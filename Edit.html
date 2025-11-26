@@ -46,7 +46,7 @@
     <div class="bg-orange-200 z-40 left-0 w-full shadow-md rounded-b-3xl">
         <div class="p-5">
 
-            <div class="flex justify-between items-center">
+            <div onclick="window.location.href='index.html'" class="flex justify-between items-center">
                 <div id="openSidebar" class="flex items-center gap-3 cursor-pointer">
                     <img src="Logo.jpg" class="w-11 h-11 rounded-full shadow-md" />
                     <p class="font-extrabold text-black text-2xl">Spot Game</p>
@@ -70,7 +70,7 @@
     </div>
 
     <!-- TABLE -->
-    <div class="mx-4">
+    <div class="mx-2">
         <div class="bg-white py-2 rounded-lg shadow">
             <h2 class="text-xl font-bold mb-4">Chart Sheet</h2>
             <div id="recordsBody"></div>
@@ -78,14 +78,14 @@
     </div>
 
     <!-- UPDATE BOX -->
-    <div id="updatebox" class="fixed bottom-0 left-0 w-full bg-white rounded-t-3xl px-6 py-8 shadow-lg hidden">
+    <div id="updatebox" class="fixed bottom-0 left-0 w-full bg-white rounded-t-3xl px-3 py-8 shadow-lg hidden">
         <h2 class="text-2xl font-bold">Update Data</h2>
         <p class="text-gray-600 mt-1">Chart Sheet</p>
 
         <form id="crudForm" class="grid grid-cols-1 mt-4 md:grid-cols-2 gap-4">
 
             <div>
-                <select name="Id" class="border p-4 w-full text-black focus:outline-none focus:ring-0 rounded">
+                <select name="Id" class="border border-blue-500 p-4 w-full text-black focus:outline-none focus:ring-0 rounded">
                     <option value="">Select Applicant</option>
                     <option>SRIDEVI</option>
                     <option>KALYAN MORNING</option>
@@ -119,11 +119,11 @@
 
             <div class="flex gap-3">
                 <input type="number" name="Jodi" placeholder="Jodi"
-                    class="border p-4 rounded w-1/3 focus:outline-none focus:ring-0" />
+                    class="border p-4 rounded border-black w-1/3 focus:outline-none focus:ring-0" />
                 <input type="number" name="Marks" placeholder="Marks"
-                    class="border p-4 rounded w-1/3 focus:outline-none focus:ring-0" />
+                    class="border p-4 rounded w-1/3 border-black focus:outline-none focus:ring-0" />
                 <input type="number" name="Pennel" placeholder="Pennel"
-                    class="border p-4 rounded w-1/3 focus:outline-none focus:ring-0" />
+                    class="border p-4 rounded w-1/3 border-black focus:outline-none focus:ring-0" />
             </div>
 
             <button id="updateBtn" onclick="showLoader();"
@@ -177,7 +177,7 @@
   </div>
 
   <button onclick="fillForm('${r.Id}')" 
-          class="bg-blue-900 text-white px-4 py-1 rounded hover:bg-yellow-600">
+          class="bg-blue-900 text-white px-4 h-8 rounded hover:bg-yellow-600">
     Update
   </button>
 </div>`;
