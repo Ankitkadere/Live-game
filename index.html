@@ -21,7 +21,7 @@
   <link rel="apple-touch-icon" href="Logo.jpg">
 
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#ffffff" />
+  <meta name="theme-color" content="#FED7AA" />
 
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -61,7 +61,7 @@
   <!-- 🔵 FIXED REFRESH BUTTON -->
   <!-- Refresh Button -->
   <button id="refreshBtn" class="fixed bottom-4 right-6 bg-blue-900 mb-4 text-blue-700 px-4 py-3 rounded-full shadow-lg 
-         hover:bg-blue-100 transition transform hover:scale-110">
+         hover:bg-blue-900 transition transform hover:scale-110">
     <i id="refreshIcon" class="fas fa-sync-alt text-white text-2xl"></i>
   </button>
 
@@ -260,6 +260,7 @@
       icon.classList.add("spin");   // start spin
 
       setTimeout(() => {
+      btn.style.backgroundColor ="#2a4365"; 
         icon.classList.remove("spin"); // stop spin after 3s
         loadData(); // optional refresh action
       }, 3000);
