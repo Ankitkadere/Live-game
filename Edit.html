@@ -38,7 +38,7 @@
 
 <body class="bg-gray-100">
     <div id="page-loader"
-        class="fixed inset-1 bg-gray-50 flex items-center justify-center z-50 opacity-100 transition-opacity duration-500 hidden">
+        class="fixed top-0 left-0 inset-1 bg-gray-50 flex items-center justify-center z-50 opacity-100 transition-opacity duration-500 hidden">
         <div class="w-16 h-16 border-8 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
     </div>
 
@@ -78,73 +78,80 @@
     </div>
 
     <!-- UPDATE BOX -->
-    <div id="updatebox" class="fixed bottom-0 left-0 w-full bg-white rounded-t-3xl px-3 py-8 shadow-lg hidden">
+    <div id="updatebox" class="fixed h-full bottom-0 left-0 w-full bg-gray-100 hidden">
+        <div class="fixed bottom-0 left-0 w-full bg-white rounded-t-3xl px-3 py-8 shadow-lg ">
 
-        <div class="flex justify-between text-center">
-            <div>
-                <h2 class="text-2xl font-bold">Update Data</h2>
-                <p class="text-gray-600 mt-1">Chart Sheet</p>
+            <div class="flex justify-between text-center">
+                <div>
+                    <h2 class="text-2xl font-bold">Update Data</h2>
+                    <p class="text-gray-600 mt-1">Chart Sheet</p>
+                </div>
+                <!-- Angle down -->
+                <div onclick="showUpdateBox()"
+                    class="w-12 h-12 bg-gray-200 rounded-full border border-black flex items-center justify-center cursor-pointer hover:bg-gray-300 transition">
+                    <i class="fa-solid fa-angle-down text-black text-lg"></i>
+                </div>
             </div>
-            <!-- Angle down -->
-            <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
-                <i class="fa-solid fa-angle-down text-black"></i>
-            </div>
+
+            <form id="crudForm" class="grid grid-cols-1 mt-4 md:grid-cols-2 gap-4">
+
+                <div>
+                    <select name="Id"
+                        class="border border-black p-4 w-full text-black focus:outline-none focus:ring-0 rounded">
+                        <option value="">Select Applicant</option>
+                        <option>SRIDEVI</option>
+                        <option>KALYAN MORNING</option>
+                        <option>MAIN BAZAR MORNING</option>
+                        <option>SUNDAY BAZAR</option>
+                        <option>MADHURI</option>
+                        <option>PADMAVATHI</option>
+                        <option>Deepak Joshi</option>
+                        <option>MAHARANI</option>
+                        <option>RADHA-RANI MORNING</option>
+                        <option>SUPER MILAN DAY</option>
+                        <option>JAY SHREE DAY</option>
+                        <option>DAY BOMBAY</option>
+                        <option>JANTA DAY</option>
+                        <option>KALYAN SRIDEVI</option>
+                        <option>KAMAL MORNING</option>
+                        <option>MEENA MORNING</option>
+                        <option>RAKHI MORNING</option>
+                        <option>SHAGUN</option>
+                        <option>SHRI DAY</option>
+                        <option>SRILAKSHMI</option>
+                        <option>TIME BAZAR MORNING</option>
+                        <option>TIME MORNING</option>
+                        <option>GOWA</option>
+                        <option>MOHINI</option>
+                    </select>
+
+                    <input type="text" name="Category" value="General"
+                        class="border hidden p-2 rounded focus:outline-none focus:ring-0" />
+                </div>
+
+                <div class="flex gap-3">
+                    <input type="number" name="Jodi" placeholder="Jodi"
+                        class="border p-4 rounded border-black w-1/3 focus:outline-none focus:ring-0" />
+                    <input type="number" name="Marks" placeholder="Marks"
+                        class="border p-4 rounded w-1/3 border-black focus:outline-none focus:ring-0" />
+                    <input type="number" name="Pennel" placeholder="Pennel"
+                        class="border p-4 rounded w-1/3 border-black focus:outline-none focus:ring-0" />
+                </div>
+
+                <button id="updateBtn" onclick="showLoader();"
+                    class="bg-blue-900 w-full md:w-[97vw] text-white py-4 rounded-full text-lg font-bold mt-8 shadow-md hover:bg-blue-700 transition">
+                    UPDATE
+                </button>
+
+            </form>
         </div>
-
-    <form id="crudForm" class="grid grid-cols-1 mt-4 md:grid-cols-2 gap-4">
-
-        <div>
-            <select name="Id"
-                class="border border-blue-500 p-4 w-full text-black focus:outline-none focus:ring-0 rounded">
-                <option value="">Select Applicant</option>
-                <option>SRIDEVI</option>
-                <option>KALYAN MORNING</option>
-                <option>MAIN BAZAR MORNING</option>
-                <option>SUNDAY BAZAR</option>
-                <option>MADHURI</option>
-                <option>PADMAVATHI</option>
-                <option>Deepak Joshi</option>
-                <option>MAHARANI</option>
-                <option>RADHA-RANI MORNING</option>
-                <option>SUPER MILAN DAY</option>
-                <option>JAY SHREE DAY</option>
-                <option>DAY BOMBAY</option>
-                <option>JANTA DAY</option>
-                <option>KALYAN SRIDEVI</option>
-                <option>KAMAL MORNING</option>
-                <option>MEENA MORNING</option>
-                <option>RAKHI MORNING</option>
-                <option>SHAGUN</option>
-                <option>SHRI DAY</option>
-                <option>SRILAKSHMI</option>
-                <option>TIME BAZAR MORNING</option>
-                <option>TIME MORNING</option>
-                <option>GOWA</option>
-                <option>MOHINI</option>
-            </select>
-
-            <input type="text" name="Category" value="General"
-                class="border hidden p-2 rounded focus:outline-none focus:ring-0" />
-        </div>
-
-        <div class="flex gap-3">
-            <input type="number" name="Jodi" placeholder="Jodi"
-                class="border p-4 rounded border-black w-1/3 focus:outline-none focus:ring-0" />
-            <input type="number" name="Marks" placeholder="Marks"
-                class="border p-4 rounded w-1/3 border-black focus:outline-none focus:ring-0" />
-            <input type="number" name="Pennel" placeholder="Pennel"
-                class="border p-4 rounded w-1/3 border-black focus:outline-none focus:ring-0" />
-        </div>
-
-        <button id="updateBtn" onclick="showLoader();"
-            class="bg-blue-900 w-full md:w-[97vw] text-white py-4 rounded-full text-lg font-bold mt-8 shadow-md hover:bg-blue-700 transition">
-            UPDATE
-        </button>
-
-    </form>
     </div>
-
     <script>
+
+        function showUpdateBox() {
+            const box = document.getElementById('updatebox');
+            box.classList.add('hidden');
+        }
 
 
         function showLoader(displayTime = 3000) {
