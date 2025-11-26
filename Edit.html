@@ -79,59 +79,69 @@
 
     <!-- UPDATE BOX -->
     <div id="updatebox" class="fixed bottom-0 left-0 w-full bg-white rounded-t-3xl px-3 py-8 shadow-lg hidden">
-        <h2 class="text-2xl font-bold">Update Data</h2>
-        <p class="text-gray-600 mt-1">Chart Sheet</p>
 
-        <form id="crudForm" class="grid grid-cols-1 mt-4 md:grid-cols-2 gap-4">
-
+        <div class="flex justify-between text-center">
             <div>
-                <select name="Id" class="border border-blue-500 p-4 w-full text-black focus:outline-none focus:ring-0 rounded">
-                    <option value="">Select Applicant</option>
-                    <option>SRIDEVI</option>
-                    <option>KALYAN MORNING</option>
-                    <option>MAIN BAZAR MORNING</option>
-                    <option>SUNDAY BAZAR</option>
-                    <option>MADHURI</option>
-                    <option>PADMAVATHI</option>
-                    <option>Deepak Joshi</option>
-                    <option>MAHARANI</option>
-                    <option>RADHA-RANI MORNING</option>
-                    <option>SUPER MILAN DAY</option>
-                    <option>JAY SHREE DAY</option>
-                    <option>DAY BOMBAY</option>
-                    <option>JANTA DAY</option>
-                    <option>KALYAN SRIDEVI</option>
-                    <option>KAMAL MORNING</option>
-                    <option>MEENA MORNING</option>
-                    <option>RAKHI MORNING</option>
-                    <option>SHAGUN</option>
-                    <option>SHRI DAY</option>
-                    <option>SRILAKSHMI</option>
-                    <option>TIME BAZAR MORNING</option>
-                    <option>TIME MORNING</option>
-                    <option>GOWA</option>
-                    <option>MOHINI</option>
-                </select>
-
-                <input type="text" name="Category" value="General"
-                    class="border hidden p-2 rounded focus:outline-none focus:ring-0" />
+                <h2 class="text-2xl font-bold">Update Data</h2>
+                <p class="text-gray-600 mt-1">Chart Sheet</p>
             </div>
-
-            <div class="flex gap-3">
-                <input type="number" name="Jodi" placeholder="Jodi"
-                    class="border p-4 rounded border-black w-1/3 focus:outline-none focus:ring-0" />
-                <input type="number" name="Marks" placeholder="Marks"
-                    class="border p-4 rounded w-1/3 border-black focus:outline-none focus:ring-0" />
-                <input type="number" name="Pennel" placeholder="Pennel"
-                    class="border p-4 rounded w-1/3 border-black focus:outline-none focus:ring-0" />
+            <!-- Angle down -->
+            <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
+                <i class="fa-solid fa-angle-down text-black"></i>
             </div>
+        </div>
 
-            <button id="updateBtn" onclick="showLoader();"
-                class="bg-blue-900 w-full md:w-[97vw] text-white py-4 rounded-full text-lg font-bold mt-8 shadow-md hover:bg-blue-700 transition">
-                UPDATE
-            </button>
+    <form id="crudForm" class="grid grid-cols-1 mt-4 md:grid-cols-2 gap-4">
 
-        </form>
+        <div>
+            <select name="Id"
+                class="border border-blue-500 p-4 w-full text-black focus:outline-none focus:ring-0 rounded">
+                <option value="">Select Applicant</option>
+                <option>SRIDEVI</option>
+                <option>KALYAN MORNING</option>
+                <option>MAIN BAZAR MORNING</option>
+                <option>SUNDAY BAZAR</option>
+                <option>MADHURI</option>
+                <option>PADMAVATHI</option>
+                <option>Deepak Joshi</option>
+                <option>MAHARANI</option>
+                <option>RADHA-RANI MORNING</option>
+                <option>SUPER MILAN DAY</option>
+                <option>JAY SHREE DAY</option>
+                <option>DAY BOMBAY</option>
+                <option>JANTA DAY</option>
+                <option>KALYAN SRIDEVI</option>
+                <option>KAMAL MORNING</option>
+                <option>MEENA MORNING</option>
+                <option>RAKHI MORNING</option>
+                <option>SHAGUN</option>
+                <option>SHRI DAY</option>
+                <option>SRILAKSHMI</option>
+                <option>TIME BAZAR MORNING</option>
+                <option>TIME MORNING</option>
+                <option>GOWA</option>
+                <option>MOHINI</option>
+            </select>
+
+            <input type="text" name="Category" value="General"
+                class="border hidden p-2 rounded focus:outline-none focus:ring-0" />
+        </div>
+
+        <div class="flex gap-3">
+            <input type="number" name="Jodi" placeholder="Jodi"
+                class="border p-4 rounded border-black w-1/3 focus:outline-none focus:ring-0" />
+            <input type="number" name="Marks" placeholder="Marks"
+                class="border p-4 rounded w-1/3 border-black focus:outline-none focus:ring-0" />
+            <input type="number" name="Pennel" placeholder="Pennel"
+                class="border p-4 rounded w-1/3 border-black focus:outline-none focus:ring-0" />
+        </div>
+
+        <button id="updateBtn" onclick="showLoader();"
+            class="bg-blue-900 w-full md:w-[97vw] text-white py-4 rounded-full text-lg font-bold mt-8 shadow-md hover:bg-blue-700 transition">
+            UPDATE
+        </button>
+
+    </form>
     </div>
 
     <script>
