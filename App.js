@@ -205,23 +205,23 @@ function loadData() {
       const tbody = document.querySelector("#dataTable");
       tbody.innerHTML = ""; // Clear table
 
-      data.records
-        .filter((r) => r.Category == Category) // filter by category
-        .reverse() // reverse the filtered results
-        .forEach((r) => {
+      data.records.reverse().forEach((r) => {
+           const resultText = [r.Jodi, r.Marks, r.Pennel]
+              .filter(Boolean)
+              .join(" - ");
           const row = `
             
           <div class="mt-4 space-y-4">
     <div class="bg-white px-5 py-4 rounded-2xl shadow">
       <div class="flex justify-between items-center">
         <div>
-        <b class="text-3x1 text-black text-extrabold">${r.Applicant}</b>
+        <b class="text-3x1 text-black text-extrabold">${r.Id}</b>
           <p class="text-gray-500">   ${formatDate(r.Date)} → ${formatTime(
             r.Time
           )} </p>
         </div>
         <span class="bg-blue-100 text-blue-900 px-3 py-1 rounded-full text-lg font-bold">${
-          r.Marks
+           resultText
         }</span>
       </div>
     </div>
