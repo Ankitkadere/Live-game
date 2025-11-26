@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Spot Game</title>
+    <meta name="description" content="Spot Game – Play Smart & Track Your Game Stats Easily." />
+    <meta name="keywords" content="Spot Game, games, tracking, stats, online game" />
+    <meta name="author" content="Spot Game Team" />
+    <meta property="og:title" content="Spot Game" />
+    <meta property="og:description" content="Play Smart. Track Smarter. Spot Game PWA." />
+    <meta property="og:image" content="Logo.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="/" />
+    <link rel="icon" type="image/png" sizes="192x192" href="Logo.jpg" />
+    <link rel="apple-touch-icon" href="Logo.jpg">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#FED7AA" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Spot Game">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker
+                    .register("service-worker.js")
+                    .then(() => console.log("Service Worker Registered"));
+            });
+        }
+    </script>
+
+</head>
+
+<body class="bg-gray-100">
+    <div id="page-loader"
+        class="fixed inset-1 bg-gray-50 flex items-center justify-center z-50 opacity-100 transition-opacity duration-500 hidden">
+        <div class="w-16 h-16 border-8 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+
+    <!-- HEADER -->
+    <div class="bg-orange-200 z-40 left-0 w-full shadow-md rounded-b-3xl">
+        <div class="p-5">
+
+            <div class="flex justify-between items-center">
+                <div id="openSidebar" class="flex items-center gap-3 cursor-pointer">
+                    <img src="Logo.jpg" class="w-11 h-11 rounded-full shadow-md" />
+                    <p class="font-extrabold text-black text-2xl">Spot Game</p>
+                </div>
+
+                <div class="flex items-center gap-5 text-gray-900 text-2xl">
+                    <i onclick="window.location.href='App.html'"
+                        class="fa-solid fa-mobile hover:text-blue-600 transition"></i>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <div class="bg-orange-100 rounded-2xl flex items-center px-4 py-3 shadow-inner">
+                    <i class="fa-solid fa-search text-gray-500 mr-3"></i>
+                    <input type="text" placeholder="Search Your Data ..."
+                        class="w-full bg-transparent outline-none text-gray-700 placeholder-gray-500" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="mx-4">
+        <div class="bg-white py-2 rounded-lg shadow">
+            <h2 class="text-xl font-bold mb-4">Chart Sheet</h2>
+            <div id="recordsBody"></div>
+        </div>
+    </div>
+
+    <!-- UPDATE BOX -->
+    <div id="updatebox" class="fixed bottom-0 left-0 w-full bg-white rounded-t-3xl px-6 py-8 shadow-lg hidden">
+        <h2 class="text-2xl font-bold">Update Data</h2>
+        <p class="text-gray-600 mt-1">Chart Sheet</p>
+
+        <form id="crudForm" class="grid grid-cols-1 mt-4 md:grid-cols-2 gap-4">
+
+            <div>
+                <select name="Id" class="border p-4 w-full text-black focus:outline-none focus:ring-0 rounded">
+                    <option value="">Select Applicant</option>
+                    <option>SRIDEVI</option>
+                    <option>KALYAN MORNING</option>
+                    <option>MAIN BAZAR MORNING</option>
+                    <option>SUNDAY BAZAR</option>
+                    <option>MADHURI</option>
+                    <option>PADMAVATHI</option>
+                    <option>Deepak Joshi</option>
+                    <option>MAHARANI</option>
+                    <option>RADHA-RANI MORNING</option>
+                    <option>SUPER MILAN DAY</option>
+                    <option>JAY SHREE DAY</option>
+                    <option>DAY BOMBAY</option>
+                    <option>JANTA DAY</option>
+                    <option>KALYAN SRIDEVI</option>
+                    <option>KAMAL MORNING</option>
+                    <option>MEENA MORNING</option>
+                    <option>RAKHI MORNING</option>
+                    <option>SHAGUN</option>
+                    <option>SHRI DAY</option>
+                    <option>SRILAKSHMI</option>
+                    <option>TIME BAZAR MORNING</option>
+                    <option>TIME MORNING</option>
+                    <option>GOWA</option>
+                    <option>MOHINI</option>
+                </select>
+
+                <input type="text" name="Category" value="General"
+                    class="border hidden p-2 rounded focus:outline-none focus:ring-0" />
+            </div>
+
+            <div class="flex gap-3">
+                <input type="number" name="Jodi" placeholder="Jodi"
+                    class="border p-4 rounded w-1/3 focus:outline-none focus:ring-0" />
+                <input type="number" name="Marks" placeholder="Marks"
+                    class="border p-4 rounded w-1/3 focus:outline-none focus:ring-0" />
+                <input type="number" name="Pennel" placeholder="Pennel"
+                    class="border p-4 rounded w-1/3 focus:outline-none focus:ring-0" />
+            </div>
+
+            <button id="updateBtn" onclick="showLoader();"
+                class="bg-blue-900 w-full md:w-[97vw] text-white py-4 rounded-full text-lg font-bold mt-8 shadow-md hover:bg-blue-700 transition">
+                UPDATE
+            </button>
+
+        </form>
+    </div>
+
+    <script>
+
+
+        function showLoader(displayTime = 3000) {
+            const loader = document.getElementById('page-loader');
+            loader.style.display = 'flex';
+            loader.classList.remove('opacity-0');
+
+            setTimeout(() => {
+                loader.classList.add('opacity-0');
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 500); // Fade duration
+            }, displayTime); // Loader display duration
+        }
+
+        const scriptURL = "https://script.google.com/macros/s/AKfycbyW6iFWJpgLR-oogi_GysEp_RXph9d9vaQ2idlMgsQQVAg3ee_XeKuqyI_HDyaqnwlG/exec";
+
+        function getCurrentDateTime() {
+            const now = new Date();
+            return {
+                date: now.toISOString().split("T")[0],
+                time: now.toTimeString().slice(0, 5)
+            };
+        }
+
+        // LOAD RECORDS
+        async function fetchRecords() {
+            const res = await fetch(`${scriptURL}?action=read`);
+            const data = await res.json();
+            const body = document.getElementById("recordsBody");
+            body.innerHTML = "";
+
+            data.records.forEach(r => {
+                const row = document.createElement("div");
+                row.innerHTML = `
+<div class="p-3 bg-orange-100 shadow rounded-lg border mb-3 flex justify-between">
+  <div>
+    <h2 class="font-bold text-lg text-gray-700">${r.Id}</h2>
+    <p class="text-pink-600 font-extrabold text-lg">${r.Jodi || ""}${r.Marks ? "-" + r.Marks : ""}${r.Pennel ? "-" + r.Pennel : ""}</p>
+  </div>
+
+  <button onclick="fillForm('${r.Id}')" 
+          class="bg-blue-900 text-white px-4 py-1 rounded hover:bg-yellow-600">
+    Update
+  </button>
+</div>`;
+                body.appendChild(row);
+            });
+        }
+
+        // FILL FORM (open update box)
+        async function fillForm(Id) {
+            showLoader();
+            const res = await fetch(`${scriptURL}?action=read`);
+            const data = await res.json();
+            const record = data.records.find(r => r.Id == Id);
+            if (record) {
+                const form = document.getElementById("crudForm");
+
+                document.getElementById("page-loader").classList.remove("hidden");
+                Object.keys(record).forEach(key => {
+                    if (form[key]) form[key].value = record[key];
+                });
+
+                document.getElementById("updatebox").classList.remove("hidden");
+            }
+        }
+
+        // SUBMIT UPDATE
+        document.getElementById("updateBtn").addEventListener("click", async (e) => {
+            e.preventDefault();
+
+            const form = document.getElementById("crudForm");
+            const fd = Object.fromEntries(new FormData(form));
+
+            if (!fd.Id) {
+                alert("Id is required");
+                return;
+            }
+
+            // Set current date & time
+            const { date, time } = getCurrentDateTime();
+            fd.Date = date;
+            fd.Time = time;
+
+            // Send all fields in query string
+            await fetch(`${scriptURL}?action=update&${new URLSearchParams(fd).toString()}`);
+            document.getElementById("updatebox").classList.add("hidden");
+            form.reset();
+            fetchRecords();
+        });
+
+        fetchRecords();
+
+
+    </script>
+
+</body>
+
+</html>
