@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Spot Game</title>
+  <meta name="description" content="Spot Game – Play Smart & Track Your Game Stats Easily." />
+  <meta name="keywords" content="Spot Game, games, tracking, stats, online game" />
+  <meta name="author" content="Spot Game Team" />
+  <meta property="og:title" content="Spot Game" />
+  <meta property="og:description" content="Play Smart. Track Smarter. Spot Game PWA." />
+  <meta property="og:image" content="Logo.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="/" />
+  <link rel="icon" type="image/png" sizes="192x192" href="Logo.jpg" />
+  <link rel="apple-touch-icon" href="Logo.jpg">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#FED7AA" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Spot Game">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script type="module"
+    src="firebaseicsjiwhiudnjscniqueh8e28e28d82hd82h82h22h8dwdhsujvskaie3nejf9wu2ewidj9wi02e3u48u5tugr9uw9d3hrujfe.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker
+          .register("service-worker.js")
+          .then(() => console.log("Service Worker Registered"));
+      });
+    }
+  </script>
+
+</head>
+
+<body class="bg-gray-100">
+  <h1 id="loggedUserFName" class="hidden"></h1>
+  
+  <script>setTimeout(() => {
+      const loader = document.getElementById('page-loader');
+      const name = document.getElementById('loggedUserFName').innerText;
+      const mail = document.getElementById('loggedUserEmail').innerText;
+      if (name == "" || mail == "") {
+        window.location.href = "index.html";
+      }
+      if (loader) {
+        setTimeout(() => loader.remove(), 600); // Remove after fade-out
+      }
+    }, 4000);
+
+
+  </script>
+  <div id="page-loader"
+    class="fixed top-0 left-0 w-full h-full inset-1 bg-black bg-opacity-50 flex items-center justify-center z-50  transition-opacity duration-500 hidden">
+    <div class="w-16 h-16 border-8 border-white border-t-transparent rounded-full animate-spin"></div>
+  </div>
+
+  <!-- HEADER -->
+  <div class="bg-orange-200 z-40 left-0 w-full shadow-md rounded-b-3xl">
+    <div class="p-5">
+
+      <div onclick="window.location.href='index.html'" class="flex justify-between items-center">
+        <div id="openSidebar" class="flex items-center gap-3 cursor-pointer">
+          <img src="Logo.jpg" class="w-11 h-11 rounded-full shadow-md" />
+          <p id="loggedUserEmail" class="font-extrabold text-black text-2xl">Spot Game</p>
+        </div>
+
+        <div class="flex items-center gap-5 text-gray-900 text-2xl">
+          <i onclick="window.location.href='App.html'" class="fa-solid fa-mobile hover:text-blue-600 transition"></i>
+        </div>
+      </div>
+
+      <div class="mt-4 ">
+        <div class="bg-orange-100 rounded-2xl flex items-center px-4 py-3 shadow-inner">
+          <i class="fa-solid fa-search text-gray-500 mr-3"></i>
+          <input type="text" placeholder="Search Your Data ..."
+            class="w-full bg-transparent outline-none text-gray-700 placeholder-gray-500" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="mx-2">
+    <div class="bg-white py-2 rounded-lg shadow">
+      <h2 class="text-xl font-bold mb-4 mx-3 flex justify-between">
+        <p>Chart Sheet </p>
+        <p class="mr-1">Update</p>
+      </h2>
+      <div id="recordsBody">
+        <div class="p-3 bg-orange-100 shadow rounded-lg border mb-3 flex justify-between animate-pulse">
+          <div class="space-y-2">
+            <div class="h-6 w-16 bg-gray-300 rounded"></div>
+            <div class="h-5 w-24 bg-pink-300 rounded"></div>
+          </div>
+          <div class="h-8 w-20 bg-blue-900 rounded opacity-50"></div>
+        </div>
+        <div class="p-3 bg-orange-100 shadow rounded-lg border mb-3 flex justify-between animate-pulse">
+          <div class="space-y-2">
+            <div class="h-6 w-16 bg-gray-300 rounded"></div>
+            <div class="h-5 w-24 bg-pink-300 rounded"></div>
+          </div>
+          <div class="h-8 w-20 bg-blue-900 rounded opacity-50"></div>
+        </div>
+        <div class="p-3 bg-orange-100 shadow rounded-lg border mb-3 flex justify-between animate-pulse">
+          <div class="space-y-2">
+            <div class="h-6 w-16 bg-gray-300 rounded"></div>
+            <div class="h-5 w-24 bg-pink-300 rounded"></div>
+          </div>
+          <div class="h-8 w-20 bg-blue-900 rounded opacity-50"></div>
+        </div>
+        <div class="p-3 bg-orange-100 shadow rounded-lg border mb-3 flex justify-between animate-pulse">
+          <div class="space-y-2">
+            <div class="h-6 w-16 bg-gray-300 rounded"></div>
+            <div class="h-5 w-24 bg-pink-300 rounded"></div>
+          </div>
+          <div class="h-8 w-20 bg-blue-900 rounded opacity-50"></div>
+        </div>
+        <div class="p-3 bg-orange-100 shadow rounded-lg border mb-3 flex justify-between animate-pulse">
+          <div class="space-y-2">
+            <div class="h-6 w-16 bg-gray-300 rounded"></div>
+            <div class="h-5 w-24 bg-pink-300 rounded"></div>
+          </div>
+          <div class="h-8 w-20 bg-blue-900 rounded opacity-50"></div>
+        </div>
+
+        <div class="p-3 bg-orange-100 shadow rounded-lg border mb-3 flex justify-between animate-pulse">
+          <div class="space-y-2">
+            <div class="h-6 w-16 bg-gray-300 rounded"></div>
+            <div class="h-5 w-24 bg-pink-300 rounded"></div>
+          </div>
+          <div class="h-8 w-20 bg-blue-900 rounded opacity-50"></div>
+        </div>
+        <div class="p-3 bg-orange-100 shadow rounded-lg border mb-3 flex justify-between animate-pulse">
+          <div class="space-y-2">
+            <div class="h-6 w-16 bg-gray-300 rounded"></div>
+            <div class="h-5 w-24 bg-pink-300 rounded"></div>
+          </div>
+          <div class="h-8 w-20 bg-blue-900 rounded opacity-50"></div>
+        </div>
+        <div class="p-3 bg-orange-100 shadow rounded-lg border mb-3 flex justify-between animate-pulse">
+          <div class="space-y-2">
+            <div class="h-6 w-16 bg-gray-300 rounded"></div>
+            <div class="h-5 w-24 bg-pink-300 rounded"></div>
+          </div>
+          <div class="h-8 w-20 bg-blue-900 rounded opacity-50"></div>
+        </div>
+        <div class="p-3 bg-orange-100 shadow rounded-lg border mb-3 flex justify-between animate-pulse">
+          <div class="space-y-2">
+            <div class="h-6 w-16 bg-gray-300 rounded"></div>
+            <div class="h-5 w-24 bg-pink-300 rounded"></div>
+          </div>
+          <div class="h-8 w-20 bg-blue-900 rounded opacity-50"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+
+  <!-- UPDATE BOX -->
+  <div id="updatebox" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-40">
+    <div class="fixed bottom-0 left-0 w-full bg-white rounded-t-3xl px-3 py-8 shadow-lg ">
+
+      <div class="flex justify-between text-center">
+        <div>
+          <h2 class="text-2xl font-bold">Update Data</h2>
+          <p class="text-gray-600 mt-1">Chart Sheet</p>
+        </div>
+        <!-- Angle down -->
+        <div onclick="showUpdateBox()"
+          class="w-12 h-12 bg-gray-200 rounded-full border border-black flex items-center justify-center cursor-pointer hover:bg-gray-300 transition">
+          <i class="fa-solid fa-angle-down text-black text-lg"></i>
+        </div>
+      </div>
+
+      <form id="crudForm" class="grid grid-cols-1 mt-4 md:grid-cols-2 gap-4">
+
+        <div>
+          <select name="Id" class="border border-black p-4 w-full text-black focus:outline-none focus:ring-0 rounded">
+            <option value="">Select Applicant</option>
+            <option>SRIDEVI</option>
+            <option>KALYAN MORNING</option>
+            <option>MAIN BAZAR MORNING</option>
+            <option>SUNDAY BAZAR</option>
+            <option>MADHURI</option>
+            <option>PADMAVATHI</option>
+            <option>Deepak Joshi</option>
+            <option>MAHARANI</option>
+            <option>RADHA-RANI MORNING</option>
+            <option>SUPER MILAN DAY</option>
+            <option>JAY SHREE DAY</option>
+            <option>DAY BOMBAY</option>
+            <option>JANTA DAY</option>
+            <option>KALYAN SRIDEVI</option>
+            <option>KAMAL MORNING</option>
+            <option>MEENA MORNING</option>
+            <option>RAKHI MORNING</option>
+            <option>SHAGUN</option>
+            <option>SHRI DAY</option>
+            <option>SRILAKSHMI</option>
+            <option>TIME BAZAR MORNING</option>
+            <option>TIME MORNING</option>
+            <option>GOWA</option>
+            <option>MOHINI</option>
+          </select>
+
+          <input type="text" name="Category" value="General"
+            class="border hidden p-2 rounded focus:outline-none focus:ring-0" />
+        </div>
+
+        <div class="flex gap-3">
+          <input type="number" name="Jodi" placeholder="Jodi"
+            class="border p-4 rounded border-black w-1/3 focus:outline-none focus:ring-0" />
+          <input type="number" name="Marks" placeholder="Marks"
+            class="border p-4 rounded w-1/3 border-black focus:outline-none focus:ring-0" />
+          <input type="number" name="Pennel" placeholder="Pennel"
+            class="border p-4 rounded w-1/3 border-black focus:outline-none focus:ring-0" />
+        </div>
+
+        <button id="updateBtn" onclick="showLoader();"
+          class="bg-blue-900 w-full md:w-[97vw] text-white py-4 rounded-full text-lg font-bold mt-8 shadow-md hover:bg-blue-700 transition">
+          UPDATE
+        </button>
+
+      </form>
+    </div>
+  </div>
+  <script>
+
+    function showUpdateBox() {
+      const box = document.getElementById('updatebox');
+      box.classList.add('hidden');
+    }
+
+
+    function showLoader(displayTime = 3000) {
+      const loader = document.getElementById('page-loader');
+      loader.style.display = 'flex';
+      loader.classList.remove('opacity-0');
+
+      setTimeout(() => {
+        loader.classList.add('opacity-0');
+        setTimeout(() => {
+          loader.style.display = 'none';
+        }, 500); // Fade duration
+      }, displayTime); // Loader display duration
+    }
+
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyW6iFWJpgLR-oogi_GysEp_RXph9d9vaQ2idlMgsQQVAg3ee_XeKuqyI_HDyaqnwlG/exec";
+
+    function getCurrentDateTime() {
+      const now = new Date();
+      return {
+        date: now.toISOString().split("T")[0],
+        time: now.toTimeString().slice(0, 5)
+      };
+    }
+
+    // LOAD RECORDS
+    async function fetchRecords() {
+      const res = await fetch(`${scriptURL}?action=read`);
+      const data = await res.json();
+      const body = document.getElementById("recordsBody");
+      body.innerHTML = "";
+
+      data.records.forEach(r => {
+        const row = document.createElement("div");
+        row.innerHTML = `
+<div class="p-3 bg-orange-100 shadow rounded-lg border mb-3 flex justify-between">
+  <div>
+    <h2 class="font-bold text-lg text-gray-700">${r.Id}</h2>
+    <p class="text-pink-600 font-extrabold text-lg">${r.Jodi || ""}${r.Marks ? "-" + r.Marks : ""}${r.Pennel ? "-" + r.Pennel : ""}</p>
+  </div>
+
+  <button onclick="fillForm('${r.Id}')" 
+          class="bg-blue-900 text-white px-4 h-8 rounded hover:bg-yellow-600">
+    Update
+  </button>
+</div>`;
+        body.appendChild(row);
+      });
+    }
+
+    // FILL FORM (open update box)
+    async function fillForm(Id) {
+      showLoader();
+      const res = await fetch(`${scriptURL}?action=read`);
+      const data = await res.json();
+      const record = data.records.find(r => r.Id == Id);
+      if (record) {
+        const form = document.getElementById("crudForm");
+
+        document.getElementById("page-loader").classList.remove("hidden");
+        Object.keys(record).forEach(key => {
+          if (form[key]) form[key].value = record[key];
+        });
+
+        document.getElementById("updatebox").classList.remove("hidden");
+      }
+    }
+
+    // SUBMIT UPDATE
+    document.getElementById("updateBtn").addEventListener("click", async (e) => {
+      e.preventDefault();
+
+      const form = document.getElementById("crudForm");
+      const fd = Object.fromEntries(new FormData(form));
+
+      if (!fd.Id) {
+        alert("Id is required");
+        return;
+      }
+
+      // Set current date & time
+      const { date, time } = getCurrentDateTime();
+      fd.Date = date;
+      fd.Time = time;
+
+      // Send all fields in query string
+      await fetch(`${scriptURL}?action=update&${new URLSearchParams(fd).toString()}`);
+      document.getElementById("updatebox").classList.add("hidden");
+      form.reset();
+      fetchRecords();
+    });
+
+    fetchRecords();
+
+
+  </script>
+
+</body>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+  import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+  import {
+    getFirestore,
+    getDoc,
+    doc
+  } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+
+  // ✅ Your Firebase config (USE YOUR OWN VALUES HERE)
+  const firebaseConfig = {
+    apiKey: "AIzaSyAKN5GR18VTFrKNgVG7FenD4aSTX3Q2PbA",
+    authDomain: "gift-zone-project.firebaseapp.com",
+    projectId: "gift-zone-project",
+    storageBucket: "gift-zone-project.appspot.com",
+    messagingSenderId: "806465456032",
+    appId: "1:806465456032:web:becf8988a6dfabe43646c5",
+    measurementId: "G-1ZLMWBP61Y",
+  };
+
+  // ✅ Initialize Firebase services
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // ✅ On Auth Change: fetch and show user data
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const loggedInUserId = localStorage.getItem("loggedInUserId");
+      if (!loggedInUserId) {
+        console.log("User ID not found in local storage.");
+        return;
+      }
+
+      const docRef = doc(db, "users", loggedInUserId);
+      getDoc(docRef)
+        .then((docSnap) => {
+          if (docSnap.exists()) {
+            const userData = docSnap.data();
+            let filt = document.getElementById("loggedUserFName").innerText = userData.firstName || "N/A";
+            document.getElementById("loggedUserEmail").innerText = userData.email || "N/A";
+            const lNameElement = document.getElementById("loggedUserLName");
+            if (userData.lastName) {
+              lNameElement.innerText = userData.lastName;
+            } else {
+              lNameElement.innerText = "-";
+            }
+          } else {
+            console.log("No user document found in Firestore.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching user data:", error);
+        });
+    } else {
+      console.log("User not signed in.");
+      window.location.href = "index.html"; // Redirect to login
+    }
+  });
+
+  // ✅ Logout
+  const logoutButton = document.getElementById("logout");
+  logoutButton.addEventListener("click", () => {
+    localStorage.removeItem("loggedInUserId");
+    signOut(auth)
+      .then(() => {
+        window.location.href = "index.html";
+      })
+      .catch((error) => {
+        console.error("Error signing out:", error);
+      });
+  });
+
+</script>
+
+</html>
