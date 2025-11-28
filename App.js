@@ -265,11 +265,11 @@ function updateSlider() {
   slider.style.transform = `translateX(-${index * 100}%)`;
 
   dots.forEach((dot, i) => {
-    dot.classList.remove("bg-white");
-    dot.classList.add("bg-gray-400");
+    dot.classList.remove("bg-gray-400");
+    dot.classList.add("bg-white");
     if (i === index) {
-      dot.classList.remove("bg-gray-400");
-      dot.classList.add("bg-white");
+      dot.classList.remove("bg-white");
+      dot.classList.add("bg-gray-400");
     }
   });
 }
