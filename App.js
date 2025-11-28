@@ -107,7 +107,7 @@ beeta.addEventListener("click", () => {
   loadData();
   document.getElementById("alphachild").style.backgroundColor = "";
   document.getElementById("beetachild").style.backgroundColor = "white";
-    document.querySelector("#dataTable").innerHTML = `
+  document.querySelector("#dataTable").innerHTML = `
      <div id="preLoader" class="mt-4 space-y-4">
         <div class="bg-white p-5 rounded-2xl shadow animate-pulse">
           <div class="flex justify-between items-center">
@@ -195,40 +195,49 @@ function loadData() {
       }
 
       function formatTime(t) {
-        // For values like "10:30 AM"
-        return new Date("1970-01-01 " + t).toLocaleTimeString("en-IN", {
-          hour: "2-digit",
-          minute: "2-digit",
-        });
+        let [time, mod] = t.split(" ");
+        let [h, m] = time.split(":").map(Number);
+        if (mod === "PM" && h !== 12) h += 12;
+        if (mod === "AM" && h === 12) h = 0;
+        const d = new Date();
+        d.setHours(h, m, 0);
+        return d
+          .toLocaleTimeString("en-IN", {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+          })
+          .toUpperCase();
       }
 
       const tbody = document.querySelector("#dataTable");
       tbody.innerHTML = ""; // Clear table
 
       data.records.reverse().forEach((r) => {
-           const resultText = [r.Jodi, r.Marks, r.Pennel]
-              .filter(Boolean)
-              .join(" - ");
-          const row = `
+        const row = `
             
           <div class="mt-4 space-y-4">
     <div class="bg-white px-5 py-4 rounded-2xl shadow">
-      <div class="flex justify-between items-center">
-        <div>
-        <b class="text-3x1 text-black text-extrabold">${r.Id}</b>
-          <p class="text-gray-500">   ${formatDate(r.Date)} → ${formatTime(
-            r.Time
-          )} </p>
+      <div class="  justify-between items-center">
+        <div class="flex justify-between">
+        <b class="text-3x1 text-black text-extrabold text-center">${r.Id}</b>
+          <p class="text-gray-700">   ${formatDate(r.Date)} → ${formatTime(
+          r.Time
+        )} </p>
         </div>
-        <span class="bg-blue-100 text-blue-900 px-3 py-1 rounded-full text-lg font-bold">${
-           resultText
-        }</span>
+        <div class="bg-blue-50 text-blue-900 justify-between flex px-3 py-1 mt-2 rounded-md text-lg font-bold">
+          <b>${r.Jodi}</b>
+           <b  >-</b>
+            <b>${r.Marks}</b>
+            <b >-</b>
+              <b>${r.Pennel}</b>
+        </div>
       </div>
     </div>
   </div>
         `;
-          tbody.innerHTML += row;
-        });
+        tbody.innerHTML += row;
+      });
     })
     .catch((err) => console.error("Fetch Error:", err));
 }
