@@ -218,12 +218,10 @@ function loadData() {
             
           <div class="mt-4 space-y-4">
     <div class="bg-white px-5 py-4 rounded-2xl shadow">
-      <div class="  justify-between items-center">
+      <div class="justify-between items-center">
         <div class="flex justify-between">
-        <b class="text-3x1 text-black text-extrabold text-center">${r.Id}</b>
-          <p class="text-gray-700">   ${formatDate(r.Date)} → ${formatTime(
-          r.Time
-        )} </p>
+         <b class="text-3x1 text-black text-extrabold  text-center">${r.Id}</b>
+         <b class="text-gray-400">   ${formatDate(r.Date)} → ${formatTime(r.Time)} </b>
         </div>
         <div class="bg-blue-50 text-blue-900 justify-between flex px-3 py-1 mt-2 rounded-md text-lg font-bold">
           <b>${r.Jodi}</b>
