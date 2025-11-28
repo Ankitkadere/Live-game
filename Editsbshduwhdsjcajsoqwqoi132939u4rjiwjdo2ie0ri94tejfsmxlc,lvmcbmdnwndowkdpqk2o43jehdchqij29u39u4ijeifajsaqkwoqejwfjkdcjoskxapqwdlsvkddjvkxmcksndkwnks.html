@@ -41,15 +41,13 @@
   <h1 id="loggedUserFName" class="hidden"></h1>
   
   <script>setTimeout(() => {
-      const loader = document.getElementById('page-loader');
+   
       const name = document.getElementById('loggedUserFName').innerText;
       const mail = document.getElementById('loggedUserEmail').innerText;
       if (name == "" || mail == "") {
         window.location.href = "index.html";
       }
-      if (loader) {
-        setTimeout(() => loader.remove(), 600); // Remove after fade-out
-      }
+      
     }, 4000);
 
 
@@ -414,5 +412,5 @@
   });
 
 </script>
-<script src="Blocked.js"></script>
+ 
 </html>
