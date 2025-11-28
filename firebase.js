@@ -78,7 +78,6 @@ const signUpMessageDiv = document.getElementById("signUpMessage");
 
 const showSignupBtn = document.getElementById("showSignup");
 const showLoginBtn = document.getElementById("showLogin");
-const ownerlog = document.getElementById("ownerlog");
 
 // Toggle between forms
 showSignupBtn.addEventListener("click", () => {
@@ -204,10 +203,8 @@ loginForm.addEventListener("submit", (e) => {
       const user = userCredential.user;
       localStorage.setItem("loggedInUserId", user.uid);
       showMessage("Login successful!", "signInMessage");
-      setTimeout(() => {
-        window.location.href =
-          "Editsbshduwhdsjcajsoqwqoi132939u4rjiwjdo2ie0ri94tejfsmxlc,lvmcbmdnwndowkdpqk2o43jehdchqij29u39u4ijeifajsaqkwoqejwfjkdcjoskxapqwdlsvkddjvkxmcksndkwnks.html";
-      }, 3000);
+      window.location.href =
+        "Editsbshduwhdsjcajsoqwqoi132939u4rjiwjdo2ie0ri94tejfsmxlc,lvmcbmdnwndowkdpqk2o43jehdchqij29u39u4ijeifajsaqkwoqejwfjkdcjoskxapqwdlsvkddjvkxmcksndkwnks.html";
     })
     .catch((error) => {
       console.error("Error during login:", error);
@@ -223,51 +220,6 @@ loginForm.addEventListener("submit", (e) => {
     });
 });
 
-// ownerlog
-// Login handler
-ownerlog.addEventListener("click", (e) => {
-  e.preventDefault();
-  let valid = true;
-  const email = loginEmailInput.value.trim();
-  const password = loginPasswordInput.value;
-
-  if (!isValidEmail(email)) {
-    loginEmailError.classList.remove("hidden");
-    valid = false;
-  } else {
-    loginEmailError.classList.add("hidden");
-  }
-
-  if (password.length < 6) {
-    loginPasswordError.classList.remove("hidden");
-    valid = false;
-  } else {
-    loginPasswordError.classList.add("hidden");
-  }
-
-  if (!valid) return;
-
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      ownerlog.innerText = "Please Wait...";
-      const user = userCredential.user;
-      localStorage.setItem("loggedInUserId", user.uid);
-      showMessage("Login successful!", "signInMessage");
-      // Redirect or load next page
-      window.location.href =
-        "JSJorghtpLgbZjHKO4eJ4f0S1HwDF89FpmFng4CcMedA7.html";
-    })
-    .catch((error) => {
-      console.error("Error during login:", error);
-      if (error.code === "auth/wrong-password") {
-        showMessage("Wrong password.", "signInMessage");
-      } else if (error.code === "auth/user-not-found") {
-        showMessage("User not found. Please signup.", "signInMessage");
-      } else {
-        showMessage("Login error: " + error.message, "signInMessage");
-      }
-    });
-});
 // Auth state listener
 onAuthStateChanged(auth, (user) => {
   if (user) {
