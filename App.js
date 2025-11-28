@@ -215,13 +215,12 @@ function loadData() {
 
       data.records.reverse().forEach((r) => {
         const row = `
-            
           <div class="mt-4 space-y-4">
     <div class="bg-white px-5 py-4 rounded-2xl shadow">
-      <div class="justify-between items-center">
+      <div class="justify-between">
         <div class="flex justify-between">
          <b class="text-3x1 text-black text-extrabold ">${r.Id}</b>
-         <b class="text-gray-400">   ${formatDate(r.Date)} → ${formatTime(r.Time)} </b>
+         <b class="text-gray-400"> ${formatDate(r.Date)} → ${formatTime(r.Time)} </b>
         </div>
         <div class="bg-blue-50 text-blue-900 justify-between flex px-3 py-1 mt-2 rounded-md text-lg font-bold">
           <b>${r.Jodi}</b>
@@ -266,11 +265,11 @@ function updateSlider() {
   slider.style.transform = `translateX(-${index * 100}%)`;
 
   dots.forEach((dot, i) => {
-    dot.classList.remove("bg-blue-500");
+    dot.classList.remove("bg-white");
     dot.classList.add("bg-gray-400");
     if (i === index) {
       dot.classList.remove("bg-gray-400");
-      dot.classList.add("bg-blue-500");
+      dot.classList.add("bg-white");
     }
   });
 }
