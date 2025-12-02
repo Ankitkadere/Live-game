@@ -1,32 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Leela Bazar</title>
-  <!-- SEO -->
-  <meta name="description" content="Leela Bazar – Play Smart & Track Your Game Stats Easily." />
-  <meta name="keywords" content="Leela Bazar, games, tracking, stats, online game" />
+  <title>Leela Bazar – Satta Matka, Matka Results, Lucky Numbers & Game Tracker</title>
+  <!-- Primary SEO -->
+  <meta name="description" content="Leela Bazar – Best platform for Satta Matka charts, Matka results, lucky numbers, game tracker, guessing, fast updates, and live statistics. Check Matka numbers instantly in Hindi & English." />
+  <meta name="keywords" content="Leela Bazar, Satta Matka, Matka, Satta, Matka Result, Satta Number, Matka Guessing, Matka Chart, Online Matka, Satta Bazar, Kalyan Matka, Mumbai Matka, Satta Live, DpBoss Alternative" />
+  <!-- Hindi Keywords (boost Indian audience search ranking) -->
+  <meta name="keywords" content="सट्टा मटका, मटका नंबर, मटका रिजल्ट, सट्टा बाजार, कल्याण मटका, मुंबई मटका, फ्री मटका गेम, सट्टा चार्ट, लीला बाजार" />
+
   <meta name="author" content="Leela Bazar Team" />
-  <!-- OpenGraph (Social Media Preview) -->
-  <meta property="og:title" content="Leela Bazar" />
-  <meta property="og:description" content="Play Smart. Track Smarter. Leela Bazar PWA." />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://yourwebsite.com/" />
+
+  <!-- Robots -->
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+  <!-- OpenGraph Social Preview -->
+  <meta property="og:title" content="Leela Bazar – Fast Matka Results & Game Tracker" />
+  <meta property="og:description" content="Satta Matka results, lucky numbers, charts & guessing – all in one place. Fast updates. Hindi + English support." />
   <meta property="og:image" content="Logo.jpg" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="/" />
+  <meta property="og:url" content="https://yourwebsite.com" />
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Leela Bazar – Satta Matka Results & Lucky Numbers">
+  <meta name="twitter:description" content="Check Satta Matka results, lucky numbers, guessing & charts instantly. Hindi & English.">
+  <meta name="twitter:image" content="Logo.jpg">
+  <!-- App Icons -->
   <link rel="icon" type="image/png" sizes="192x192" href="Logo.jpg" />
   <link rel="apple-touch-icon" href="Logo.jpg">
+  <!-- PWA -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#FED7AA" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Leela Bazar">
+  <!-- Fonts & CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
+  <!-- Schema.org SEO (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Leela Bazar",
+    "url": "https://www.leelabazar.in",
+    "description": "Leela Bazar provides fast Satta Matka results, charts, lucky numbers, guessing and statistics in Hindi and English.",
+    "keywords": "Satta Matka, Matka Result, Lucky Number, Satta Guessing, Matka Chart, लीला बाजार, मटका नंबर",
+    "inLanguage": ["en", "hi"]
+  }
+  </script>
+
+  <!-- Service Worker -->
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
@@ -36,7 +67,6 @@
       });
     }
   </script>
-
 </head>
 
 <style>
