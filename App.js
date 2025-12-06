@@ -165,7 +165,7 @@ function loadData() {
         const date = new Date(d);
         return date.toLocaleDateString("en-IN", {
           day: "2-digit",
-          month: "short",
+          month: "2-digit",
           year: "2-digit",
         });
       }
@@ -207,7 +207,7 @@ function loadData() {
     <h2 class="font-bold text-lg">${r.Id}</h2>
     <p class="text-[12px] text-gray-700"> ${formatTime(r.Time)} & ${formatDate(
           r.Date
-        )} & ${formatTime(r.Timeend)}</p>
+        )} & ${formatTime(r.End)}</p>
     <p class="text-xl text-pink-700 font-extrabold">${r.Jodi}-${r.Marks}-${
           r.Pennel
         }</p>
