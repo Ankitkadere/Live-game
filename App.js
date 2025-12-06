@@ -1,27 +1,3 @@
-const sidebar = document.getElementById("sidebar");
-const overlay = document.getElementById("sidebarOverlay");
-const openSidebarBtn = document.getElementById("openSidebar");
-
-// 🔵 OPEN SIDEBAR
-openSidebarBtn.addEventListener("click", () => {
-  sidebar.classList.remove("-translate-x-full");
-  overlay.classList.remove("hidden");
-
-  setTimeout(() => {
-    overlay.classList.add("opacity-100");
-  }, 10);
-});
-
-// 🔵 CLOSE SIDEBAR
-overlay.addEventListener("click", () => {
-  sidebar.classList.add("-translate-x-full");
-  overlay.classList.remove("opacity-100");
-
-  setTimeout(() => {
-    overlay.classList.add("hidden");
-  }, 250);
-});
-
 ///////////////////////////////////////////
 const alpha = document.getElementById("alpha");
 const beeta = document.getElementById("beeta");
@@ -189,8 +165,8 @@ function loadData() {
         const date = new Date(d);
         return date.toLocaleDateString("en-IN", {
           day: "2-digit",
-          month: "short"
-          
+          month: "short",
+          year: "2-digit",
         });
       }
 
@@ -209,31 +185,55 @@ function loadData() {
           })
           .toUpperCase();
       }
+      const singleBox = document.querySelector("#dataSingle");
+      const goldenBox = document.querySelector("#dataGolden");
+      const finalBox = document.querySelector("#dataFinal");
 
-      const tbody = document.querySelector("#dataTable");
-      tbody.innerHTML = ""; // Clear table
+      // RESET OLD DOM
+      singleBox.innerHTML = "";
+      goldenBox.innerHTML = "";
+      finalBox.innerHTML = "";
 
-      data.records.reverse().forEach((r) => {
-        const row = `
-          <div class="mt-4 space-y-4">
-    <div class="bg-white px-5 py-4 rounded-2xl shadow">
-      <div class="justify-between">
-        <div class="flex justify-between">
-         <b class="text-3x1 text-black text-extrabold  text-left">${r.Id}</b>
-         <b class="text-gray-400  text-right"> ${formatDate(r.Date)} → ${formatTime(r.Time)} </b>
-        </div>
-        <div class="bg-blue-50 text-blue-900 justify-between flex px-3 py-1 mt-2 rounded-md text-lg font-bold">
-          <b>${r.Jodi}</b>
-           <b  >-</b>
-            <b>${r.Marks}</b>
-            <b >-</b>
-              <b>${r.Pennel}</b>
-        </div>
-      </div>
-    </div>
+      // ========== 1️⃣ SINGLE =============
+      const onlySingle = data.records.filter(
+        (r) => r.Category?.trim().toLowerCase() === "single"
+      );
+
+      onlySingle.reverse().forEach((r) => {
+        singleBox.innerHTML += `
+<div class="flex justify-between items-center bg-orange-100 px-2 py-2 border-t border-orange-300">
+  <button class="bg-blue-900 text-white px-3 py-1 rounded-full text-xs shadow">Jodi</button>
+  <div class="text-center flex-1">
+    <h2 class="font-bold text-lg">${r.Id}</h2>
+    <p class="text-[12px] text-gray-700"> ${formatTime(r.Time)} & ${formatDate(
+          r.Date
+        )} & ${formatTime(r.Timeend)}</p>
+    <p class="text-xl text-pink-700 font-extrabold">${r.Jodi}-${r.Marks}-${
+          r.Pennel
+        }</p>
   </div>
-        `;
-        tbody.innerHTML += row;
+  <button class="bg-blue-900 text-white px-3 py-1 rounded-full text-xs shadow">Panel</button>
+</div>`;
+      });
+
+      // ========== 2️⃣ GOLDEN =============
+      const onlyGolden = data.records.filter(
+        (r) => r.Category?.trim().toLowerCase() === "golden"
+      );
+
+      onlyGolden.reverse().forEach((r) => {
+        goldenBox.innerHTML += `
+  <p class="text-2xl font-extrabold text-orange-900">${r.Jodi}-${r.Marks}-${r.Pennel}</p>`;
+      });
+
+      // ========== 3️⃣ FINAL =============
+      const onlyFinal = data.records.filter(
+        (r) => r.Category?.trim().toLowerCase() === "final"
+      );
+
+      onlyFinal.reverse().forEach((r) => {
+        finalBox.innerHTML += `
+ <p class="text-2xl font-extrabold text-green-700">${r.Jodi}-${r.Marks}-${r.Pennel}</p>`;
       });
     })
     .catch((err) => console.error("Fetch Error:", err));
@@ -252,6 +252,20 @@ function autoLoad() {
 
 loadData(); // first load
 setInterval(autoLoad, 50);
+
+refreshBtn.addEventListener("click", () => {
+  loadData(); // first load
+  let rotation = 0;
+  const speed = 25; // lower = faster
+  const spin = setInterval(() => {
+    rotation += 20;
+    refreshIcon.style.transform = `rotate(${rotation}deg)`;
+  }, speed);
+  setTimeout(() => {
+    clearInterval(spin);
+    refreshIcon.style.transform = "rotate(0deg)";
+  }, 3000); // stop after 3s
+});
 
 ////////////////////////Sliding//////////
 

@@ -39,15 +39,15 @@
 
 <body class="bg-gray-100">
   <h1 id="loggedUserFName" class="hidden"></h1>
-  
+
   <script>setTimeout(() => {
-   
+
       const name = document.getElementById('loggedUserFName').innerText;
       const mail = document.getElementById('loggedUserEmail').innerText;
       if (name == "" || mail == "") {
         window.location.href = "index.html";
       }
-      
+
     }, 4000);
 
 
@@ -64,7 +64,7 @@
       <div onclick="window.location.href='index.html'" class="flex justify-between items-center">
         <div id="openSidebar" class="flex items-center gap-3 cursor-pointer">
           <img src="Logo.jpg" class="w-11 h-11 rounded-full shadow-md" />
-          <p id="loggedUserEmail" class="font-extrabold text-black text-2xl">Spot Game</p>
+          <p id="loggedUserEmail" class="font-extrabold text-black text-2xl">Leela Bazar</p>
         </div>
 
         <div class="flex items-center gap-5 text-gray-900 text-2xl">
@@ -180,37 +180,51 @@
       <form id="crudForm" class="grid grid-cols-1 mt-4 md:grid-cols-2 gap-4">
 
         <div>
-          <select name="Id" class="border border-black p-4 w-full font-bold text-black focus:outline-none focus:ring-0 rounded">
+          <select name="Id"
+            class="border border-black p-4 w-full font-bold text-black focus:outline-none focus:ring-0 rounded">
             <option value="">Select Applicant</option>
-            <option>SRIDEVI</option>
-            <option>KALYAN MORNING</option>
-            <option>MAIN BAZAR MORNING</option>
-            <option>SUNDAY BAZAR</option>
-            <option>MADHURI</option>
-            <option>PADMAVATHI</option>
-            <option>Deepak Joshi</option>
-            <option>MAHARANI</option>
-            <option>RADHA-RANI MORNING</option>
-            <option>SUPER MILAN DAY</option>
-            <option>JAY SHREE DAY</option>
-            <option>DAY BOMBAY</option>
-            <option>JANTA DAY</option>
-            <option>KALYAN SRIDEVI</option>
-            <option>KAMAL MORNING</option>
-            <option>MEENA MORNING</option>
-            <option>RAKHI MORNING</option>
-            <option>SHAGUN</option>
-            <option>SHRI DAY</option>
-            <option>SRILAKSHMI</option>
-            <option>TIME BAZAR MORNING</option>
-            <option>TIME MORNING</option>
-            <option>GOWA</option>
-            <option>MOHINI</option>
+            <option value="Golden">Golden</option>
+            <option value="Final">Final</option>
+            <option value="SRIDEVI">SRIDEVI</option>
+            <option value="KALYAN MORNING">KALYAN MORNING</option>
+            <option value="MAIN BAZAR MORNING">MAIN BAZAR MORNING</option>
+            <option value="SUNDAY BAZAR">SUNDAY BAZAR</option>
+            <option value="MADHURI">MADHURI</option>
+            <option value="PADMAVATHI">PADMAVATHI</option>
+            <option value="Deepak Joshi">Deepak Joshi</option>
+            <option value="MAHARANI">MAHARANI</option>
+            <option value="RADHA-RANI MORNING">RADHA-RANI MORNING</option>
+            <option value="SUPER MILAN DAY">SUPER MILAN DAY</option>
+            <option value="JAY SHREE DAY">JAY SHREE DAY</option>
+            <option value="DAY BOMBAY">DAY BOMBAY</option>
+            <option value="JANTA DAY">JANTA DAY</option>
+            <option value="KALYAN SRIDEVI">KALYAN SRIDEVI</option>
+            <option value="KAMAL MORNING">KAMAL MORNING</option>
+            <option value="MEENA MORNING">MEENA MORNING</option>
+            <option value="RAKHI MORNING">RAKHI MORNING</option>
+            <option value="SHAGUN">SHAGUN</option>
+            <option value="SHRI DAY">SHRI DAY</option>
+            <option value="SRILAKSHMI">SRILAKSHMI</option>
+            <option value="TIME BAZAR MORNING">TIME BAZAR MORNING</option>
+            <option value="TIME MORNING">TIME MORNING</option>
+            <option value="GOWA">GOWA</option>
+            <option value="MOHINI">MOHINI</option>
+
           </select>
 
           <input type="text" name="Category" value="General"
-            class="border hidden p-2  font-bold rounded focus:outline-none focus:ring-0" />
+            class="border hidden p-2 font-bold rounded focus:outline-none focus:ring-0" />
         </div>
+
+        <div class="flex gap-3">
+          <input type="date" name="Date" placeholder="Date"
+            class="border p-4 text-sm rounded border-black w-1/3  font-bold focus:outline-none focus:ring-0" />
+          <input type="time" name="Time" placeholder="Time"
+            class="border p-4 rounded w-1/3 border-black  font-bold focus:outline-none focus:ring-0" />
+       <input type="time" name="Timeend" placeholder="Time"
+            class="border p-4 rounded w-1/3 border-black  font-bold focus:outline-none focus:ring-0" />
+    
+          </div>
 
         <div class="flex gap-3">
           <input type="number" name="Jodi" placeholder="Jodi"
@@ -412,5 +426,5 @@
   });
 
 </script>
- 
+
 </html>
