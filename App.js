@@ -1,4 +1,49 @@
-///////////////////////////////////////////
+const data = [
+  { Id: "SRIDEVI" },
+  { Id: "KALYAN MORNING" },
+  { Id: "MAIN BAZAR MORNING" },
+  { Id: "SUNDAY BAZAR" },
+  { Id: "MADHURI" },
+  { Id: "PADMAVATHI" },
+  { Id: "Deepak Joshi" },
+  { Id: "MAHARANI" },
+  { Id: "RADHA-RANI MORNING" },
+  { Id: "SUPER MILAN DAY" },
+  { Id: "JAY SHREE DAY" },
+  { Id: "DAY BOMBAY" },
+  { Id: "JANTA DAY" },
+  { Id: "KALYAN SRIDEVI" },
+  { Id: "KAMAL MORNING" },
+  { Id: "MEENA MORNING" },
+  { Id: "RAKHI MORNING" },
+  { Id: "SHAGUN" },
+  { Id: "SHRI DAY" },
+  { Id: "SRILAKSHMI" },
+  { Id: "TIME BAZAR MORNING" },
+  { Id: "TIME MORNING" },
+  { Id: "GOWA" },
+  { Id: "MOHINI" },
+].reverse();
+
+
+// Render
+document.getElementById("gameList").innerHTML = data
+  .map(
+    (r) => `
+<div class="flex justify-between items-center bg-orange-100 px-2 py-2 border-t border-orange-300">
+  <button class="bg-blue-900 text-white px-3 py-1 rounded-full text-xs shadow">Jodi</button>
+  <div class="text-center flex-1">
+    <h2 class="font-bold text-lg">${r.Id}</h2>
+    <p class="text-[12px] text-gray-700">  ----:---- </p>
+    <p class="text-xl text-pink-700 font-extrabold">---- : ----   </p>
+  </div>
+  <button class="bg-blue-900 text-white px-3 py-1 rounded-full text-xs shadow">Panel</button>
+</div>
+`
+  )
+  .join("");
+
+//////////////////////////////////////////
 const alpha = document.getElementById("alpha");
 const beeta = document.getElementById("beeta");
 
@@ -13,28 +58,8 @@ alpha.addEventListener("click", () => {
   document.getElementById("alphachild").style.backgroundColor = "white";
   document.getElementById("beetachild").style.backgroundColor = "";
   document.querySelector("#dataTable").innerHTML = `
-     <div id="preLoader" class="mt-2 space-y-3">
-        <div class="bg-white p-5 rounded-2xl shadow animate-pulse">
-          <div class="flex justify-between items-center">
-            <div>
-              <div class="h-4 bg-gray-200 rounded w-40 mb-2"></div>
-              <div class="h-3 bg-gray-200 rounded w-24"></div>
-            </div>
-            <div class="h-7 w-20 bg-gray-200 rounded-full"></div>
-          </div>
-        </div>
-
-        <div class="bg-white p-5 rounded-2xl shadow animate-pulse">
-          <div class="flex justify-between items-center">
-            <div>
-              <div class="h-4 bg-gray-200 rounded w-36 mb-2"></div>
-              <div class="h-3 bg-gray-200 rounded w-20"></div>
-            </div>
-            <div class="h-7 w-20 bg-gray-200 rounded-full"></div>
-          </div>
-        </div>
-
-        <div class="bg-white p-5 rounded-2xl shadow animate-pulse">
+   
+    <div class="bg-white p-5 hidden rounded-2xl shadow animate-pulse">
           <div class="flex justify-between items-center">
             <div>
               <div class="h-4 bg-gray-200 rounded w-48 mb-2"></div>
@@ -43,38 +68,6 @@ alpha.addEventListener("click", () => {
             <div class="h-7 w-20 bg-gray-200 rounded-full"></div>
           </div>
         </div>
-
-        <div class="bg-white p-5 rounded-2xl shadow animate-pulse">
-          <div class="flex justify-between items-center">
-            <div>
-              <div class="h-4 bg-gray-200 rounded w-40 mb-2"></div>
-              <div class="h-3 bg-gray-200 rounded w-24"></div>
-            </div>
-            <div class="h-7 w-20 bg-gray-200 rounded-full"></div>
-          </div>
-        </div>
-
-        <div class="bg-white p-5 rounded-2xl shadow animate-pulse">
-          <div class="flex justify-between items-center">
-            <div>
-              <div class="h-4 bg-gray-200 rounded w-36 mb-2"></div>
-              <div class="h-3 bg-gray-200 rounded w-20"></div>
-            </div>
-            <div class="h-7 w-20 bg-gray-200 rounded-full"></div>
-          </div>
-        </div>
-
-        <div class="bg-white p-5 rounded-2xl shadow animate-pulse">
-          <div class="flex justify-between items-center">
-            <div>
-              <div class="h-4 bg-gray-200 rounded w-48 mb-2"></div>
-              <div class="h-3 bg-gray-200 rounded w-32"></div>
-            </div>
-            <div class="h-7 w-20 bg-gray-200 rounded-full"></div>
-          </div>
-        </div>
-      </div>
-  
   `;
 });
 
@@ -84,28 +77,8 @@ beeta.addEventListener("click", () => {
   document.getElementById("alphachild").style.backgroundColor = "";
   document.getElementById("beetachild").style.backgroundColor = "white";
   document.querySelector("#dataTable").innerHTML = `
-     <div id="preLoader" class="mt-4 space-y-4">
-        <div class="bg-white p-5 rounded-2xl shadow animate-pulse">
-          <div class="flex justify-between items-center">
-            <div>
-              <div class="h-4 bg-gray-200 rounded w-40 mb-2"></div>
-              <div class="h-3 bg-gray-200 rounded w-24"></div>
-            </div>
-            <div class="h-7 w-20 bg-gray-200 rounded-full"></div>
-          </div>
-        </div>
-
-        <div class="bg-white p-5 rounded-2xl shadow animate-pulse">
-          <div class="flex justify-between items-center">
-            <div>
-              <div class="h-4 bg-gray-200 rounded w-36 mb-2"></div>
-              <div class="h-3 bg-gray-200 rounded w-20"></div>
-            </div>
-            <div class="h-7 w-20 bg-gray-200 rounded-full"></div>
-          </div>
-        </div>
-
-        <div class="bg-white p-5 rounded-2xl shadow animate-pulse">
+   
+        <div class="bg-white p-5 hidden rounded-2xl shadow animate-pulse">
           <div class="flex justify-between items-center">
             <div>
               <div class="h-4 bg-gray-200 rounded w-48 mb-2"></div>
@@ -114,37 +87,7 @@ beeta.addEventListener("click", () => {
             <div class="h-7 w-20 bg-gray-200 rounded-full"></div>
           </div>
         </div>
-
-        <div class="bg-white p-5 rounded-2xl shadow animate-pulse">
-          <div class="flex justify-between items-center">
-            <div>
-              <div class="h-4 bg-gray-200 rounded w-40 mb-2"></div>
-              <div class="h-3 bg-gray-200 rounded w-24"></div>
-            </div>
-            <div class="h-7 w-20 bg-gray-200 rounded-full"></div>
-          </div>
-        </div>
-
-        <div class="bg-white p-5 rounded-2xl shadow animate-pulse">
-          <div class="flex justify-between items-center">
-            <div>
-              <div class="h-4 bg-gray-200 rounded w-36 mb-2"></div>
-              <div class="h-3 bg-gray-200 rounded w-20"></div>
-            </div>
-            <div class="h-7 w-20 bg-gray-200 rounded-full"></div>
-          </div>
-        </div>
-
-        <div class="bg-white p-5 rounded-2xl shadow animate-pulse">
-          <div class="flex justify-between items-center">
-            <div>
-              <div class="h-4 bg-gray-200 rounded w-48 mb-2"></div>
-              <div class="h-3 bg-gray-200 rounded w-32"></div>
-            </div>
-            <div class="h-7 w-20 bg-gray-200 rounded-full"></div>
-          </div>
-        </div>
-      </div>
+    
   
   `;
 });
