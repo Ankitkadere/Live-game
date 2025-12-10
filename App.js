@@ -25,7 +25,6 @@ const data = [
   { Id: "MOHINI" },
 ].reverse();
 
-
 // Render
 document.getElementById("gameList").innerHTML = data
   .map(
@@ -145,15 +144,15 @@ function loadData() {
       onlySingle.reverse().forEach((r) => {
         singleBox.innerHTML += `
 <div class="flex justify-between items-center bg-orange-100 px-2 py-2 border-t border-orange-300">
-  <button class="bg-blue-900 text-white px-3 py-1 rounded-full text-xs shadow">Jodi</button>
+  <button onclick="window.location.href='Callender.html'" class="bg-blue-900 text-white px-3 py-1 rounded-full text-xs shadow">Jodi</button>
   <div class="text-center flex-1">
     <h2 class="font-bold text-lg">${r.Id}</h2>
     <p class="text-[12px] text-gray-700"> ${formatTime(r.Time)} & ${formatDate(
           r.Date
         )} & ${formatTime(r.End)}</p>
-    <p class="text-xl text-pink-700 font-extrabold">${r.Jodi}-${r.Marks}-${
-          r.Pennel
-        }</p>
+    <p class="text-xl text-pink-700 font-extrabold">${r.Jodi +" " || ""}${
+          "- "+ r.Marks +" " || ""
+        }${"- "+ r.Pennel || ""} </p>
   </div>
   <button class="bg-blue-900 text-white px-3 py-1 rounded-full text-xs shadow">Panel</button>
 </div>`;
@@ -166,7 +165,9 @@ function loadData() {
 
       onlyGolden.reverse().forEach((r) => {
         goldenBox.innerHTML += `
-  <p class="text-2xl font-extrabold text-orange-900">${r.Jodi}-${r.Marks}-${r.Pennel}</p>`;
+  <p class="text-2xl font-extrabold text-orange-900">${r.Jodi || ""}${
+          -r.Marks || ""
+        }${-r.Pennel || ""}  </p>`;
       });
 
       // ========== 3️⃣ FINAL =============
@@ -176,7 +177,9 @@ function loadData() {
 
       onlyFinal.reverse().forEach((r) => {
         finalBox.innerHTML += `
- <p class="text-2xl font-extrabold text-green-700">${r.Jodi}-${r.Marks}-${r.Pennel}</p>`;
+ <p class="text-2xl font-extrabold text-green-700">${r.Jodi || ""}${
+          r.Marks || ""
+        }${r.Pennel || ""}</p>`;
       });
     })
     .catch((err) => console.error("Fetch Error:", err));
