@@ -66,16 +66,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
 </head>
- 
+
 <style>
-  /* Hide scrollbar for all browsers */
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-  .scrollbar-hide {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;     /* Firefox */
-  }
+    /* Hide scrollbar for all browsers */
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+    }
 </style>
 
 <body class="bg-gray-100 ">
@@ -93,6 +96,13 @@
 
                 <!-- RIGHT ICONS -->
                 <div class="flex items-center gap-5 text-gray-900 text-2xl mr-2">
+                    <i id="translateToggle"
+                        class="fa-solid fa-language text-gray-800 text-3xl cursor-pointer hover:text-blue-600 transition fixed top-4 right-4 z-50"
+                        title="Toggle Language"></i>
+
+                    <!-- Google Translate hidden div -->
+                    <div id="google_translate_element" style="display:none;"></div>
+
                     <i class="fa-solid fa-mobile text-gray-800 transition"></i>
                 </div>
 
@@ -232,5 +242,47 @@
     </script>
 
 </body>
+<script>
+    let currentLang = 'en'; // track current language
+    let gtLoaded = false;
+
+    const toggleBtn = document.getElementById("translateToggle");
+
+    toggleBtn.addEventListener("click", () => {
+        if (!gtLoaded) {
+            // Load Google Translate script dynamically
+            const gtScript = document.createElement("script");
+            gtScript.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+            document.body.appendChild(gtScript);
+
+            window.googleTranslateElementInit = function () {
+                new google.translate.TranslateElement({
+                    pageLanguage: 'en',
+                    includedLanguages: 'en,hi',
+                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                }, 'google_translate_element');
+
+                gtLoaded = true;
+                toggleLanguage(); // Switch to Hindi on first click
+            }
+        } else {
+            toggleLanguage();
+        }
+    });
+
+    function toggleLanguage() {
+        const select = document.querySelector(".goog-te-combo");
+        if (!select) return;
+
+        if (currentLang === 'en') {
+            select.value = 'hi'; // Translate to Hindi
+            currentLang = 'hi';
+        } else {
+            select.value = 'en'; // Translate back to English
+            currentLang = 'en';
+        }
+        select.dispatchEvent(new Event('change'));
+    }
+</script>
 
 </html>

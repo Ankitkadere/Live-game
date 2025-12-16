@@ -52,9 +52,9 @@
   <meta name="twitter:image" content="Logo.jpg">
   <!-- App Icons -->
   <link rel="icon" type="image/png" sizes="512x512" href="Logo.jpg" />
- 
+
   <!-- PWA -->
- 
+
   <meta name="theme-color" content="#FED7AA" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -344,6 +344,13 @@
 
         <!-- RIGHT ICONS -->
         <div class="flex items-center gap-5 text-gray-900 text-2xl mr-2">
+          <i id="translateToggle"
+            class="fa-solid fa-language text-gray-800 text-2xl cursor-pointer hover:text-blue-600 transition fixed top-4 right-4 z-50"
+            title="Toggle Language"></i>
+
+          <!-- Google Translate hidden div -->
+          <div id="google_translate_element" style="display:none;"></div>
+
           <i class="fa-solid fa-mobile text-gray-800 transition"></i>
         </div>
 
@@ -505,5 +512,47 @@
 </body>
 <script src="App.js"></script>
 <script src="Blocked.js"></script>
+<script>
+  let currentLang = 'en'; // track current language
+  let gtLoaded = false;
+
+  const toggleBtn = document.getElementById("translateToggle");
+
+  toggleBtn.addEventListener("click", () => {
+    if (!gtLoaded) {
+      // Load Google Translate script dynamically
+      const gtScript = document.createElement("script");
+      gtScript.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+      document.body.appendChild(gtScript);
+
+      window.googleTranslateElementInit = function () {
+        new google.translate.TranslateElement({
+          pageLanguage: 'en',
+          includedLanguages: 'en,hi',
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        }, 'google_translate_element');
+
+        gtLoaded = true;
+        toggleLanguage(); // Switch to Hindi on first click
+      }
+    } else {
+      toggleLanguage();
+    }
+  });
+
+  function toggleLanguage() {
+    const select = document.querySelector(".goog-te-combo");
+    if (!select) return;
+
+    if (currentLang === 'en') {
+      select.value = 'hi'; // Translate to Hindi
+      currentLang = 'hi';
+    } else {
+      select.value = 'en'; // Translate back to English
+      currentLang = 'en';
+    }
+    select.dispatchEvent(new Event('change'));
+  }
+</script>
 
 </html>
