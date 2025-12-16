@@ -138,14 +138,14 @@
 
                     const row = document.createElement("div");
                     row.innerHTML = `
-                <div class="  mx-auto overflow-x-auto p-2">
+                <div class="  mx-auto overflow-x-auto text-2x1 p-2">
                     <div class=" bg-orange-100 rounded-xl shadow-md p-1 min-w-[600px] ">
 
-                        <div class="flex justify-between items-center  ">
-                            <h2 class="text-sm font-bold text-gray-800">
+                        <div class="flex justify-between items-center  mb-1">
+                            <h2 class="text-base font-bold text-gray-800">
                                 Week Start: ${mondayKey}
                             </h2>
-                            <p class="text-sm font-semibold text-gray-600">
+                            <p class="text-base font-semibold text-gray-600">
                                 Week End: ${getWeekEndDate(monday)}
                             </p>
                         </div>
@@ -155,7 +155,7 @@
                             <div>THU</div><div>FRI</div><div>SAT</div><div>SUN</div>
                         </div>
 
-                        <div class="grid grid-cols-7 text-center text-sm bg-gray-100 rounded-lg mt-1">
+                        <div class="grid grid-cols-7 text-center text-base bg-gray-100 rounded-lg mt-1">
                             ${renderWeekDays(monday, weekRecords)}
                         </div>
                     </div>
