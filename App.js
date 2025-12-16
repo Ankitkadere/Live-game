@@ -1,9 +1,9 @@
 const data = [
   { Id: "MORNING SYNDICATE" },
-  { Id: "KALYAN MORNING" }, 
+  { Id: "KALYAN MORNING" },
   { Id: "SYNDICATE NIGHT" },
   { Id: "LEELA BAZAR" },
-  { Id: "RAJDHANI NIGHT" }, 
+  { Id: "RAJDHANI NIGHT" },
 ].reverse();
 
 // Render
@@ -117,27 +117,43 @@ function loadData() {
       goldenBox.innerHTML = "";
       finalBox.innerHTML = "";
 
-      // ========== 1️⃣ SINGLE =============
-      const onlySingle = data.records.filter(
-        (r) => r.Category?.trim().toLowerCase() === "single"
-      );
+    const onlySingle = data.records.filter(
+  (r) => r.Category?.trim().toLowerCase() === "single"
+);
 
-      onlySingle.reverse().forEach((r) => {
-        singleBox.innerHTML += `
+// ✅ ADD THIS
+const renderedIds = new Set();
+
+onlySingle.reverse().forEach((r) => {
+
+  // ✅ UNIQUE BY Id
+  if (renderedIds.has(r.Id)) return;
+  renderedIds.add(r.Id);
+
+  singleBox.innerHTML += `
 <div class="flex justify-between items-center bg-orange-100 px-2 py-2 border-t border-orange-300">
-  <button  onclick="window.location.href='Callender.html?id=${r.Id}'"  class=" bg-blue-900 text-white px-3 py-1 rounded-full text-xs shadow">Jodi</button>
+  <button onclick="window.location.href='Callender.html?id=${r.Id}'"
+    class="bg-blue-900 text-white px-3 py-1 rounded-full text-xs shadow">
+    Jodi
+  </button>
+
   <div class="text-center flex-1">
     <h2 class="font-bold text-lg">${r.Id}</h2>
-    <p class="text-[12px] text-gray-700"> ${formatTime(r.Time)} & ${formatDate(
-          r.Date
-        )} & ${formatTime(r.End)}</p>
-    <p class="text-xl text-pink-700 font-extrabold">${r.Jodi +" " || ""}${
-          "- "+ r.Marks +" " || ""
-        }${"- "+ r.Pennel || ""} </p>
+    <p class="text-[12px] text-gray-700">
+      ${formatTime(r.Time)} & ${formatDate(r.Date)} & ${formatTime(r.End)}
+    </p>
+    <p class="text-xl text-pink-700 font-extrabold">
+      ${r.Jodi + " " || ""}${"- " + r.Marks + " " || ""}${"- " + r.Pennel || ""}
+    </p>
   </div>
-  <button onclick="window.location.href='Callender.html?id=${r.Id}'" class=" bg-blue-900 text-white px-3 py-1 rounded-full text-xs shadow">Panel</button>
+
+  <button onclick="window.location.href='Callender.html?id=${r.Id}'"
+    class="bg-blue-900 text-white px-3 py-1 rounded-full text-xs shadow">
+    Panel
+  </button>
 </div>`;
-      });
+});
+
 
       // ========== 2️⃣ GOLDEN =============
       const onlyGolden = data.records.filter(
