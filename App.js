@@ -144,7 +144,7 @@ function loadData() {
       onlySingle.reverse().forEach((r) => {
         singleBox.innerHTML += `
 <div class="flex justify-between items-center bg-orange-100 px-2 py-2 border-t border-orange-300">
-  <button onclick="window.location.href='Callender.html'" class="bg-blue-900 text-white px-3 py-1 rounded-full text-xs shadow">Jodi</button>
+  <button  onclick="window.location.href='Callender.html?id=${r.Id}'"  class=" bg-blue-900 text-white px-3 py-1 rounded-full text-xs shadow">Jodi</button>
   <div class="text-center flex-1">
     <h2 class="font-bold text-lg">${r.Id}</h2>
     <p class="text-[12px] text-gray-700"> ${formatTime(r.Time)} & ${formatDate(
@@ -154,7 +154,7 @@ function loadData() {
           "- "+ r.Marks +" " || ""
         }${"- "+ r.Pennel || ""} </p>
   </div>
-  <button class="bg-blue-900 text-white px-3 py-1 rounded-full text-xs shadow">Panel</button>
+  <button onclick="window.location.href='Callender.html?id=${r.Id}'" class=" bg-blue-900 text-white px-3 py-1 rounded-full text-xs shadow">Panel</button>
 </div>`;
       });
 

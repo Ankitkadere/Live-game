@@ -34,7 +34,7 @@
       });
     }
   </script>
-<script src="Blocked.js"></script>
+  <script src="Blocked.js"></script>
 </head>
 
 <body class="bg-gray-100">
@@ -185,31 +185,23 @@
             <option value="">Select Applicant</option>
             <option value="Golden">Golden</option>
             <option value="Final">Final</option>
-            <option value="SRIDEVI">SRIDEVI</option>
+            <option value="MORNING SYNDICATE">MORNING SYNDICATE</option>
             <option value="KALYAN MORNING">KALYAN MORNING</option>
-            <option value="MAIN BAZAR MORNING">MAIN BAZAR MORNING</option>
-            <option value="SUNDAY BAZAR">SUNDAY BAZAR</option>
-            <option value="MADHURI">MADHURI</option>
-            <option value="PADMAVATHI">PADMAVATHI</option>
-            <option value="Deepak Joshi">Deepak Joshi</option>
-            <option value="MAHARANI">MAHARANI</option>
-            <option value="RADHA-RANI MORNING">RADHA-RANI MORNING</option>
-            <option value="SUPER MILAN DAY">SUPER MILAN DAY</option>
-            <option value="JAY SHREE DAY">JAY SHREE DAY</option>
-            <option value="DAY BOMBAY">DAY BOMBAY</option>
-            <option value="JANTA DAY">JANTA DAY</option>
-            <option value="KALYAN SRIDEVI">KALYAN SRIDEVI</option>
-            <option value="KAMAL MORNING">KAMAL MORNING</option>
-            <option value="MEENA MORNING">MEENA MORNING</option>
-            <option value="RAKHI MORNING">RAKHI MORNING</option>
-            <option value="SHAGUN">SHAGUN</option>
-            <option value="SHRI DAY">SHRI DAY</option>
-            <option value="SRILAKSHMI">SRILAKSHMI</option>
-            <option value="TIME BAZAR MORNING">TIME BAZAR MORNING</option>
-            <option value="TIME MORNING">TIME MORNING</option>
-            <option value="GOWA">GOWA</option>
-            <option value="MOHINI">MOHINI</option>
-
+            <option value="SYNDICATE NIGHT">SYNDICATE NIGHT</option>
+            <option value="LEELA BAZAR">LEELA BAZAR</option>
+            <option value="RAJDHANI NIGHT">RAJDHANI NIGHT</option>
+          </select>
+          <br>
+          <select name="day" title="Select Days"
+            class="border border-black mt-2 p-4 w-full font-bold text-black focus:outline-none focus:ring-0 rounded">
+            <option value="">-- Select Day --</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+            <option value="Sunday">Sunday</option>
           </select>
 
           <input type="text" name="Category" value="General"
@@ -235,21 +227,23 @@
             class="border p-4 rounded w-1/3 border-black  font-bold focus:outline-none focus:ring-0" />
         </div>
 
-        <button type="button" id="updateBtn" onclick="showLoader();"
-          class="bg-blue-900 w-full md:w-[48.4vw] text-white py-4 rounded-full text-lg font-bold mt-8 shadow-md hover:bg-blue-700 transition">
-          UPDATE
-        </button>
-
+        <div class="flex">
+          <button type="button" id="updateBtn" onclick="showLoader();"
+            class="bg-blue-900 w-full md:w-[48.4vw] text-white py-4 rounded-full text-lg font-bold mt-8 shadow-md hover:bg-blue-700 transition">
+            UPDATE
+          </button> <button type="button" id="createBtn" onclick="showLoader();"
+            class="bg-blue-900 w-full md:w-[48.4vw] text-white py-4 rounded-full text-lg font-bold mt-8 shadow-md hover:bg-blue-700 transition">
+            CREATE
+          </button>
+        </div>
       </form>
     </div>
   </div>
   <script>
-
     function showUpdateBox() {
       const box = document.getElementById('updatebox');
       box.classList.add('hidden');
     }
-
 
     function showLoader(displayTime = 3000) {
       const loader = document.getElementById('page-loader');
@@ -276,14 +270,22 @@
 
     // LOAD RECORDS
     async function fetchRecords() {
-      const res = await fetch(`${scriptURL}?action=read`);
-      const data = await res.json();
-      const body = document.getElementById("recordsBody");
-      body.innerHTML = "";
+      showLoader(500); // optional brief loader
+      try {
+        const res = await fetch(`${scriptURL}?action=read`);
+        const data = await res.json();
+        const body = document.getElementById("recordsBody");
+        body.innerHTML = "";
 
-      data.records.forEach(r => {
-        const row = document.createElement("div");
-        row.innerHTML = `
+        // Keep track of already rendered Ids
+        const renderedIds = new Set();
+
+        data.records.reverse().forEach(r => {
+          if (!renderedIds.has(r.Id)) {
+            renderedIds.add(r.Id);
+
+            const row = document.createElement("div");
+            row.innerHTML = `
 <div class="p-3 bg-orange-100 shadow rounded-lg border mb-3 flex justify-between">
   <div>
     <h2 class="font-bold text-lg text-gray-700">${r.Id}</h2>
@@ -295,50 +297,92 @@
     Update
   </button>
 </div>`;
-        body.appendChild(row);
-      });
+            body.appendChild(row);
+          }
+        });
+
+
+      } catch (err) {
+        console.error("Error fetching records:", err);
+      }
     }
 
     // FILL FORM (open update box)
     async function fillForm(Id) {
       showLoader();
-      const res = await fetch(`${scriptURL}?action=read`);
-      const data = await res.json();
-      const record = data.records.find(r => r.Id == Id);
-      if (record) {
-        const form = document.getElementById("crudForm");
-
-        document.getElementById("page-loader").classList.remove("hidden");
-        Object.keys(record).forEach(key => {
-          if (form[key]) form[key].value = record[key];
-        });
-
-        document.getElementById("updatebox").classList.remove("hidden");
+      try {
+        const res = await fetch(`${scriptURL}?action=read`);
+        const data = await res.json();
+        const record = data.records.find(r => r.Id == Id);
+        if (record) {
+          const form = document.getElementById("crudForm");
+          Object.keys(record).forEach(key => {
+            if (form[key]) form[key].value = record[key];
+          });
+          document.getElementById("updatebox").classList.remove("hidden");
+        }
+      } catch (err) {
+        console.error("Error filling form:", err);
       }
     }
 
     // SUBMIT UPDATE
     document.getElementById("updateBtn").addEventListener("click", async (e) => {
       e.preventDefault();
-
       const form = document.getElementById("crudForm");
       const fd = Object.fromEntries(new FormData(form));
 
       if (!fd.Id) {
-        alert("Id is required");
+        alert("Name is required");
         return;
       }
 
-      // Send all fields in query string
-      await fetch(`${scriptURL}?action=update&${new URLSearchParams(fd).toString()}`);
-      document.getElementById("updatebox").classList.add("hidden");
-      form.reset();
-      fetchRecords();
+      showLoader();
+      try {
+        await fetch(`${scriptURL}?action=update&${new URLSearchParams(fd).toString()}`);
+        document.getElementById("updatebox").classList.add("hidden");
+        form.reset();
+        fetchRecords();
+      } catch (err) {
+        console.error("Error updating record:", err);
+        alert("Update failed.");
+      }
     });
 
+    // ADD / CREATE RECORD
+    document.getElementById("createBtn").addEventListener("click", async (e) => {
+      e.preventDefault();
+      const form = document.getElementById("crudForm");
+      const fd = Object.fromEntries(new FormData(form));
+
+      if (!fd.Id) {
+        alert("Name is required");
+        return;
+      }
+
+      showLoader();
+      try {
+        const res = await fetch(`${scriptURL}?action=create&${new URLSearchParams(fd).toString()}`);
+        const result = await res.json();
+
+        if (result.status === "success") {
+
+
+          form.reset();
+          fetchRecords();
+        } else {
+
+
+        }
+      } catch (err) {
+        console.error("Error creating record:", err);
+
+
+      }
+    });
+
+    // INITIAL LOAD
     fetchRecords();
-
-
   </script>
 
 </body>
