@@ -94,7 +94,7 @@
                 <!-- RIGHT ICONS -->
                 <div class="flex items-center gap-5 text-gray-900 text-2xl mr-2">
                     <i id="translateToggle"
-                        class="fa-solid fa-language text-gray-800 text-3xl cursor-pointer hover:text-blue-600 transition  top-4 right-4 z-50"
+                        class="fa-solid fa-language text-gray-800 text-3xl cursor-pointer   transition  top-4 right-4 z-50"
                         title="Toggle Language"></i>
 
                     <!-- Google Translate hidden div -->
@@ -216,11 +216,11 @@
                 if (dayMap[i]) {
                     const r = dayMap[i];
                     return `
-            <div class="px-2 flex gap-3 md:gap-4 items-center justify-center border border-gray-300">
+            <div class="px-2 flex gap-1 md:gap-4 items-center justify-center border border-gray-300">
                 <div class="font-extrabold text-red-600 text-sm">
                     ${r.Jodi.split('').map(v => `<p>${v}</p>`).join('')}
                 </div>
-                <div class="font-extrabold rounded-full  w-6 text-lg">${r.Marks}</div>
+                <div class="font-extrabold rounded-full  w-6 text-base">${r.Marks}</div>
                 <div class="font-semibold text-sm">
                     ${r.Pennel.split('').map(v => `<p>${v}</p>`).join('')}
                 </div>
