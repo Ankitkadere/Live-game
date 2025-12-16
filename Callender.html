@@ -66,6 +66,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
 </head>
+ 
+<style>
+  /* Hide scrollbar for all browsers */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+  }
+</style>
 
 <body class="bg-gray-100 ">
     <div class="bg-orange-200  z-40 left-0 w-full   shadow-md rounded-b-3xl">
@@ -138,28 +149,29 @@
 
                     const row = document.createElement("div");
                     row.innerHTML = `
-                <div class="  mx-auto overflow-x-auto text-2x1 p-2">
-                    <div class=" bg-orange-100 rounded-xl shadow-md p-1 min-w-[600px] ">
+          <div class="mx-auto overflow-x-auto scrollbar-hide text-lg p-2">
+  <div class="bg-orange-100 rounded-xl shadow-md p-1 min-w-[600px]">
+    
+    <div class="flex justify-between items-center mb-1">
+      <h2 class="text-lg font-bold text-gray-800">
+        Week Start: ${mondayKey}
+      </h2>
+      <p class="text-lg font-semibold text-gray-600">
+        Week End: ${getWeekEndDate(monday)}
+      </p>
+    </div>
 
-                        <div class="flex justify-between items-center  mb-1">
-                            <h2 class="text-base font-bold text-gray-800">
-                                Week Start: ${mondayKey}
-                            </h2>
-                            <p class="text-base font-semibold text-gray-600">
-                                Week End: ${getWeekEndDate(monday)}
-                            </p>
-                        </div>
+    <div class="grid grid-cols-7 text-center text-sm font-bold text-gray-700 border-b pb-1">
+      <div>MON</div><div>TUE</div><div>WED</div>
+      <div>THU</div><div>FRI</div><div>SAT</div><div>SUN</div>
+    </div>
 
-                        <div class="grid grid-cols-7 text-center text-xs font-bold text-gray-700 border-b pb-1">
-                            <div>MON</div><div>TUE</div><div>WED</div>
-                            <div>THU</div><div>FRI</div><div>SAT</div><div>SUN</div>
-                        </div>
+    <div class="grid grid-cols-7 text-center text-base bg-gray-100 rounded-lg mt-1">
+      ${renderWeekDays(monday, weekRecords)}
+    </div>
+  </div>
+</div>
 
-                        <div class="grid grid-cols-7 text-center text-base bg-gray-100 rounded-lg mt-1">
-                            ${renderWeekDays(monday, weekRecords)}
-                        </div>
-                    </div>
-                </div>
             `;
                     body.appendChild(row);
                 });
@@ -198,17 +210,17 @@
                     const r = dayMap[i];
                     return `
             <div class="p-2 flex gap-3 md:gap-4 items-center justify-center border border-gray-300">
-                <div class="font-extrabold text-red-600">
+                <div class="font-extrabold text-red-600 text-lg">
                     ${r.Jodi.split('').map(v => `<p>${v}</p>`).join('')}
                 </div>
-                <div class="font-semibold rounded-full bg-orange-200 w-6">${r.Marks}</div>
-                <div class="font-semibold">
+                <div class="font-semibold rounded-full bg-orange-200 w-6 text-lg">${r.Marks}</div>
+                <div class="font-semibold text-lg">
                     ${r.Pennel.split('').map(v => `<p>${v}</p>`).join('')}
                 </div>
             </div>`;
                 } else {
                     return `
-            <div class="p-2 flex items-center justify-center border border-gray-300 text-gray-400">
+            <div class="p-2 flex items-center justify-center border border-gray-300 text-lg text-gray-400">
                 -
             </div>`;
                 }
