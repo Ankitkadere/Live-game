@@ -68,13 +68,42 @@
         </div>
 
         <div class="flex items-center gap-5 text-gray-900 text-2xl">
-          <i id="translateToggle" 
-   class="fa-solid fa-language text-gray-800 text-3xl cursor-pointer  transition   top-4 right-4 z-50" 
-   title="Toggle Language"></i>
+       <!-- HIDDEN GOOGLE TRANSLATE ELEMENT -->
+          <div id="google_translate_element" class="hidden" style="display:none;"></div>
+          <!-- TRANSLATE TOGGLE BUTTON -->
+          <button id="translateBtn" class="translate-btn">हिंदी</button>
+          <script>
+            let isHindi = false;
 
-<!-- Google Translate hidden div -->
-<div id="google_translate_element" style="display:none;"></div>
+            function googleTranslateElementInit() {
+              new google.translate.TranslateElement(
+                {
+                  pageLanguage: 'en',
+                  includedLanguages: 'hi,en',
+                  autoDisplay: false
+                },
+                'google_translate_element'
+              );
+            }
 
+            document.getElementById("translateBtn").addEventListener("click", () => {
+              const select = document.querySelector(".goog-te-combo");
+              if (!select) return;
+
+              if (!isHindi) {
+                select.value = "hi";
+                document.getElementById("translateBtn").innerText = "English";
+              } else {
+                select.value = "en";
+                document.getElementById("translateBtn").innerText = "हिंदी";
+              }
+
+              select.dispatchEvent(new Event("change"));
+              isHindi = !isHindi;
+            });
+          </script>
+          <!-- GOOGLE TRANSLATE SCRIPT -->
+          <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
           <i onclick="window.location.href='App.html'" class="fa-solid fa-mobile hover:text-blue-600 transition"></i>
         </div>
       </div>
@@ -472,47 +501,5 @@
   });
 
 </script>
-<script>
-  let currentLang = 'en'; // track current language
-  let gtLoaded = false;
-
-  const toggleBtn = document.getElementById("translateToggle");
-
-  toggleBtn.addEventListener("click", () => {
-    if (!gtLoaded) {
-      // Load Google Translate script dynamically
-      const gtScript = document.createElement("script");
-      gtScript.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-      document.body.appendChild(gtScript);
-
-      window.googleTranslateElementInit = function() {
-        new google.translate.TranslateElement({
-          pageLanguage: 'en',
-          includedLanguages: 'en,hi',
-          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-        }, 'google_translate_element');
-
-        gtLoaded = true;
-        toggleLanguage(); // Switch to Hindi on first click
-      }
-    } else {
-      toggleLanguage();
-    }
-  });
-
-  function toggleLanguage() {
-    const select = document.querySelector(".goog-te-combo");
-    if (!select) return;
-
-    if (currentLang === 'en') {
-      select.value = 'hi'; // Translate to Hindi
-      currentLang = 'hi';
-    } else {
-      select.value = 'en'; // Translate back to English
-      currentLang = 'en';
-    }
-    select.dispatchEvent(new Event('change'));
-  }
-</script>
-
+ 
 </html>
