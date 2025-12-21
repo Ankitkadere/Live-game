@@ -117,21 +117,20 @@ function loadData() {
       goldenBox.innerHTML = "";
       finalBox.innerHTML = "";
 
-    const onlySingle = data.records.filter(
-  (r) => r.Category?.trim().toLowerCase() === "single"
-);
+      const onlySingle = data.records.filter(
+        (r) => r.Category?.trim().toLowerCase() === "single"
+      );
 
-// ✅ ADD THIS
-const renderedIds = new Set();
+      // ✅ ADD THIS
+      const renderedIds = new Set();
 
-onlySingle.reverse().forEach((r) => {
+      onlySingle.reverse().forEach((r) => {
+        // ✅ UNIQUE BY Id
+        if (renderedIds.has(r.Id)) return;
+        renderedIds.add(r.Id);
 
-  // ✅ UNIQUE BY Id
-  if (renderedIds.has(r.Id)) return;
-  renderedIds.add(r.Id);
-
-  singleBox.innerHTML += `
-<div class="flex justify-between items-center bg-orange-100 px-2 py-2 border-t border-orange-300">
+        singleBox.innerHTML += `
+<div class="flex justify-between items-center bg-[${r.Mcolor || "#ffe8baff"}] px-2 py-2 border-t border-orange-300">
   <button onclick="window.location.href='Callender.html?id=${r.Id}'"
     class="bg-blue-900 text-white px-3 py-1 rounded-full text-xs shadow">
     Jodi
@@ -140,7 +139,7 @@ onlySingle.reverse().forEach((r) => {
   <div class="text-center flex-1">
     <h2 class="font-bold text-lg">${r.Id}</h2>
     <p class="text-[12px] text-gray-700">
-      ${formatTime(r.Time)} & ${formatDate(r.Date)} & ${formatTime(r.End)}
+      ${formatTime(r.Time)} && ${formatTime(r.End)}
     </p>
     <p class="text-xl text-pink-700 font-extrabold">
       ${r.Jodi + " " || ""}${"- " + r.Marks + " " || ""}${"- " + r.Pennel || ""}
@@ -152,8 +151,7 @@ onlySingle.reverse().forEach((r) => {
     Panel
   </button>
 </div>`;
-});
-
+      });
 
       // ========== 2️⃣ GOLDEN =============
       const onlyGolden = data.records.filter(
@@ -238,6 +236,27 @@ function autoSlide() {
 
 updateSlider();
 setInterval(autoSlide, 3000);
+
+let deferredPrompt;
+const installBtn = document.getElementById("installBtn");
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.classList.remove("hidden");
+});
+
+installBtn.addEventListener("click", async () => {
+  installBtn.classList.add("hidden");
+  deferredPrompt.prompt();
+  await deferredPrompt.userChoice;
+  deferredPrompt = null;
+});
+
+// Register Service Worker
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
 
 /////////dynamic data load /////////
 
