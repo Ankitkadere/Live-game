@@ -380,6 +380,27 @@
           <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
           <i id="installBtn" class="fa-solid fa-mobile text-gray-800 transition"></i>
+          <script>
+            let deferredPrompt;
+            const btn = document.getElementById("installBtn");
+
+            window.addEventListener("beforeinstallprompt", (e) => {
+              e.preventDefault();
+              deferredPrompt = e;
+              btn.classList.remove("hidden");
+            });
+
+            btn.addEventListener("click", async () => {
+              btn.classList.add("hidden");
+              await deferredPrompt.prompt();
+              deferredPrompt = null;
+            });
+
+            window.addEventListener("appinstalled", () => {
+              btn.classList.add("hidden");
+            });
+          </script>
+
         </div>
       </div>
 
@@ -538,5 +559,5 @@
 </body>
 <script src="App.js"></script>
 <script src="Blocked.js"></script>
- 
+
 </html>

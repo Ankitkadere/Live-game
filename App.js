@@ -130,7 +130,7 @@ function loadData() {
         renderedIds.add(r.Id);
 
         singleBox.innerHTML += `
-<div class="flex justify-between items-center bg-[${r.Mcolor || "#ffe8baff"}] px-2 py-2 border-t border-orange-300">
+<div class="flex justify-between items-center bg-[${r.Mcolor || "#fffaf0"}] px-2 py-2 border-t border-orange-300">
   <button onclick="window.location.href='Callender.html?id=${r.Id}'"
     class="bg-blue-900 text-white px-3 py-1 rounded-full text-xs shadow">
     Jodi
@@ -209,54 +209,7 @@ refreshBtn.addEventListener("click", () => {
 });
 
 ////////////////////////Sliding//////////
-
-const slider = document.getElementById("slider");
-const dots = document.querySelectorAll(".dot");
-
-let index = 0;
-const slideCount = dots.length;
-
-function updateSlider() {
-  slider.style.transform = `translateX(-${index * 100}%)`;
-
-  dots.forEach((dot, i) => {
-    dot.classList.remove("bg-gray-400");
-    dot.classList.add("bg-white");
-    if (i === index) {
-      dot.classList.remove("bg-white");
-      dot.classList.add("bg-gray-400");
-    }
-  });
-}
-
-function autoSlide() {
-  index = (index + 1) % slideCount;
-  updateSlider();
-}
-
-updateSlider();
-setInterval(autoSlide, 3000);
-
-let deferredPrompt;
-const installBtn = document.getElementById("installBtn");
-
-window.addEventListener("beforeinstallprompt", (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  installBtn.classList.remove("hidden");
-});
-
-installBtn.addEventListener("click", async () => {
-  installBtn.classList.add("hidden");
-  deferredPrompt.prompt();
-  await deferredPrompt.userChoice;
-  deferredPrompt = null;
-});
-
-// Register Service Worker
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("service-worker.js");
-}
+  
 
 /////////dynamic data load /////////
 
