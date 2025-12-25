@@ -34,8 +34,9 @@
       });
     }
   </script>
-  <script src="Blocked.js"></script>
+
 </head>
+<script src="Blocked.js"></script>
 
 <body class="bg-gray-100">
   <h1 id="loggedUserFName" class="hidden"></h1>
@@ -69,7 +70,7 @@
 
         <div class="flex items-center gap-5 text-gray-900 text-2xl">
           <!-- HIDDEN GOOGLE TRANSLATE ELEMENT -->
-          <div id="google_translate_element" class="hidden" style="display:none;"></div>
+          <div id="google_translate_element" class="hidden"></div>
           <!-- TRANSLATE TOGGLE BUTTON -->
           <button id="translateBtn" class="translate-btn">हिंदी</button>
           <script>
@@ -226,9 +227,11 @@
             <option value="SYNDICATE NIGHT">SYNDICATE NIGHT</option>
             <option value="LEELA BAZAR">LEELA BAZAR</option>
             <option value="RAJDHANI NIGHT">RAJDHANI NIGHT</option>
+            <option value="SHAKTIMAAN">SHAKTIMAAN</option>
           </select>
 
-          <input type="color" name="Mcolor" class="w-full mt-2 h-14 border border-black rounded cursor-pointer"
+          <input type="color" name="Mcolor" data-empty
+            class="w-full mt-2 h-14 border border-black rounded cursor-pointer"
             oninput="this.style.backgroundColor=this.value">
 
           <br>
@@ -241,7 +244,6 @@
             <option value="Thursday">Thursday</option>
             <option value="Friday">Friday</option>
             <option value="Saturday">Saturday</option>
-            <option value="Sunday">Sunday</option>
           </select>
 
           <input type="text" name="Category" value="General"
@@ -249,7 +251,7 @@
         </div>
 
         <div class="flex gap-3">
-          <input type="date" name="Date" placeholder="Date"
+          <input type="date" name="Date" id="dateInput" placeholder="Date"
             class="border p-3 text-sm rounded border-black w-1/3  font-bold focus:outline-none focus:ring-0" />
           <input type="time" name="Time" placeholder="Time Start"
             class="border p-3 rounded w-1/3 border-black  font-bold focus:outline-none focus:ring-0" />
@@ -260,21 +262,21 @@
 
         <div class="flex gap-3">
           <div class="w-1/3 space-y-2">
-            <input type="color" name="Acolor" class="w-full h-14 border border-black rounded"
+            <input type="color" name="Acolor" data-empty class="w-full h-14 border border-black rounded"
               oninput="this.style.backgroundColor=this.value">
             <input type="number" name="Jodi" placeholder="Jodi"
               class="w-full p-4 border border-black rounded font-bold">
           </div>
 
           <div class="w-1/3 space-y-2">
-            <input type="color" name="Bcolor" class="w-full h-14 border border-black rounded"
+            <input type="color" name="Bcolor" data-empty class="w-full h-14 border border-black rounded"
               oninput="this.style.backgroundColor=this.value">
             <input type="number" name="Marks" placeholder="Marks"
               class="w-full p-4 border border-black rounded font-bold">
           </div>
 
           <div class="w-1/3 space-y-2">
-            <input type="color" name="Ccolor" class="w-full h-14 border border-black rounded"
+            <input type="color" name="Ccolor" data-empty class="w-full h-14 border border-black rounded"
               oninput="this.style.backgroundColor=this.value">
             <input type="number" name="Pennel" placeholder="Pennel"
               class="w-full p-4 border border-black rounded font-bold">
@@ -321,7 +323,17 @@
         time: now.toTimeString().slice(0, 5)
       };
     }
+    function setTodayDate() {
+      const input = document.getElementById("dateInput");
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, "0");
+      const dd = String(today.getDate()).padStart(2, "0");
+      input.value = `${mm}/${dd}/${yyyy}`;
+    }
 
+    // Run on page load
+    window.addEventListener("load", setTodayDate);
     // LOAD RECORDS
     async function fetchRecords() {
       showLoader(500); // optional brief loader
@@ -415,12 +427,13 @@
       }
 
       showLoader();
+      setTodayDate();
       try {
         const res = await fetch(`${scriptURL}?action=create&${new URLSearchParams(fd).toString()}`);
         const result = await res.json();
 
         if (result.status === "success") {
-           form.reset();
+          form.reset();
           fetchRecords();
           v
           setTimeout(() => {
