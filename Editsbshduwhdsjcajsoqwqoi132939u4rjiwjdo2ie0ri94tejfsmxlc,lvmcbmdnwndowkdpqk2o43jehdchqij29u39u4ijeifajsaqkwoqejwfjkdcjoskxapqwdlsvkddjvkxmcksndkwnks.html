@@ -55,11 +55,16 @@
   </script>
   <div id="page-loader"
     class="fixed top-0 left-0 w-full h-full inset-1 bg-black bg-opacity-50 flex items-center justify-center z-50  transition-opacity duration-500 hidden">
-    <div class="w-16 h-16 border-8 border-white border-t-transparent rounded-full animate-spin"></div>
+    <div id="spin" class="w-16 h-16 border-8 border-white border-t-transparent rounded-full animate-spin"></div>
+    <div id="successAlert" class=" inset-0 bg-black/40 flex items-center justify-center hidden">
+      <div class="bg-white px-6 py-5 rounded-xl shadow text-center">
+        <h2 class="text-green-600 text-lg font-bold">Success!</h2>
+        <p class="text-gray-600 text-sm mt-1">Updated successfully</p>
+      </div>
+    </div>
   </div>
-
   <!-- HEADER -->
-  <div class="bg-orange-200 z-40 left-0 w-full shadow-md rounded-b-3xl">
+  <div class="bg-orange-200 left-0 w-full shadow-md rounded-b-3xl">
     <div class="p-5">
 
       <div onclick="window.location.href='index.html'" class="flex justify-between items-center">
@@ -157,12 +162,7 @@
     </div>
   </div>
   </div>
-  <div id="successAlert" class="fixed inset-0 bg-black/40 flex items-center justify-center hidden z-50">
-    <div class="bg-white px-6 py-5 rounded-xl shadow text-center">
-      <h2 class="text-green-600 text-lg font-bold">Success!</h2>
-      <p class="text-gray-600 text-sm mt-1">Updated successfully</p>
-    </div>
-  </div>
+
 
   <!-- UPDATE BOX -->
   <div id="updatebox" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-40">
@@ -306,8 +306,10 @@
       box.classList.add('hidden');
     }
     function showSuccess() {
+      const spin = document.getElementById("spin");
+      const successAlert = document.getElementById("successAlert");
+      spin.classList.add("hidden");
       successAlert.classList.remove("hidden");
-      setTimeout(() => window.location.reload(), 1000);
     }
 
     function showLoader() {
@@ -437,10 +439,11 @@
       } catch (err) {
         console.error("Update error:", err);
       } finally {
+        showSuccess();
         setTimeout(() => {
           window.location.reload();
-        }, 600);
-        hideLoader();
+        }, 2000);
+
       }
     });
 
@@ -464,7 +467,6 @@
           showSuccess();
           form.reset();
           fetchRecords();
-          hideLoader();
           setTimeout(() => {
             window.location.reload();
           }, 300); // small delay so UI updates properly
@@ -472,10 +474,11 @@
       } catch (err) {
         console.error("Error creating record:", err);
       } finally {
+        showSuccess();
         setTimeout(() => {
           window.location.reload();
-        }, 600);
-        hideLoader();
+        }, 2000);
+
       }
     });
 
