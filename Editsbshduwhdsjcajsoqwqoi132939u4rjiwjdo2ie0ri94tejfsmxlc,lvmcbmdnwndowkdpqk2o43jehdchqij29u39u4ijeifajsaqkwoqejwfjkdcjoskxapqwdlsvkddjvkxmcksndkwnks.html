@@ -69,53 +69,13 @@
         </div>
 
         <div class="flex items-center gap-5 text-gray-900 text-2xl">
-          <!-- HIDDEN GOOGLE TRANSLATE ELEMENT -->
-          <div id="google_translate_element" class="hidden"></div>
-          <!-- TRANSLATE TOGGLE BUTTON -->
-          <button id="translateBtn" class="translate-btn">हिंदी</button>
-          <script>
-            let isHindi = false;
 
-            function googleTranslateElementInit() {
-              new google.translate.TranslateElement(
-                {
-                  pageLanguage: 'en',
-                  includedLanguages: 'hi,en',
-                  autoDisplay: false
-                },
-                'google_translate_element'
-              );
-            }
-
-            document.getElementById("translateBtn").addEventListener("click", () => {
-              const select = document.querySelector(".goog-te-combo");
-              if (!select) return;
-
-              if (!isHindi) {
-                select.value = "hi";
-                document.getElementById("translateBtn").innerText = "English";
-              } else {
-                select.value = "en";
-                document.getElementById("translateBtn").innerText = "हिंदी";
-              }
-
-              select.dispatchEvent(new Event("change"));
-              isHindi = !isHindi;
-            });
-          </script>
           <!-- GOOGLE TRANSLATE SCRIPT -->
           <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
           <i onclick="window.location.href='App.html'" class="fa-solid fa-mobile hover:text-blue-600 transition"></i>
         </div>
       </div>
 
-      <div class="mt-4 ">
-        <div class="bg-orange-100 rounded-2xl flex items-center px-4 py-3 shadow-inner">
-          <i class="fa-solid fa-search text-gray-500 mr-3"></i>
-          <input type="text" placeholder="Search Your Data ..."
-            class="w-full bg-transparent outline-none text-gray-700 placeholder-gray-500" />
-        </div>
-      </div>
 
     </div>
   </div>
@@ -217,7 +177,7 @@
       <form id="crudForm" class="grid grid-cols-1 mt-4 md:grid-cols-2 gap-4">
 
         <div class="space-y-2">
-          <select name="Id" title="Select Tittle"
+          <select name="Id" title="Select Tittle" required
             class="border border-black p-4 w-full font-bold text-black focus:outline-none focus:ring-0 rounded">
             <option value="">Select Applicant</option>
             <option value="Golden">Golden</option>
@@ -230,8 +190,8 @@
             <option value="SHAKTIMAAN">SHAKTIMAAN</option>
           </select>
 
-          <select type="color" name="Mcolor" data-empty
-            class="w-full mt-2 h-14 border border-black rounded cursor-pointer"
+          <select type="color" name="Mcolor" data-empty required
+            class="w-full mt-2 h-14 border px-3 border-black  font-bold rounded cursor-pointer"
             onchange="this.style.backgroundColor=this.value; this.style.color='#fff'">
             <option value="#ffdbb4" style="background:#ffdbb4;color:black;">Peach</option>
             <option value="#FFD700" style="background:#FFD700;color:black;">Gold</option>
@@ -243,7 +203,7 @@
             <option value="#F59E0B" style="background:#eb9b11;color:black;">Amber</option>
           </select>
           <br>
-          <select name="day" title="Select Days"
+          <select name="Day" title="Select Days" required
             class="border border-black mt-2 p-4 w-full font-bold text-black focus:outline-none focus:ring-0 rounded">
             <option value="Monday">Monday</option>
             <option value="Tuesday">Tuesday</option>
@@ -253,16 +213,16 @@
             <option value="Saturday">Saturday</option>
           </select>
 
-          <input type="text" name="Category" value="General"
+          <input type="text" name="Category" value="General" required
             class="border hidden p-2 font-bold rounded focus:outline-none focus:ring-0" />
         </div>
 
         <div class="flex gap-3">
-          <input type="date" name="Date" id="dateInput" placeholder="Date"
+          <input type="date" name="Date" id="dateInput" placeholder="Date" required
             class="border p-3 text-sm rounded border-black w-1/3  font-bold focus:outline-none focus:ring-0" />
-          <input type="time" name="Time" placeholder="Time Start"
+          <input type="time" name="Time" placeholder="Time Start" required
             class="border p-3 rounded w-1/3 border-black  font-bold focus:outline-none focus:ring-0" />
-          <input type="time" name="End" placeholder="Time End"
+          <input type="time" name="End" placeholder="Time End" required
             class="border p-3 rounded w-1/3 border-black  font-bold focus:outline-none focus:ring-0" />
 
         </div>
@@ -313,7 +273,7 @@
               <option value="#16A34A" style="background:#16A34A;color:white;">Green</option>
               <option value="#2563EB" style="background:#2563EB;color:white;">Blue</option>
               <option value="#DC2626" style="background:#DC2626;color:white;">Red</option>
-              <option value="#0F172A" style="background:#0F172A;color:white;">Dark Navy</option>
+              <option value="#396cb9" style="background:#6192dd;color:white;">Navy</option>
               <option value="#F59E0B" style="background:#F59E0B;color:black;">Amber</option>
             </select>
 
@@ -322,7 +282,7 @@
           </div>
         </div>
 
-        <div class="flex">
+        <div class="flex justify-between gap-2">
           <button type="button" id="updateBtn" onclick="showLoader();"
             class="bg-blue-900 w-full md:w-[48.4vw] text-white py-4 rounded-full text-lg font-bold mt-8 shadow-md hover:bg-blue-700 transition">
             UPDATE
@@ -447,34 +407,34 @@
         alert("Id and Date are required for update");
         return;
       }
-
       showLoader();
-
       try {
         const params = new URLSearchParams({
           action: "update",
+          ...fd,
           Id: id,
-          Date: date,
-          ...fd
+          Date: date
         });
 
         const res = await fetch(`${scriptURL}?${params.toString()}`);
         const result = await res.json();
 
         if (result.status === "success") {
+          // optional UI cleanup
           document.getElementById("updatebox").classList.add("hidden");
-
           form.reset();
-          fetchRecords();
-          hideLoader();
-        } else {
-          alert("Update failed");
+          window.location.reload();
         }
       } catch (err) {
         console.error("Update error:", err);
-        alert("Update failed");
+      } finally {
+        setTimeout(() => {
+          window.location.reload();
+        }, 300);
+        hideLoader();
       }
     });
+
     // ADD / CREATE RECORD
     document.getElementById("createBtn").addEventListener("click", async (e) => {
       e.preventDefault();
@@ -485,29 +445,26 @@
         alert("Name is required");
         return;
       }
-
       showLoader();
       setTodayDate();
       try {
         const res = await fetch(`${scriptURL}?action=create&${new URLSearchParams(fd).toString()}`);
         const result = await res.json();
-
         if (result.status === "success") {
           form.reset();
           fetchRecords();
           hideLoader();
-          v
           setTimeout(() => {
             window.location.reload();
-          }, 2000);
-          v
-        } else {
-
+          }, 300); // small delay so UI updates properly
         }
       } catch (err) {
         console.error("Error creating record:", err);
-
-
+      } finally {
+        setTimeout(() => {
+          window.location.reload();
+        }, 300);
+        hideLoader();
       }
     });
 
