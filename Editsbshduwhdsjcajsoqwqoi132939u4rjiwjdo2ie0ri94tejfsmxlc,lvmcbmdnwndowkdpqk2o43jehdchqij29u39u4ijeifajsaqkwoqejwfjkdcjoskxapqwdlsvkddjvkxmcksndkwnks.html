@@ -230,14 +230,21 @@
             <option value="SHAKTIMAAN">SHAKTIMAAN</option>
           </select>
 
-          <input type="color" name="Mcolor" data-empty
+          <select type="color" name="Mcolor" data-empty
             class="w-full mt-2 h-14 border border-black rounded cursor-pointer"
-            oninput="this.style.backgroundColor=this.value">
-
+            onchange="this.style.backgroundColor=this.value; this.style.color='#fff'">
+            <option value="#ffdbb4" style="background:#ffdbb4;color:black;">Peach</option>
+            <option value="#FFD700" style="background:#FFD700;color:black;">Gold</option>
+            <option value="#16A34A" style="background:#16A34A;color:white;">Green</option>
+            <option value="#2563EB" style="background:#2563EB;color:white;">Blue</option>
+            <option value="#7C3AED" style="background:#7C3AED;color:white;">Purple</option>
+            <option value="#DC2626" style="background:#DC2626;color:white;">Red</option>
+            <option value="#0F172A" style="background:#2b3a5c;color:white;">Dark Navy</option>
+            <option value="#F59E0B" style="background:#eb9b11;color:black;">Amber</option>
+          </select>
           <br>
           <select name="day" title="Select Days"
             class="border border-black mt-2 p-4 w-full font-bold text-black focus:outline-none focus:ring-0 rounded">
-            <option value="">-- Select Day --</option>
             <option value="Monday">Monday</option>
             <option value="Tuesday">Tuesday</option>
             <option value="Wednesday">Wednesday</option>
@@ -262,22 +269,54 @@
 
         <div class="flex gap-3">
           <div class="w-1/3 space-y-2">
-            <input type="color" name="Acolor" data-empty class="w-full h-14 border border-black rounded"
-              oninput="this.style.backgroundColor=this.value">
+            <select name="Acolor" data-empty class="w-full h-14 border border-black rounded font-bold px-3" onchange="this.style.backgroundColor=this.value;
+            this.style.color=['#FDBA74','#FFD700','#F59E0B'].includes(this.value)?'#000':'#fff';">
+              <option value="#000000" style="background:#000000;color:white;">Black</option>
+              <option value="#FDBA74" style="background:#FDBA74;color:black;">Peach</option>
+              <option value="#FFD700" style="background:#FFD700;color:black;">Gold</option>
+              <option value="#16A34A" style="background:#16A34A;color:white;">Green</option>
+              <option value="#2563EB" style="background:#2563EB;color:white;">Blue</option>
+              <option value="#7C3AED" style="background:#7C3AED;color:white;">Purple</option>
+              <option value="#DC2626" style="background:#DC2626;color:white;">Red</option>
+              <option value="#0F172A" style="background:#0F172A;color:white;">Dark Navy</option>
+              <option value="#F59E0B" style="background:#F59E0B;color:black;">Amber</option>
+            </select>
+
             <input type="number" name="Jodi" placeholder="Jodi"
               class="w-full p-4 border border-black rounded font-bold">
           </div>
 
           <div class="w-1/3 space-y-2">
-            <input type="color" name="Bcolor" data-empty class="w-full h-14 border border-black rounded"
-              oninput="this.style.backgroundColor=this.value">
+            <select name="Bcolor" data-empty class="w-full h-14 border border-black rounded font-bold px-3" onchange="this.style.backgroundColor=this.value;
+            this.style.color=['#FDBA74','#FFD700','#F59E0B'].includes(this.value)?'#000':'#fff';">
+              <option value="#000000" style="background:#000000;color:white;">Black</option>
+              <option value="#FDBA74" style="background:#FDBA74;color:black;">Peach</option>
+              <option value="#FFD700" style="background:#FFD700;color:black;">Gold</option>
+              <option value="#16A34A" style="background:#16A34A;color:white;">Green</option>
+              <option value="#2563EB" style="background:#2563EB;color:white;">Blue</option>
+              <option value="#7C3AED" style="background:#7C3AED;color:white;">Purple</option>
+              <option value="#DC2626" style="background:#DC2626;color:white;">Red</option>
+              <option value="#0F172A" style="background:#0F172A;color:white;">Dark Navy</option>
+              <option value="#F59E0B" style="background:#F59E0B;color:black;">Amber</option>
+            </select>
+
             <input type="number" name="Marks" placeholder="Marks"
               class="w-full p-4 border border-black rounded font-bold">
           </div>
 
           <div class="w-1/3 space-y-2">
-            <input type="color" name="Ccolor" data-empty class="w-full h-14 border border-black rounded"
-              oninput="this.style.backgroundColor=this.value">
+            <select name="Ccolor" data-empty class="w-full h-14 border border-black rounded font-bold px-3" onchange="this.style.backgroundColor=this.value;
+            this.style.color=['#FDBA74','#FFD700','#F59E0B'].includes(this.value)?'#000':'#fff';">
+              <option value="#000000" style="background:#000000;color:white;">Black</option>
+              <option value="#FDBA74" style="background:#FDBA74;color:black;">Peach</option>
+              <option value="#FFD700" style="background:#FFD700;color:black;">Gold</option>
+              <option value="#16A34A" style="background:#16A34A;color:white;">Green</option>
+              <option value="#2563EB" style="background:#2563EB;color:white;">Blue</option>
+              <option value="#DC2626" style="background:#DC2626;color:white;">Red</option>
+              <option value="#0F172A" style="background:#0F172A;color:white;">Dark Navy</option>
+              <option value="#F59E0B" style="background:#F59E0B;color:black;">Amber</option>
+            </select>
+
             <input type="number" name="Pennel" placeholder="Pennel"
               class="w-full p-4 border border-black rounded font-bold">
           </div>
@@ -301,18 +340,19 @@
       box.classList.add('hidden');
     }
 
-    function showLoader(displayTime = 3000) {
-      const loader = document.getElementById('page-loader');
-      loader.style.display = 'flex';
-      loader.classList.remove('opacity-0');
 
-      setTimeout(() => {
-        loader.classList.add('opacity-0');
-        setTimeout(() => {
-          loader.style.display = 'none';
-        }, 500); // Fade duration
-      }, displayTime); // Loader display duration
+    function showLoader() {
+      const loader = document.getElementById('page-loader');
+      loader.classList.remove('hidden', 'opacity-0');
+      loader.classList.add('flex');
     }
+
+    function hideLoader() {
+      const loader = document.getElementById('page-loader');
+      loader.classList.add('hidden', 'opacity-0');
+
+    }
+
 
     const scriptURL = "https://script.google.com/macros/s/AKfycbyW6iFWJpgLR-oogi_GysEp_RXph9d9vaQ2idlMgsQQVAg3ee_XeKuqyI_HDyaqnwlG/exec";
 
@@ -336,7 +376,7 @@
     window.addEventListener("load", setTodayDate);
     // LOAD RECORDS
     async function fetchRecords() {
-      showLoader(500); // optional brief loader
+
       try {
         const res = await fetch(`${scriptURL}?action=read`);
         const data = await res.json();
@@ -386,6 +426,7 @@
             if (form[key]) form[key].value = record[key];
           });
           document.getElementById("updatebox").classList.remove("hidden");
+          hideLoader();
         }
       } catch (err) {
         console.error("Error filling form:", err);
@@ -395,26 +436,45 @@
     // SUBMIT UPDATE
     document.getElementById("updateBtn").addEventListener("click", async (e) => {
       e.preventDefault();
+
       const form = document.getElementById("crudForm");
       const fd = Object.fromEntries(new FormData(form));
 
-      if (!fd.Id) {
-        alert("Name is required");
+      const id = fd.Id;
+      const date = fd.Date || document.getElementById("dateInput")?.value;
+
+      if (!id || !date) {
+        alert("Id and Date are required for update");
         return;
       }
 
       showLoader();
+
       try {
-        await fetch(`${scriptURL}?action=update&${new URLSearchParams(fd).toString()}`);
-        document.getElementById("updatebox").classList.add("hidden");
-        form.reset();
-        fetchRecords();
+        const params = new URLSearchParams({
+          action: "update",
+          Id: id,
+          Date: date,
+          ...fd
+        });
+
+        const res = await fetch(`${scriptURL}?${params.toString()}`);
+        const result = await res.json();
+
+        if (result.status === "success") {
+          document.getElementById("updatebox").classList.add("hidden");
+
+          form.reset();
+          fetchRecords();
+          hideLoader();
+        } else {
+          alert("Update failed");
+        }
       } catch (err) {
-        console.error("Error updating record:", err);
-        alert("Update failed.");
+        console.error("Update error:", err);
+        alert("Update failed");
       }
     });
-
     // ADD / CREATE RECORD
     document.getElementById("createBtn").addEventListener("click", async (e) => {
       e.preventDefault();
@@ -435,10 +495,11 @@
         if (result.status === "success") {
           form.reset();
           fetchRecords();
+          hideLoader();
           v
           setTimeout(() => {
             window.location.reload();
-          }, 3000);
+          }, 2000);
           v
         } else {
 
