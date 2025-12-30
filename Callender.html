@@ -157,7 +157,7 @@
     <div class="bg-[#ffffff] flex font-extrabold shadow border border-black overflow-x-auto">
 
         <!-- DATE (KEEP HERE) -->
-        <div class="text-[10px] px-1 leading-[1] font-extrabold max-w-[18%] min-w-[18%] font-extrabold text-gray-700 text-center py-1">
+        <div class="text-[9px] px-2 leading-[1] font-extrabold max-w-[18%] min-w-[18%] font-extrabold text-gray-700 text-center py-1">
             ${rowDate} To ${rowDatePlus6}
         </div>
 
@@ -175,7 +175,7 @@
 
             records.forEach(r => {
                 html += `
-        <div class="flex items-center justify-center gap-1 border-l border-r border-black p-[3px]">
+        <div class="flex p-2 items-center justify-center gap-1 border-l border-r border-black p-[3px]">
             <!-- JODI -->
             <div class="font-extrabold text-[11px] leading-[11px]">
                 ${r.Jodi?.split('').join('<br>') || ""}
