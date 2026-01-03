@@ -202,7 +202,7 @@ function renderWeekRow(map){
     return `
 <div class="flex items-center justify-center gap-1 border-l border-black px-[3px]"> 
     <div class="font-extrabold font-black text-[11px] leading-[11px]"> ${r.Jodi?.split("").join("<br>") || ""} </div> 
-    <div class="text-[19px] font-black min-w-[19px]" style="color:${r.Bcolor || "#000"}"> ${r.Marks || ""} </div> 
+    <div class="text-[18px] font-black min-w-[19px]" style="color:${r.Bcolor || "#000"}"> ${r.Marks || ""} </div> 
     <div class="font-extrabold font-black text-[11px] leading-[11px]"> ${r.Pennel?.split("").join("<br>") || ""} </div> 
 </div>`;
   }).join("");
