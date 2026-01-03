@@ -68,97 +68,13 @@
 
   <!-- HEADER -->
   <header class="bg-orange-200 z-40 left-0 w-full shadow-md rounded-b-3xl">
-    <div class="p-3">
+    <div class="p-4">
       <div class="flex justify-between items-center">
-
         <!-- LEFT PROFILE BUTTON -->
         <div onclick="window.location.href='index.html'" id="openSidebar"
           class="flex items-center gap-3 cursor-pointer">
           <img title="leelabazar" src="Logo.jpg" class="w-11 h-11 rounded-full shadow-md" />
           <p class="font-extrabold text-black text-2xl">Leela Bazar</p>
-        </div>
-
-        <!-- RIGHT ICONS -->
-        <div class="flex items-center gap-5 text-gray-900 text-2xl mr-2">
-          <!-- HIDDEN GOOGLE TRANSLATE ELEMENT -->
-          <div id="google_translate_element" class="hidden"></div>
-          <!-- TRANSLATE TOGGLE BUTTON -->
-          <button id="translateBtn" class="translate-btn">हिंदी</button>
-          <script>
-            let isHindi = false;
-
-            function googleTranslateElementInit() {
-              new google.translate.TranslateElement(
-                {
-                  pageLanguage: 'en',
-                  includedLanguages: 'hi,en',
-                  autoDisplay: false
-                },
-                'google_translate_element'
-              );
-            }
-
-            document.getElementById("translateBtn").addEventListener("click", () => {
-              const select = document.querySelector(".goog-te-combo");
-              if (!select) return;
-
-              if (!isHindi) {
-                select.value = "hi";
-                document.getElementById("translateBtn").innerText = "English";
-              } else {
-                select.value = "en";
-                document.getElementById("translateBtn").innerText = "हिंदी";
-              }
-
-              select.dispatchEvent(new Event("change"));
-              isHindi = !isHindi;
-            });
-          </script>
-          <!-- GOOGLE TRANSLATE SCRIPT -->
-          <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-          <i id="installBtn" class="fa-solid fa-mobile text-gray-800 transition"></i>
-          <script>
-            let deferredPrompt;
-            const btn = document.getElementById("installBtn");
-
-            // 🔹 Function to check if app is already installed
-            function isAppInstalled() {
-              return (
-                window.matchMedia("(display-mode: standalone)").matches || // Android
-                window.navigator.standalone === true // iOS
-              );
-            }
-
-            // 🔹 Hide button immediately if installed
-            if (isAppInstalled()) {
-              btn.classList.add("hidden");
-            }
-
-            // 🔹 Show install button only if installable
-            window.addEventListener("beforeinstallprompt", (e) => {
-              e.preventDefault();
-              deferredPrompt = e;
-
-              if (!isAppInstalled()) {
-                btn.classList.remove("hidden");
-              }
-            });
-
-            // 🔹 Install click
-            btn.addEventListener("click", async () => {
-              if (!deferredPrompt) return;
-              btn.classList.add("hidden");
-              await deferredPrompt.prompt();
-              deferredPrompt = null;
-            });
-
-            // 🔹 After installation
-            window.addEventListener("appinstalled", () => {
-              btn.classList.add("hidden");
-            });
-          </script>
-
         </div>
       </div>
       <!-- Search Bar -->
@@ -274,7 +190,6 @@
       Bazar com, sata mata com, सट्टा मटका, sattamatkà 143, golden matka, satta matta matka 143, satta fast, kalyan
       open, satta 143, Leela Bazar 143 guessing, Leela Bazar satta, golden satta matka, satta bajar
     </div>
-
 
     <div
       class="bg-orange-700 mt-2 mx-0 p-2 text-white font-normal text-justify  text-center rounded-lg text-[13px] md:text-[16px] leading-5 border border-orange-400 ">

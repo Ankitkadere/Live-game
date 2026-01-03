@@ -126,18 +126,18 @@ function loadData() {
 
       onlySingle.reverse().forEach((r) => {
         // ✅ UNIQUE BY Id
-        if (renderedIds.has(r.Id)) return;
-        renderedIds.add(r.Id);
+        if (renderedIds.has(r.Name)) return;
+        renderedIds.add(r.Name);
 
         singleBox.innerHTML += `
 <div class="flex justify-between items-center bg-[${r.Mcolor || "#fffaf0"}] px-2 py-2 border-t border-orange-300">
-  <button onclick="window.location.href='Callender.html?id=${r.Id}'"
+  <button onclick="window.location.href='Callender.html?id=${r.Name}'"
     class="bg-blue-900 text-white px-3 py-1 rounded-full text-xs shadow">
     Jodi
   </button>
 
   <div class="text-center flex-1">
-    <h2 class="font-bold text-lg">${r.Id}</h2>
+    <h2 class="font-bold text-lg">${r.Name}</h2>
     <p class="text-[12px] text-gray-700">
       ${formatTime(r.Time)} && ${formatTime(r.End)}
     </p>
@@ -146,7 +146,7 @@ function loadData() {
     </p>
   </div>
 
-  <button onclick="window.location.href='Callender.html?id=${r.Id}'"
+  <button onclick="window.location.href='Callender.html?id=${r.Name}'"
     class="bg-blue-900 text-white px-3 py-1 rounded-full text-xs shadow">
     Panel
   </button>

@@ -46,7 +46,7 @@
       const name = document.getElementById('loggedUserFName').innerText;
       const mail = document.getElementById('loggedUserEmail').innerText;
       if (name == "" || mail == "") {
-        window.location.href = "index.html";
+        window.location.href = "";
       }
 
     }, 4000);
@@ -67,17 +67,15 @@
   <div class="bg-orange-200 left-0 w-full shadow-md rounded-b-3xl">
     <div class="p-5">
 
-      <div onclick="window.location.href='index.html'" class="flex justify-between items-center">
-        <div id="openSidebar" class="flex items-center gap-3 cursor-pointer">
+      <div class="flex justify-between items-center">
+        <div onclick="window.location.href='index.html'" id="openSidebar"
+          class="flex items-center gap-3 cursor-pointer">
           <img src="Logo.jpg" alt="Leela Bazar" class="w-11 h-11 rounded-full shadow-md" />
-          <p id="loggedUserEmail" class="font-extrabold text-black text-2xl">Leela Bazar</p>
+          <p id="loggedUserEmail" class="font-extrabold text-black text-1xl">Leela Bazar</p>
         </div>
 
         <div class="flex items-center gap-5 text-gray-900 text-2xl">
-
-          <!-- GOOGLE TRANSLATE SCRIPT -->
-          <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-          <i onclick="window.location.href='App.html'" class="fa-solid fa-mobile hover:text-blue-600 transition"></i>
+          <i onclick="showBox()" class="fa-solid fa-add hover:text-blue-600 transition"></i>
         </div>
       </div>
 
@@ -163,6 +161,7 @@
   </div>
   </div>
 
+  <div id="calendar" class="grid w-full grid-cols-3 md:grid-cols-7 justify-center md:gap-1"></div>
 
   <!-- UPDATE BOX -->
   <div id="updatebox" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-40">
@@ -183,7 +182,10 @@
       <form id="crudForm" class="grid grid-cols-1 mt-4 md:grid-cols-2 gap-4">
 
         <div class="space-y-2">
-          <select name="Id" title="Select Tittle" required
+          <input type="text" title="Categiry" name="Id" id="Id" required
+            class="border border-black p-4 w-full font-bold text-black focus:outline-none focus:ring-0 rounded0" />
+
+          <select name="Name" id="Name" title="Select Tittle" required
             class="border border-black p-4 w-full font-bold text-black focus:outline-none focus:ring-0 rounded">
             <option value="">Select Applicant</option>
             <option value="Golden">Golden</option>
@@ -196,9 +198,9 @@
             <option value="SHAKTIMAAN">SHAKTIMAAN</option>
           </select>
 
-          <select type="color" name="Mcolor" data-empty required
-            class="w-full mt-2 h-14 border px-3 border-black  font-bold rounded cursor-pointer"
-            onchange="this.style.backgroundColor=this.value; this.style.color='#fff'">
+          <select type="color" title="Mcolor" name="Mcolor" data-empty required
+            class="w-full mt-2 h-14 border px-3 border-black text-black font-bold rounded cursor-pointer"
+            onchange="this.style.backgroundColor=this.value; this.style.color='#000000'">
             <option value="#fff1e1" style="background:#fff1e1;color:black;">Peach</option>
             <option value="#f7eebb" style="background:#f7eebb;color:black;">Gold</option>
             <option value="#d2f8e0" style="background:#d2f8e0;color:black;">Green</option>
@@ -210,23 +212,35 @@
           </select>
           <br>
 
-          <input type="text" name="Category" value="General" required
+          <input type="text" title="Categiry" name="Category" value="General" required
             class="border hidden p-2 font-bold rounded focus:outline-none focus:ring-0" />
+
+          <select name="Day" id="days" title="Select Day" required
+            class="border border-black p-4 w-full font-bold text-black focus:outline-none focus:ring-0 rounded">
+            <option value="MONDAY">Monday</option>
+            <option value="TUESDAY">Tuesday</option>
+            <option value="WEDNESDAY">Wednesday</option>
+            <option value="THURSDAY">Thursday</option>
+            <option value="FRIDAY">Friday</option>
+            <option value="SATURDAY">Saturday</option>
+            <option value="SUNDAY">Sunday</option>
+          </select>
         </div>
-
-        <div class="flex gap-3">
+        <div class="flex gap-2">
           <input type="date" name="Date" id="dateInput" placeholder="Date" required
-            class="border p-3 text-sm rounded border-black w-2/3  font-bold focus:outline-none focus:ring-0" />
+            class="border border-black p-4 w-full font-bold text-black focus:outline-none focus:ring-0 rounded" />
+        </div>
+        <div class="flex gap-2">
           <input type="time" name="Time" placeholder="Time Start" required
-            class="border p-3 rounded w-1/3 border-black  font-bold focus:outline-none focus:ring-0" />
+            class="border p-3 rounded w-1/2 border-black  font-bold focus:outline-none focus:ring-0" />
           <input type="time" name="End" placeholder="Time End" required
-            class="border p-3 rounded w-1/3 border-black  font-bold focus:outline-none focus:ring-0" />
-
+            class="border p-3 rounded w-1/2 border-black  font-bold focus:outline-none focus:ring-0" />
         </div>
 
         <div class="flex gap-3">
           <div class="w-1/3 space-y-2">
-            <select name="Acolor" data-empty class="w-full h-14 border border-black rounded font-bold px-3" onchange="this.style.backgroundColor=this.value;
+            <select name="Acolor" title="Acolor" data-empty
+              class="w-full h-14 border border-black rounded font-bold px-3" onchange="this.style.backgroundColor=this.value;
             this.style.color=['#FDBA74','#FFD700','#F59E0B'].includes(this.value)?'#000':'#fff';">
               <option value="#000000" style="background:#000000;color:white;">Black</option>
               <option value="#FDBA74" style="background:#FDBA74;color:black;">Peach</option>
@@ -244,7 +258,8 @@
           </div>
 
           <div class="w-1/3 space-y-2">
-            <select name="Bcolor" data-empty class="w-full h-14 border border-black rounded font-bold px-3" onchange="this.style.backgroundColor=this.value;
+            <select name="Bcolor" title="Bcolor" data-empty
+              class="w-full h-14 border border-black rounded font-bold px-3" onchange="this.style.backgroundColor=this.value;
             this.style.color=['#FDBA74','#FFD700','#F59E0B'].includes(this.value)?'#000':'#fff';">
               <option value="#000000" style="background:#000000;color:white;">Black</option>
               <option value="#FDBA74" style="background:#FDBA74;color:black;">Peach</option>
@@ -262,7 +277,8 @@
           </div>
 
           <div class="w-1/3 space-y-2">
-            <select name="Ccolor" data-empty class="w-full h-14 border border-black rounded font-bold px-3" onchange="this.style.backgroundColor=this.value;
+            <select name="Ccolor" title="Ccolor" data-empty
+              class="w-full h-14 border border-black rounded font-bold px-3" onchange="this.style.backgroundColor=this.value;
             this.style.color=['#FDBA74','#FFD700','#F59E0B'].includes(this.value)?'#000':'#fff';">
               <option value="#000000" style="background:#000000;color:white;">Black</option>
               <option value="#FDBA74" style="background:#FDBA74;color:black;">Peach</option>
@@ -279,12 +295,12 @@
           </div>
         </div>
 
-        <div class="flex justify-between gap-2">
+        <div class="flex justify-between w-full gap-2">
           <button type="button" id="updateBtn" onclick="showLoader();"
-            class="bg-blue-900 w-full md:w-[48.4vw] text-white py-4 rounded-full text-lg font-bold mt-8 shadow-md hover:bg-blue-700 transition">
+            class="bg-blue-900 w-full md:w-[48.4vw] text-white py-4 rounded-md text-lg font-bold mt-8 shadow-md hover:bg-blue-700 transition">
             UPDATE
           </button> <button type="button" id="createBtn" onclick="showLoader();"
-            class="bg-blue-900 w-full md:w-[48.4vw] text-white py-4 rounded-full text-lg font-bold mt-8 shadow-md hover:bg-blue-700 transition">
+            class="bg-blue-900 w-full md:w-[48.4vw] text-white py-4 rounded-md text-lg font-bold mt-8 shadow-md hover:bg-blue-700 transition">
             CREATE
           </button>
         </div>
@@ -294,6 +310,8 @@
   <script>
     function showUpdateBox() {
       const box = document.getElementById('updatebox');
+      document.getElementById("createBtn").classList.remove("hidden");
+      document.getElementById("updateBtn").classList.add("hidden");
       box.classList.add('hidden');
     }
     function showSuccess() {
@@ -301,6 +319,15 @@
       const successAlert = document.getElementById("successAlert");
       spin.classList.add("hidden");
       successAlert.classList.remove("hidden");
+    }
+    function showBox() {
+      document.getElementById("updatebox").classList.remove("hidden");
+      document.getElementById("createBtn").classList.remove("hidden");
+      document.getElementById("updateBtn").classList.add("hidden");
+    }
+    function crtBox() {
+      document.getElementById("createBtn").classList.add("hidden");
+      document.getElementById("updateBtn").classList.remove("hidden");
     }
 
     function showLoader() {
@@ -315,7 +342,12 @@
 
     }
 
-    const scriptURL = "https://script.google.com/macros/s/AKfycbyW6iFWJpgLR-oogi_GysEp_RXph9d9vaQ2idlMgsQQVAg3ee_XeKuqyI_HDyaqnwlG/exec";
+    function generate6DigitCode() {
+      document.getElementById("Id").value =
+        Math.floor(100000 + Math.random() * 900000);
+    }
+
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwyn0hnIPesioTndkrXdHdH8XIouffYuWbPq_Sa1V7PzgpICK2ZXE5Xjm4ShXOMQf8J/exec";
 
     function getCurrentDateTime() {
       const now = new Date();
@@ -345,28 +377,52 @@
         body.innerHTML = "";
 
         // Keep track of already rendered Ids
+
+        const calendar = document.getElementById("calendar");
         const renderedIds = new Set();
 
-        data.records.reverse().forEach(r => {
+        data.records.reverse().forEach((r, index) => {
           if (!renderedIds.has(r.Id)) {
             renderedIds.add(r.Id);
-            const row = document.createElement("div");
-            row.innerHTML = `
-<div class="p-3 bg-orange-100 shadow rounded-lg border mb-3 flex justify-between">
-  <div>
-    <h2 class="font-bold text-lg text-gray-700">${r.Id}</h2>
-    <p class="text-pink-600 font-extrabold text-lg">${r.Jodi || ""}${r.Marks ? "-" + r.Marks : ""}${r.Pennel ? "-" + r.Pennel : ""}</p>
+
+            const cell = document.createElement("div");
+            cell.className = " bg-orange-100 shadow rounded-lg border flex flex-col justify-between";
+            cell.innerHTML = `
+     <div class="p-1 bg-white shadow-md rounded-lg border border-gray-200 flex flex-col justify-between text-[10px] md:text-[14px]">
+  <!-- Header: Date & Day -->
+  <div class="flex justify-between items-center mb-1">
+    <span class="font-semibold text-gray-700">${r.Date}</span>
+    <span class="font-semibold text-gray-500">${r.Day}</span>
   </div>
 
-  <button onclick="fillForm('${r.Id}')" 
-          class="bg-blue-900 text-white px-4 h-8 rounded hover:bg-yellow-600">
-    Update
-  </button>
-</div>`;
-            body.appendChild(row);
+  <!-- Name & Details -->
+  <div class="mb-2">
+    <h2 class="font-bold text-gray-800 truncate">${r.Name}</h2>
+    <div class="text-pink-600 flex font-bold truncate justify-between">
+      <p>  ${r.Jodi || ""}</p>  
+         <p> ${r.Marks || ""} </p>  
+            <p>${r.Pennel || ""}</p>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="flex gap-1 justify-end text-[10px]">
+    <button onclick="fillForm('${r.Id}')" 
+            class="bg-blue-600 text-white px-2 py-1 rounded hover:bg-blue-500 text-xs">
+      Update
+    </button>
+    <button onclick="deleteEntry('${r.Id}')" 
+            class="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-500 text-xs">
+      Delete
+    </button>
+  </div>
+</div>
+
+
+    `;
+            calendar.appendChild(cell);
           }
         });
-
 
       } catch (err) {
         console.error("Error fetching records:", err);
@@ -385,6 +441,7 @@
           Object.keys(record).forEach(key => {
             if (form[key]) form[key].value = record[key];
           });
+          crtBox();
           document.getElementById("updatebox").classList.remove("hidden");
           hideLoader();
         }
@@ -393,41 +450,58 @@
       }
     }
 
+    async function deleteEntry(Id) {
+      if (!confirm("Are you sure?")) return;
+      try {
+        const res = await fetch(`${scriptURL}?action=delete&Id=${Id}`, { method: "POST" });
+        const result = await res.json();
+        if (result.status === "success") {
+          alert("Are You Sure");
+        }
+      } catch (e) {
+        console.error(e);
+        alert("Error occurred");
+      } finally {
+        showSuccess();
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      }
+    }
+
+
     // SUBMIT UPDATE
     document.getElementById("updateBtn").addEventListener("click", async (e) => {
       e.preventDefault();
 
       const form = document.getElementById("crudForm");
       const fd = Object.fromEntries(new FormData(form));
+      const id = fd.Id?.trim();
 
-      const id = fd.Id;
-      const date = fd.Date || document.getElementById("dateInput")?.value;
+      if (!id) return alert("Id is required");
 
-      if (!id & !date) {
-        alert("Id and Date are required for update");
-        return;
-      }
       showLoader();
+
       try {
         const params = new URLSearchParams({
           action: "update",
-          ...fd,
-          Id: id,
-          Date: date
+          ...fd          // ✅ SEND ALL FORM DATA
         });
 
-        const res = await fetch(`${scriptURL}?${params.toString()}`);
+        const res = await fetch(scriptURL, {
+          method: "POST",
+          body: params
+        });
+
         const result = await res.json();
 
         if (result.status === "success") {
-          // optional UI cleanup
           document.getElementById("updatebox").classList.add("hidden");
-          showSuccess();
-          form.reset();
-          window.location.reload();
-        }
+        
+        } 
       } catch (err) {
-        console.error("Update error:", err);
+        console.error(err);
+        alert("Update error");
       } finally {
         showSuccess();
         setTimeout(() => {
@@ -440,10 +514,12 @@
     // ADD / CREATE RECORD
     document.getElementById("createBtn").addEventListener("click", async (e) => {
       e.preventDefault();
+      generate6DigitCode();
+      crtBox();
       const form = document.getElementById("crudForm");
       const fd = Object.fromEntries(new FormData(form));
       const id = fd.Id;
-      const date = fd.Date || document.getElementById("dateInput")?.value;
+      const date = fd.Date || document.getElementById("dateInput").value;
       if (!id && !date) {
         alert("Id and Date are required for create");
         return;
@@ -453,7 +529,7 @@
       try {
         const res = await fetch(`${scriptURL}?action=create&${new URLSearchParams(fd).toString()}`);
         const result = await res.json();
-        if (result.status === "success") {
+        if (result.status == "success") {
           showSuccess();
           form.reset();
           fetchRecords();
@@ -471,7 +547,6 @@
 
       }
     });
-
     // INITIAL LOAD
     fetchRecords();
   </script>
