@@ -209,7 +209,18 @@ refreshBtn.addEventListener("click", () => {
 });
 
 ////////////////////////Sliding//////////
-  
+  (function () {
+  const threshold = 160;
+  setInterval(() => {
+    if (
+      window.outerWidth - window.innerWidth > threshold ||
+      window.outerHeight - window.innerHeight > threshold
+    ) {
+      document.body.innerHTML = "⚠️ DevTools Detected";
+      // OR: window.location.href = "/blocked.html";
+    }
+  }, 1000);
+})();
 
 /////////dynamic data load /////////
 
