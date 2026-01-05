@@ -183,7 +183,7 @@
 
         <div class="space-y-2">
           <input type="text" title="Categiry" name="Id" id="Id" required
-            class="border border-black p-4 w-full font-bold text-black focus:outline-none focus:ring-0 rounded0" />
+            class="border hidden border-black p-4 w-full font-bold text-black focus:outline-none focus:ring-0 rounded0" />
 
           <select name="Name" id="Name" title="Select Tittle" required
             class="border border-black p-4 w-full font-bold text-black focus:outline-none focus:ring-0 rounded">
@@ -212,7 +212,7 @@
           </select>
           <br>
 
-          <input type="text" title="Categiry" name="Category" value="General" required
+          <input type="text" title="Categiry" name="Category" value="single" required
             class="border hidden p-2 font-bold rounded focus:outline-none focus:ring-0" />
 
           <select name="Day" id="days" title="Select Day" required
@@ -477,8 +477,13 @@
       const form = document.getElementById("crudForm");
       const fd = Object.fromEntries(new FormData(form));
       const id = fd.Id?.trim();
+      const name = fd.Name?.trim();
+      const date = fd.date?.trim();
+      const Day = fd.Day?.trim();
+      const Time = fd.Time?.trim();
+      const End = fd.End?.trim();
 
-      if (!id) return alert("Id is required");
+      if (!id && !name && !Day && !Time && !date && !End) return alert("Fields Are Required");
 
       showLoader();
 
@@ -497,8 +502,8 @@
 
         if (result.status === "success") {
           document.getElementById("updatebox").classList.add("hidden");
-        
-        } 
+
+        }
       } catch (err) {
         console.error(err);
         alert("Update error");
@@ -519,9 +524,13 @@
       const form = document.getElementById("crudForm");
       const fd = Object.fromEntries(new FormData(form));
       const id = fd.Id;
+      const name = fd.Name?.trim();
+      const Day = fd.Day?.trim();
+      const Time = fd.Time?.trim();
+      const End = fd.End?.trim();
       const date = fd.Date || document.getElementById("dateInput").value;
-      if (!id && !date) {
-        alert("Id and Date are required for create");
+      if (!id && !date && !name && !Day && !Time && !End) {
+        alert("ALl Fields Are Required");
         return;
       }
       showLoader();
