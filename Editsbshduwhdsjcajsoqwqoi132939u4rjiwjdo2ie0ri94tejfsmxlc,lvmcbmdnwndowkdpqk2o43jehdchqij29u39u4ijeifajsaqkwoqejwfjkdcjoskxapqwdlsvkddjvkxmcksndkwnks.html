@@ -412,7 +412,7 @@
       Update
     </button>
     <button onclick="deleteEntry('${r.Id}')" 
-            class="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-500 text-xs">
+            class="hidden bg-red-600 text-white px-2 py-1 rounded hover:bg-red-500 text-xs">
       Delete
     </button>
   </div>
@@ -502,7 +502,7 @@
 
         if (result.status === "success") {
           document.getElementById("updatebox").classList.add("hidden");
-
+          showSuccess();
         }
       } catch (err) {
         console.error(err);
