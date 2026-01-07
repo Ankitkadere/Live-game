@@ -46,7 +46,7 @@
       const name = document.getElementById('loggedUserFName').innerText;
       const mail = document.getElementById('loggedUserEmail').innerText;
       if (name == "" || mail == "") {
-        window.location.href = "";
+        window.location.href = "index.html";
       }
 
     }, 4000);
@@ -86,10 +86,16 @@
   <!-- TABLE -->
   <div class="mx-2">
     <div class="bg-white py-2 rounded-lg shadow">
-      <h2 class="text-xl font-bold mb-4 mx-3 flex justify-between">
+      <h2 class="text-xl font-bold mb-1 mx-3 flex justify-between">
         <p>Chart Sheet </p>
         <p class="mr-1">Update</p>
       </h2>
+      <div class="mx-3">
+        <input title="search" type="date" id="searchInput"
+          class="w-full justify-center mb-3 mx-auto p-2 border border-black rounded font-bold text-sm"
+          oninput="filterRecords()" />
+      </div>
+
       <div id="recordsBody">
         <div class="p-3 bg-orange-100 shadow rounded-lg border mb-3 flex justify-between animate-pulse">
           <div class="space-y-2">
@@ -161,7 +167,9 @@
   </div>
   </div>
 
-  <div id="calendar" class="grid w-full grid-cols-3 md:grid-cols-7 justify-center md:gap-1"></div>
+
+  <div id="calendar"
+    class="max-h-[100vh] overflow-y-hidden grid w-full grid-cols-3 md:grid-cols-7 justify-center md:gap-1"></div>
 
   <!-- UPDATE BOX -->
   <div id="updatebox" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-40">
@@ -187,13 +195,12 @@
 
           <select name="Name" id="Name" title="Select Tittle" required
             class="border border-black p-4 w-full font-bold text-black focus:outline-none focus:ring-0 rounded">
-            <option value="">Select Applicant</option>
+            <option value="LEELA BAZAR">LEELA BAZAR</option>
             <option value="Golden">Golden</option>
             <option value="Final">Final</option>
-            <option value="MORNING SYNDICATE">MORNING SYNDICATE</option>
-            <option value="KALYAN MORNING">KALYAN MORNING</option>
+            <option value="MORNING SYNDICATE">SYNDICATE</option>
+            <option value="KALYAN">KALYAN</option>
             <option value="SYNDICATE NIGHT">SYNDICATE NIGHT</option>
-            <option value="LEELA BAZAR">LEELA BAZAR</option>
             <option value="RAJDHANI NIGHT">RAJDHANI NIGHT</option>
             <option value="SHAKTIMAAN">SHAKTIMAAN</option>
           </select>
@@ -558,6 +565,17 @@
     });
     // INITIAL LOAD
     fetchRecords();
+
+    function filterRecords() {
+      const value = document.getElementById("searchInput").value.toLowerCase();
+      const cards = document.querySelectorAll("#calendar > div");
+
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(value) ? "" : "none";
+      });
+    }
+
   </script>
 
 </body>

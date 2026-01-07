@@ -130,8 +130,10 @@ function loadData() {
         renderedIds.add(r.Name);
 
         singleBox.innerHTML += `
-<div class="flex justify-between items-center bg-[${r.Mcolor || "#fffaf0"}] px-2 py-2 border-t border-orange-300">
-  <button onclick="window.location.href='Callender.html?id=${r.Name}'"
+<div class="flex justify-between items-center bg-[${
+          r.Mcolor || "#fffaf0"
+        }] px-2 py-2 border-t border-orange-300">
+  <button onclick="window.location.href='${r.Name}.html?id=${r.Name}'"
     class="bg-blue-900 text-white px-3 py-1 rounded-full text-xs shadow">
     Jodi
   </button>
@@ -146,7 +148,7 @@ function loadData() {
     </p>
   </div>
 
-  <button onclick="window.location.href='Callender.html?id=${r.Name}'"
+  <button onclick="window.location.href='${r.Name}.html?id=${r.Name}'"
     class="bg-blue-900 text-white px-3 py-1 rounded-full text-xs shadow">
     Panel
   </button>
@@ -209,7 +211,7 @@ refreshBtn.addEventListener("click", () => {
 });
 
 ////////////////////////Sliding//////////
-  (function () {
+(function () {
   const threshold = 160;
   setInterval(() => {
     if (
