@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- TITLE (Most Important Ranking Factor) -->
-    <title>Data Table : Leela Bazar – Fast Satta Matka Results, Charts & Live Updates</title>
+    <title>KALYAN : Leela Bazar – Fast Satta Matka Results, Charts & Live Updates</title>
     <!-- META DESCRIPTION (ONLY ONE) -->
     <meta name="description"
         content="Leela Bazar provides fast and accurate Satta Matka results, charts, lucky numbers and market updates. View Matka results in Hindi and English for informational purposes." />
@@ -74,7 +74,7 @@
         class="bg-orange-200 shadow rounded-b-2xl p-3 flex justify-between items-center">
         <div class="flex items-center gap-2">
             <img src="Logo.jpg" alt="" class="w-10 h-10 rounded-full">
-            <h1 class="font-extrabold text-xl">Leela Bazar</h1>
+            <h1 class="font-extrabold text-xl">KALYAN</h1>
         </div>
     </div>
     <div class="hidden flex w-full rounded-md  md:text-[40px]  mt-2 font-bold text-[13px] text-center">
@@ -124,9 +124,9 @@
 
 
     <!-- DATA -->
-    <div class=" border-b-[9.9px]  border-r-[9.9px] border-l-[9.9px]  border-gray-800">
+    <div class=" border-b-[7.100px]  border-r-[7.100px] border-l-[7.100px]  border-gray-800">
         <div id="recordsBody"
-            class="border-[#a229f4] border-b-[5.7px] border-t-black border-l-[5.7px]  border-r-[5.7px] ">
+            class="border-[#a229f4] border-b-[4.170px] border-t-black border-l-[4.170px]  border-r-[4.170px] ">
             <div class=" pt-6 flex items-center justify-center gap-2">
                 <div class="h-4 w-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
                 <span class="font-bold">Loading<span class="animate-pulse">...</span></span>
@@ -191,7 +191,7 @@
                 body.innerHTML += `
 <div class="flex border-t border-black bg-white shadow text-center text-[11px] font-black ">
 
-  <div class="min-w-[18%] leading-[1] font-gray-700 flex flex-col text-[11.5px] justify-center p-[2px] ">
+  <div class="min-w-[18%] leading-[1] font-gray-700 flex flex-col text-[9.4px] justify-center p-[2px] ">
     ${start}<br>to<br>${end.toISOString().slice(0, 10)}
   </div>
 
@@ -212,9 +212,9 @@
                 }
                 return `
 <div class="flex items-center justify-center gap-1 border-l border-black px-[1px]"> 
-    <div class="font-extrabold font-black text-[14px] leading-[11px]"> ${r.Jodi?.split("").join("<br>") || ""} </div> 
-    <div class="text-[22px] font-black min-w-[30px]" style="color:${r.Bcolor || "#000"}"> ${r.Marks || ""} </div> 
-    <div class="font-extrabold font-black text-[14px] leading-[11px]"> ${r.Pennel?.split("").join("<br>") || ""} </div> 
+    <div class="font-extrabold font-black text-[11px] leading-[9.5px]"> ${r.Jodi?.split("").join("<br>") || ""} </div> 
+    <div class="text-[18px] font-black min-w-[25px]" style="color:${r.Bcolor || "#000"}"> ${r.Marks || ""} </div> 
+    <div class="font-extrabold font-black text-[11px] leading-[9.5px]"> ${r.Pennel?.split("").join("<br>") || ""} </div> 
 </div>`;
             }).join("");
         }
@@ -272,7 +272,12 @@
             }
         }, 500);
     })();
-
+    setTimeout(() => {
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth"
+        });
+    }, 100);
 </script>
 
 </html>
