@@ -203,7 +203,7 @@
                 body.innerHTML += `
 <div class="flex border-t border-black bg-white shadow text-center text-[11px] font-black ">
 
-  <div class="min-w-[17.8%] leading-[1] font-gray-700 flex flex-col text-[9.4px] justify-center ">
+  <div class="min-w-[17.8%] leading-[1] font-gray-700 flex flex-col text-[9.4px] justify-center px-[2px]">
     ${start}<br>to<br>${end.toISOString().slice(0, 10)}
   </div>
 
@@ -224,9 +224,9 @@
                 }
                 return `
 <div class="flex items-center justify-center gap-1 border-l border-black "> 
-    <div class="font-extrabold font-black text-[11px] leading-[9.3px]" style="color:${r.Acolor || "#000"}"> ${r.Jodi?.split("").join("<br>") || ""} </div> 
-    <div class="text-[18px] font-black min-w-[22px]" style="color:${r.Bcolor || "#000"}"> ${r.Marks || ""} </div> 
-    <div class="font-extrabold font-black text-[11px] leading-[9.3px]" style="color:${r.Ccolor || "#000"}"> ${r.Pennel?.split("").join("<br>") || ""} </div> 
+    <div class="font-extrabold font-black text-[11px] leading-[9.5px]" style="color:${r.Acolor || "#000"}"> ${r.Jodi?.split("").join("<br>") || ""} </div> 
+    <div class="text-[18px] font-black min-w-[24px]" style="color:${r.Bcolor || "#000"}"> ${r.Marks || ""} </div> 
+    <div class="font-extrabold font-black text-[11px] leading-[9.5px]" style="color:${r.Ccolor || "#000"}"> ${r.Pennel?.split("").join("<br>") || ""} </div> 
 </div>`;
             }).join("");
         }
