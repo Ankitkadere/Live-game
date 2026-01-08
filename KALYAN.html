@@ -124,9 +124,9 @@
 
 
     <!-- DATA -->
-    <div class=" border-b-[7.100px]  border-r-[7.100px] border-l-[7.100px]  border-gray-800">
+    <div class=" border-b-[7.100px]  border-r-[7.100px] border-l-[7.100px]  border-[#0a1d41]">
         <div id="recordsBody"
-            class="border-[#a229f4] border-b-[4.170px] border-t-black border-l-[4.170px]  border-r-[4.170px] ">
+            class="border-[#a229f4] border-b-[4.290px] border-t-black border-l-[4.290px]  border-r-[4.290px] ">
             <div class=" pt-6 flex items-center justify-center gap-2">
                 <div class="h-4 w-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
                 <span class="font-bold">Loading<span class="animate-pulse">...</span></span>
@@ -173,29 +173,38 @@
                     r.Name?.toLowerCase().trim() === ids?.toLowerCase().trim()
                 )
                 .sort((a, b) => new Date(a.Date) - new Date(b.Date));
-
             const weeks = {};
 
             records.forEach(r => {
-                if (r.Day?.toUpperCase() === "SUNDAY") return; // ⛔ skip Sunday
+                const day = r.Day?.toUpperCase();
+                if (day === "SUNDAY") return; // ⛔ skip Sunday
+
                 const d = new Date(r.Date);
                 const monday = new Date(d);
                 monday.setDate(d.getDate() - ((d.getDay() + 6) % 7));
                 const key = monday.toISOString().slice(0, 10);
-                weeks[key] ??= {};
-                weeks[key][r.Day.toUpperCase()] = r;
+
+                weeks[key] ??= { _count: 0 };
+
+                // ✅ allow only 6 days (MON–SAT)
+                if (weeks[key]._count >= 6) return;
+
+                if (!weeks[key][day]) {
+                    weeks[key][day] = r;
+                    weeks[key]._count++;
+                }
             });
 
             Object.keys(weeks).sort().forEach(start => {
-                const end = new Date(start); end.setDate(end.getDate() + 6);
+                const end = new Date(start); end.setDate(end.getDate() + 5);
                 body.innerHTML += `
 <div class="flex border-t border-black bg-white shadow text-center text-[11px] font-black ">
 
-  <div class="min-w-[18%] leading-[1] font-gray-700 flex flex-col text-[9.4px] justify-center p-[2px] ">
+  <div class="min-w-[17.8%] leading-[1] font-gray-700 flex flex-col text-[9.4px] justify-center ">
     ${start}<br>to<br>${end.toISOString().slice(0, 10)}
   </div>
 
-  <div class="grid grid-cols-6 w-full px-[2px]">
+  <div class="grid grid-cols-6 w-full px-[2.5px]">
     ${renderWeekRow(weeks[start])}
   </div>
 
@@ -211,18 +220,17 @@
                     return `<div class="border-l border-black text-red-600 flex items-center justify-center">**</div>`;
                 }
                 return `
-<div class="flex items-center justify-center gap-1 border-l border-black px-[1px]"> 
-    <div class="font-extrabold font-black text-[11px] leading-[9.5px]"> ${r.Jodi?.split("").join("<br>") || ""} </div> 
-    <div class="text-[18px] font-black min-w-[25px]" style="color:${r.Bcolor || "#000"}"> ${r.Marks || ""} </div> 
-    <div class="font-extrabold font-black text-[11px] leading-[9.5px]"> ${r.Pennel?.split("").join("<br>") || ""} </div> 
+<div class="flex items-center justify-center gap-1 border-l border-black "> 
+    <div class="font-extrabold font-black text-[11px] leading-[9.3px]" style="color:${r.Acolor || "#000"}"> ${r.Jodi?.split("").join("<br>") || ""} </div> 
+    <div class="text-[18px] font-black min-w-[22px]" style="color:${r.Bcolor || "#000"}"> ${r.Marks || ""} </div> 
+    <div class="font-extrabold font-black text-[11px] leading-[9.3px]" style="color:${r.Ccolor || "#000"}"> ${r.Pennel?.split("").join("<br>") || ""} </div> 
 </div>`;
             }).join("");
         }
-
         /* ============ INIT ============ */
         fetchRecords();
         showImageById(ids);
-        setInterval(() => showImageById(ids), 3000);
+        setInterval(() => showImageById(ids), 2000);
     </script>
 
 </body>
