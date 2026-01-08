@@ -78,13 +78,14 @@
         </div>
     </div>
 
-    <div class="flex w-full rounded-md  md:text-[40px]  mt-2 font-bold text-[13px] text-center">
+    <div
+        class="flex w-full rounded-md mx-[5px] mr-8 md:text-[40px] overflow-x-hidden mt-2 font-bold text-[12px] justify-center text-center">
         <!-- DATE COLUMN -->
-        <div class="flex items-center justify-center px-[5.8%] bg-yellow-300 border-b border-black min-w-[60px]">
+        <div class="flex items-center justify-center px-[4%] bg-yellow-300 border-b border-black min-w-[60px]">
             DATE
         </div>
         <!-- DAYS GRID -->
-        <div class="grid grid-cols-7 flex-1 pr-4 bg-yellow-300 border-b border-black py-[2px]">
+        <div class="grid grid-cols-7 flex-1 pr-4 bg-yellow-300 border-b border-black  overflow-x-hidden py-[2px]">
             <div class="border-l border-black">MON</div>
             <div class="border-l border-black">TUE</div>
             <div class="border-l border-black">WED</div>
@@ -125,7 +126,7 @@
 
 
     <!-- DATA -->
-    <div class="mx-[7px]">
+    <div class="mx-[6.8px]">
         <div id="recordsBody" class=" border-l-1 border-r-1 border-[#79bcd7] ">
             <div class="pt-6 flex items-center justify-center gap-2">
                 <div class="h-4 w-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
@@ -166,7 +167,10 @@
             const data = await res.json();
             const body = document.getElementById("recordsBody");
             body.innerHTML = "";
-
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: "smooth"
+            });
             const records = data.records
                 .filter(r =>
                     r.Category?.toLowerCase() === "single" &&
@@ -188,13 +192,13 @@
             Object.keys(weeks).sort().forEach(start => {
                 const end = new Date(start); end.setDate(end.getDate() + 6);
                 body.innerHTML += `
-<div class="flex border-b-2 border-r-2 border-l-2 border-[#79bcd7] bg-white shadow text-center text-[11px] font-black ">
+<div class="flex border-b-2 border-r-2 border-l-2 border-[#79bcd7] bg-white shadow text-center text-[11px] p-0 m-0 font-black ">
 
-  <div class="min-w-[16.3%] leading-[1.2] font-black flex flex-col text-[11px] justify-center py-[2px] ">
+  <div class="min-w-[16%] leading-[1.2] font-black flex flex-col text-[10.4px] justify-center py-[2px] ">
     ${start}<br>to<br>${end.toISOString().slice(0, 10)}
   </div>
 
-  <div class="grid grid-cols-7 w-full p-[2px]">
+  <div class="grid grid-cols-7 w-full px-[2px]">
     ${renderWeekRow(weeks[start])}
   </div>
 
@@ -211,9 +215,9 @@
                 }
                 return `
 <div class="flex items-center justify-center gap-1 border-l-2 border-[#79bcd7] py-[2px] px-[4px]"> 
-    <div class="font-extrabold font-black text-[13px] leading-[14px]"> ${r.Jodi?.split("").join("<br>") || ""} </div> 
-    <div class="text-[20px] font-extrabold font-black min-w-[18px]" style="color:${r.Bcolor || "#000"}"> ${r.Marks || ""} </div> 
-    <div class="font-extrabold font-black text-[13px] leading-[14px]"> ${r.Pennel?.split("").join("<br>") || ""} </div> 
+    <div class="font-extrabold font-black text-[13px] leading-[16px]"> ${r.Jodi?.split("").join("<br>") || ""} </div> 
+    <div class="text-[20px] font-extrabold font-black min-w-[18.4px]" style="color:${r.Bcolor || "#000"}"> ${r.Marks || ""} </div> 
+    <div class="font-extrabold font-black text-[13px] leading-[16px]"> ${r.Pennel?.split("").join("<br>") || ""} </div> 
 </div>`;
             }).join("");
         }
