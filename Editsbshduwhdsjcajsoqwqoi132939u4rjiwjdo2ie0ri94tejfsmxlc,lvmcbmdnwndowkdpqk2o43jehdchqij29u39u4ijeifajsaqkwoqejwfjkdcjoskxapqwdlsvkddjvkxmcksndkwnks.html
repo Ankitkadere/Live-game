@@ -90,10 +90,26 @@
         <p>Chart Sheet </p>
         <p class="mr-1">Update</p>
       </h2>
-      <div class="mx-3">
-        <input title="search" type="date" id="searchInput"
-          class="w-full justify-center mb-3 mx-auto p-2 border border-black rounded font-bold text-sm"
-          oninput="filterRecords()" />
+      <div class="mx-2 flex justify-between ">
+        <div>
+          <select title="Name" id="nameFilter" onchange="filterByName()" class="w-full bg-white justify-center mb-3 mx-auto p-2 border border-black rounded font-bold text-sm">
+            <option value="">Select Name Type</option>
+            <option value="LEELA BAZAR">LEELA BAZAR</option>
+            <option value="Golden">Golden</option>
+            <option value="Final">Final</option>
+            <option value="MORNING SYNDICATE">SYNDICATE</option>
+            <option value="KALYAN">KALYAN</option>
+            <option value="SYNDICATE NIGHT">SYNDICATE NIGHT</option>
+            <option value="RAJDHANI NIGHT">RAJDHANI NIGHT</option>
+            <option value="SHAKTIMAAN">SHAKTIMAAN</option>
+          </select>
+        </div>
+        <div>
+          <input title="search" type="date" id="searchInput"
+            class="w-full justify-center mb-3 mx-auto p-2 border border-black rounded font-bold text-sm"
+            oninput="filterRecords()" />
+        </div>
+
       </div>
 
       <div id="recordsBody">
@@ -566,6 +582,25 @@
     // INITIAL LOAD
     fetchRecords();
 
+
+    // FILTER ONLY BY NAME (SELECT → BOXES)
+    function filterByName() {
+      const selectedName = document.getElementById("nameFilter").value.toLowerCase();
+      const boxes = document.querySelectorAll("#calendar > div");
+
+      boxes.forEach(box => {
+        const nameEl = box.querySelector("h2"); // Name inside box
+        const boxName = nameEl ? nameEl.innerText.toLowerCase() : "";
+
+        // show all if no selection, else exact name match
+        box.style.display =
+          !selectedName || boxName === selectedName ? "" : "none";
+      });
+    }
+
+
+    // CALL AFTER RECORDS LOAD
+    setTimeout(populateNameFilter, 500);
     function filterRecords() {
       const value = document.getElementById("searchInput").value.toLowerCase();
       const cards = document.querySelectorAll("#calendar > div");
