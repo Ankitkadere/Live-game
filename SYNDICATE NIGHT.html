@@ -79,19 +79,19 @@
     </div>
 
     <div
-        class="flex w-full rounded-md mx-[5px] mr-8 md:text-[40px] overflow-x-hidden mt-2 font-bold text-[12px] justify-center text-center">
+        class="flex w-full mr-[3px] rounded-md md:text-[40px] overflow-x-hidden mt-2 font-bold text-[14px] justify-center text-center">
         <!-- DATE COLUMN -->
         <div class="flex items-center justify-center px-[4%] bg-yellow-300 border-b border-black min-w-[60px]">
             DATE
         </div>
         <!-- DAYS GRID -->
-        <div class="grid grid-cols-7 flex-1 pr-4 bg-yellow-300 border-b border-black  overflow-x-hidden py-[2px]">
-            <div class="border-l border-black">MON</div>
-            <div class="border-l border-black">TUE</div>
-            <div class="border-l border-black">WED</div>
-            <div class="border-l border-black">THU</div>
-            <div class="border-l border-black">FRI</div>
-            <div class="border-l border-black">SAT</div>
+        <div class="grid grid-cols-7 flex-1 bg-yellow-300 pr-[7px] text-[14px] border-b border-black overflow-x-hidden py-[2px]">
+            <div class="border-l  border-black">MON</div>
+            <div class="border-l   border-black">TUE</div>
+            <div class="border-l   border-black">WED</div>
+            <div class="border-l   border-black">THU</div>
+            <div class="border-l   border-black">FRI</div>
+            <div class="border-l   border-black">SAT</div>
             <div class="border-l border-black">SUN</div>
         </div>
     </div>
@@ -215,9 +215,9 @@
                 }
                 return `
 <div class="flex items-center justify-center gap-1 border-l-2 border-[#79bcd7] py-[2px] px-[4px]"> 
-    <div class="font-extrabold font-black text-[13px] leading-[16px]"> ${r.Jodi?.split("").join("<br>") || ""} </div> 
-    <div class="text-[20px] font-extrabold font-black min-w-[18.4px]" style="color:${r.Bcolor || "#000"}"> ${r.Marks || ""} </div> 
-    <div class="font-extrabold font-black text-[13px] leading-[16px]"> ${r.Pennel?.split("").join("<br>") || ""} </div> 
+    <div class="font-extrabold font-black text-[13px] leading-[20px]"> ${r.Jodi?.split("").join("<br>") || ""} </div> 
+    <div class="text-[18px] font-extrabold justify-center font-black min-w-[18.4px]" style="color:${r.Bcolor || "#000"}"> ${r.Marks || ""} </div> 
+    <div class="font-extrabold font-black text-[13px] leading-[20px]"> ${r.Pennel?.split("").join("<br>") || ""} </div> 
 </div>`;
             }).join("");
         }

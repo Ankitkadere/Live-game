@@ -166,7 +166,10 @@
             const data = await res.json();
             const body = document.getElementById("recordsBody");
             body.innerHTML = "";
-
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: "smooth"
+            });
             const records = data.records
                 .filter(r =>
                     r.Category?.toLowerCase() === "single" &&
