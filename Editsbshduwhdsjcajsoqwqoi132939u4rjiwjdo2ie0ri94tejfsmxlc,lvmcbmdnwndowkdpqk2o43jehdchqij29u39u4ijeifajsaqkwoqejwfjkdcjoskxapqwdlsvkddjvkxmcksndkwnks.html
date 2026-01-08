@@ -65,9 +65,8 @@
   </div>
   <!-- HEADER -->
   <div class="bg-orange-200 left-0 w-full shadow-md rounded-b-3xl">
-    <div class="p-5">
-
-      <div class="flex justify-between items-center">
+    <div class="pt-5 pb-2">
+      <div class="flex px-5 justify-between items-center">
         <div onclick="window.location.href='index.html'" id="openSidebar"
           class="flex items-center gap-3 cursor-pointer">
           <img src="Logo.jpg" alt="Leela Bazar" class="w-11 h-11 rounded-full shadow-md" />
@@ -78,15 +77,7 @@
           <i onclick="showBox()" class="fa-solid fa-add hover:text-blue-600 transition"></i>
         </div>
       </div>
-
-
-    </div>
-  </div>
-
-  <!-- TABLE -->
-  <div class="mx-2">
-    <div class="bg-white py-2 rounded-lg shadow">
-      <div class="mx-2 flex gap-2 items-center">
+      <div class="mx-2 mt-2 px-2 flex gap-2 items-center">
         <!-- NAME FILTER -->
         <select title="select name type" id="nameFilter" onchange="filterByName()" class="w-1/2 bg-orange-50 text-gray-800 px-3 py-2 rounded-xl font-semibold text-sm
            focus:outline-none appearance-none shadow-sm">
@@ -102,10 +93,15 @@
         </select>
 
         <!-- DATE FILTER -->
-        <input title="date" type="date" id="searchInput" oninput="filterRecords()" class="w-1/2 bg-orange-50 text-gray-800 px-3 py-2 rounded-xl font-semibold text-sm
+        <input title="date" type="date" id="searchInput" placeholder="Select Date" oninput="filterRecords()" class="w-1/2 bg-orange-50 text-gray-800 px-3 py-2 rounded-xl font-semibold text-sm
            focus:outline-none shadow-sm" />
       </div>
+    </div>
+  </div>
 
+  <!-- TABLE -->
+  <div class="mx-2">
+    <div class="bg-white py-2 rounded-lg shadow">
       <div id="recordsBody" class="mt-2">
         <div class="p-3 bg-orange-100 shadow rounded-lg border mb-3 flex justify-between animate-pulse">
           <div class="space-y-2">
