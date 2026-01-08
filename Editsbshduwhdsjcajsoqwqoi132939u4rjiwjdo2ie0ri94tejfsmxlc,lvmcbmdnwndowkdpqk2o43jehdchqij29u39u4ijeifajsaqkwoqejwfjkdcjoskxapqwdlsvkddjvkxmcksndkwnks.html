@@ -46,7 +46,7 @@
       const name = document.getElementById('loggedUserFName').innerText;
       const mail = document.getElementById('loggedUserEmail').innerText;
       if (name == "" || mail == "") {
-        window.location.href = "index.html";
+        window.location.href = " ";
       }
 
     }, 4000);
@@ -86,33 +86,27 @@
   <!-- TABLE -->
   <div class="mx-2">
     <div class="bg-white py-2 rounded-lg shadow">
-      <h2 class="text-xl font-bold mb-1 mx-3 flex justify-between">
-        <p>Chart Sheet </p>
-        <p class="mr-1">Update</p>
-      </h2>
-      <div class="mx-2 flex justify-between ">
-        <div>
-          <select title="Name" id="nameFilter" onchange="filterByName()" class="w-full bg-white justify-center mb-3 mx-auto p-2 border border-black rounded font-bold text-sm">
-            <option value="">Select Name Type</option>
-            <option value="LEELA BAZAR">LEELA BAZAR</option>
-            <option value="Golden">Golden</option>
-            <option value="Final">Final</option>
-            <option value="MORNING SYNDICATE">SYNDICATE</option>
-            <option value="KALYAN">KALYAN</option>
-            <option value="SYNDICATE NIGHT">SYNDICATE NIGHT</option>
-            <option value="RAJDHANI NIGHT">RAJDHANI NIGHT</option>
-            <option value="SHAKTIMAAN">SHAKTIMAAN</option>
-          </select>
-        </div>
-        <div>
-          <input title="search" type="date" id="searchInput"
-            class="w-full justify-center mb-3 mx-auto p-2 border border-black rounded font-bold text-sm"
-            oninput="filterRecords()" />
-        </div>
+      <div class="mx-2 flex gap-2 items-center">
+        <!-- NAME FILTER -->
+        <select title="select name type" id="nameFilter" onchange="filterByName()" class="w-1/2 bg-orange-50 text-gray-800 px-3 py-2 rounded-xl font-semibold text-sm
+           focus:outline-none appearance-none shadow-sm">
+          <option value="">All Types</option>
+          <option value="LEELA BAZAR">LEELA BAZAR</option>
+          <option value="Golden">Golden</option>
+          <option value="Final">Final</option>
+          <option value="MORNING SYNDICATE">SYNDICATE</option>
+          <option value="KALYAN">KALYAN</option>
+          <option value="SYNDICATE NIGHT">SYNDICATE NIGHT</option>
+          <option value="RAJDHANI NIGHT">RAJDHANI NIGHT</option>
+          <option value="SHAKTIMAAN">SHAKTIMAAN</option>
+        </select>
 
+        <!-- DATE FILTER -->
+        <input title="date" type="date" id="searchInput" oninput="filterRecords()" class="w-1/2 bg-orange-50 text-gray-800 px-3 py-2 rounded-xl font-semibold text-sm
+           focus:outline-none shadow-sm" />
       </div>
 
-      <div id="recordsBody">
+      <div id="recordsBody" class="mt-2">
         <div class="p-3 bg-orange-100 shadow rounded-lg border mb-3 flex justify-between animate-pulse">
           <div class="space-y-2">
             <div class="h-6 w-16 bg-gray-300 rounded"></div>
