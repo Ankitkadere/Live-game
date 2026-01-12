@@ -130,7 +130,7 @@ function loadData() {
         renderedIds.add(r.Name);
 
         singleBox.innerHTML += `
-<div class="flex justify-between items-center my-2 bg-[${
+<div class="flex justify-between items-center my-4 bg-[${
           r.Mcolor || "#fffaf0"
         }] px-2 py-2 border-t border-orange-300">
   <button onclick="window.location.href='${r.Name}.html?id=${r.Name}'"
