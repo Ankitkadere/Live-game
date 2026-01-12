@@ -118,13 +118,12 @@
       <div class="border-l border-black">WED</div>
       <div class="border-l border-black">THU</div>
       <div class="border-l border-black">FRI</div>
-      <div class="border-l border-black">SAT</div>
-      <div class="border-l border-black">SUN</div>
+      
     </div>
   </div>
 
   <!-- DATA -->
-  <div class="p-2 bg-black mb-[60%]">
+  <div class="p-2 bg-black mb-[40%]">
     <div id="recordsBody" class="border-[#a229f4] border-4 "></div>
   </div>
   <script>
@@ -159,7 +158,6 @@
       const data = await res.json();
       const body = document.getElementById("recordsBody");
       body.innerHTML = "";
-
       const records = data.records
         .filter(r =>
           r.Category?.toLowerCase() === "single" &&
@@ -221,7 +219,6 @@
 <script>
   // Disable right-click
   document.addEventListener("contextmenu", e => e.preventDefault());
-
   // Block common DevTools & View Source shortcuts
   document.addEventListener("keydown", function (e) {
     const key = e.key.toUpperCase();

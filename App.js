@@ -10,7 +10,7 @@ const data = [
 document.getElementById("gameList").innerHTML = data
   .map(
     (r) => `
-<div class="flex justify-between items-center bg-orange-100 px-2 py-2 border-t border-orange-300 mb-4">
+<div class="flex justify-between items-center bg-orange-100 px-2 py-2 border-t border-orange-300 mb-8">
   <button class="bg-blue-900 text-white px-3 py-1 rounded-full text-xs shadow">Jodi</button>
   <div class="text-center flex-1">
     <h2 class="font-bold text-lg">${r.Id}</h2>
