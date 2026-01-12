@@ -79,7 +79,7 @@
       </div>
       <div class="mx-2 mt-2 px-2 flex gap-2 items-center">
         <!-- NAME FILTER -->
-        <select title="select name type" id="nameFilter" onchange="filterByName()" class="w-1/2 bg-orange-50 text-gray-800 px-3 py-2 rounded-xl font-semibold text-sm
+        <select title="select name type" id="nameFilter" onchange="filterByName()" class="w-1/3 bg-orange-50 text-gray-800 px-3 py-2 rounded-xl font-semibold text-sm
            focus:outline-none appearance-none shadow-sm">
           <option value="">All Types</option>
           <option value="LEELA BAZAR">LEELA BAZAR</option>
@@ -91,9 +91,20 @@
           <option value="RAJDHANI NIGHT">RAJDHANI NIGHT</option>
           <option value="SHAKTIMAAN">SHAKTIMAAN</option>
         </select>
+        <!-- DAY SELECT -->
+        <select id="dayFilter" title="Day" onchange="filterByDay()"
+          class="w-1/3 bg-orange-50 text-gray-800 px-3 py-2 rounded-xl font-semibold text-sm">
+          <option value="">All Days</option>
+          <option value="MONDAY">Monday</option>
+          <option value="TUESDAY">Tuesday</option>
+          <option value="WEDNESDAY">Wednesday</option>
+          <option value="THURSDAY">Thursday</option>
+          <option value="FRIDAY">Friday</option>
+          <option value="SATURDAY">Saturday</option>
+        </select>
 
         <!-- DATE FILTER -->
-        <input title="date" type="date" id="searchInput" placeholder="Select Date" oninput="filterRecords()" class="w-1/2 bg-orange-50 text-gray-800 px-3 py-2 rounded-xl font-semibold text-sm
+        <input title="date" type="date" id="searchInput" placeholder="Select Date" oninput="filterRecords()" class="w-1/3 bg-orange-50 text-gray-800 px-3 py-2 rounded-xl font-semibold text-sm
            focus:outline-none shadow-sm" />
       </div>
     </div>
@@ -572,34 +583,43 @@
     // INITIAL LOAD
     fetchRecords();
 
+    // APPLY ALL FILTERS TOGETHER (Name + Day + Search)
+    function applyFilters() {
+      const selectedName = document.getElementById("nameFilter")?.value.toLowerCase() || "";
+      const selectedDay = document.getElementById("dayFilter")?.value.toUpperCase() || "";
+      const searchValue = document.getElementById("searchInput")?.value.toLowerCase() || "";
 
-    // FILTER ONLY BY NAME (SELECT → BOXES)
-    function filterByName() {
-      const selectedName = document.getElementById("nameFilter").value.toLowerCase();
       const boxes = document.querySelectorAll("#calendar > div");
 
       boxes.forEach(box => {
-        const nameEl = box.querySelector("h2"); // Name inside box
+        // NAME
+        const nameEl = box.querySelector("h2");
         const boxName = nameEl ? nameEl.innerText.toLowerCase() : "";
 
-        // show all if no selection, else exact name match
-        box.style.display =
-          !selectedName || boxName === selectedName ? "" : "none";
+        // DAY
+        const boxTextUpper = box.innerText.toUpperCase();
+
+        const matchName = !selectedName || boxName === selectedName;
+        const matchDay = !selectedDay || boxTextUpper.includes(selectedDay);
+        const matchSearch = !searchValue || box.innerText.toLowerCase().includes(searchValue);
+
+        box.style.display = matchName && matchDay && matchSearch ? "" : "none";
       });
     }
 
+    // HOOK ALL FILTERS
+    function filterByName() {
+      applyFilters();
+    }
 
-    // CALL AFTER RECORDS LOAD
-    setTimeout(populateNameFilter, 500);
+    function filterByDay() {
+      applyFilters();
+    }
+
     function filterRecords() {
-      const value = document.getElementById("searchInput").value.toLowerCase();
-      const cards = document.querySelectorAll("#calendar > div");
-
-      cards.forEach(card => {
-        const text = card.innerText.toLowerCase();
-        card.style.display = text.includes(value) ? "" : "none";
-      });
+      applyFilters();
     }
+
 
   </script>
 
