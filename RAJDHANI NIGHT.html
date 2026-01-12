@@ -133,7 +133,7 @@
     const ids = new URLSearchParams(window.location.search).get("id");
 
     /* ============ DAYS ORDER ============ */
-    const DAYS_ORDER = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"];
+    const DAYS_ORDER = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"];
 
     /* ============ IMAGE MAP ============ */
     const adMap = {
@@ -179,7 +179,7 @@
       });
 
       Object.keys(weeks).sort().forEach(start => {
-        const end = new Date(start); end.setDate(end.getDate() + 6);
+        const end = new Date(start); end.setDate(end.getDate() + 4);
         body.innerHTML += `
 <div class="flex border border-black bg-white shadow text-center text-[11px] font-black ">
 
