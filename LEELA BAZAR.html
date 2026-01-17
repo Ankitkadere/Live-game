@@ -61,7 +61,7 @@
 <style>
   * {
     font-family: 'Times New Roman', Times, serif;
-     user-select: none;
+    user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
   }
@@ -125,7 +125,12 @@
 
   <!-- DATA -->
   <div class="p-2 bg-black mb-[60%]">
-    <div id="recordsBody" class="border-[#a229f4] border-4 "></div>
+    <div id="recordsBody" class="border-[#a229f4] border-4 ">
+      <div class="pt-6 flex items-center justify-center gap-2">
+        <div class="h-4 w-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
+        <span class="font-bold">Loading<span class="animate-pulse">...</span></span>
+      </div>
+    </div>
   </div>
   <script>
     /* ============ CONFIG ============ */
@@ -264,7 +269,7 @@
       }
     }, 500);
   })();
-  
+
 </script>
 
 </html>
