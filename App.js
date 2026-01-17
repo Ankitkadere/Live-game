@@ -144,7 +144,7 @@ function loadData() {
       ${formatTime(r.Time)} && ${formatTime(r.End)}
     </p>
        <p class="text-base text-pink-400 font-extrabold">
-        ${ "Open"}${"-----"}${"-----" + "Close"}
+        ${ "Open"}${"----"}${"----" + "Close"}
     </p>
     <p class="text-xl text-pink-700 font-extrabold">
       ${r.Jodi + " " || ""}${"- " + r.Marks + " " || ""}${"- " + r.Pennel || ""}
