@@ -61,7 +61,7 @@
 <style>
   * {
     font-family: 'Times New Roman', Times, serif;
-     user-select: none;
+    user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
   }
@@ -74,7 +74,7 @@
     class="bg-orange-200 shadow rounded-b-2xl p-3 flex justify-between items-center">
     <div class="flex items-center gap-2">
       <img src="Logo.jpg" alt="" class="w-10 h-10 rounded-full">
-      <h1 class="font-extrabold text-xl">RAJDHANI NIGHT</h1>
+      <h1 class="font-extrabold text-xl"> RAJDHANI NIGHT</h1>
     </div>
   </div>
   <!-- Tabes-->
@@ -108,23 +108,24 @@
 
   <div class="flex w-full rounded-md  md:text-[40px]  mt-2 font-bold text-[13px] text-center">
     <!-- DATE COLUMN -->
-    <div class="flex items-center justify-center px-[6%] bg-yellow-300 border-b border-black min-w-[70px]">
+    <div class="flex items-center justify-center px-[4.9%] bg-yellow-300 border-b border-black min-w-[60px]">
       DATE
     </div>
     <!-- DAYS GRID -->
-    <div class="grid grid-cols-5 flex-1 pr-2 bg-yellow-300 border-b border-black py-[2px]">
+    <div class="grid grid-cols-5 flex-1 pr-[3px] bg-yellow-300 border-b border-black py-[2px]">
       <div class="border-l border-black">MON</div>
       <div class="border-l border-black">TUE</div>
       <div class="border-l border-black">WED</div>
       <div class="border-l border-black">THU</div>
       <div class="border-l border-black">FRI</div>
+   
     </div>
   </div>
 
   <!-- DATA -->
-  <div class="p-2 bg-black mb-[40%]">
-    <div id="recordsBody" class="border-[#a229f4] border-4 ">
-   <div class="pt-6 flex items-center bg-white h-[70vh] justify-center gap-2">
+  <div class="p-[2px] bg-black mb-[40%]">
+    <div id="recordsBody" class=" h-full">
+      <div class="pt-6 flex items-center bg-white h-[70vh] justify-center gap-2">
         <div class="h-4 w-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
         <span class="font-bold">Loading<span class="animate-pulse">...</span></span>
       </div>
@@ -136,7 +137,7 @@
     const ids = new URLSearchParams(window.location.search).get("id");
 
     /* ============ DAYS ORDER ============ */
-    const DAYS_ORDER = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"];
+    const DAYS_ORDER = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY" ];
 
     /* ============ IMAGE MAP ============ */
     const adMap = {
@@ -162,6 +163,7 @@
       const data = await res.json();
       const body = document.getElementById("recordsBody");
       body.innerHTML = "";
+
       const records = data.records
         .filter(r =>
           r.Category?.toLowerCase() === "single" &&
@@ -185,11 +187,11 @@
         body.innerHTML += `
 <div class="flex border border-black bg-white shadow text-center text-[11px] font-black ">
 
-  <div class="min-w-[20%] leading-[1] font-black flex flex-col text-[9px] justify-center p-[2px] ">
+  <div class="min-w-[70px] leading-[1]  font-extrabold font-black flex flex-col text-[10px] justify-center p-[2px] ">
     ${start}<br>TO<br>${end.toISOString().slice(0, 10)}
   </div>
 
-  <div class="grid grid-cols-5 w-full p-[2px]">
+  <div class="grid grid-cols-5 w-full py-[2px]">
     ${renderWeekRow(weeks[start])}
   </div>
 
@@ -205,9 +207,9 @@
           return `<div class="border-l border-black text-red-600 flex items-center justify-center">**</div>`;
         }
         return `
-<div class="flex items-center justify-center gap-1 border-l border-black px-[3px]"> 
+<div class="flex items-center justify-center gap-1 border-l border-black px-[0px]"> 
     <div class="font-extrabold font-black text-[11px] leading-[11px]"> ${r.Jodi?.split("").join("<br>") || ""} </div> 
-    <div class="text-[18px] font-black min-w-[19px]" style="color:${r.Bcolor || "#000"}"> ${r.Marks || ""} </div> 
+    <div class="text-[18px] font-black min-w-[26px]" style="color:${r.Bcolor || "#000"}"> ${r.Marks || ""} </div> 
     <div class="font-extrabold font-black text-[11px] leading-[11px]"> ${r.Pennel?.split("").join("<br>") || ""} </div> 
 </div>`;
       }).join("");
@@ -223,6 +225,7 @@
 <script>
   // Disable right-click
   document.addEventListener("contextmenu", e => e.preventDefault());
+
   // Block common DevTools & View Source shortcuts
   document.addEventListener("keydown", function (e) {
     const key = e.key.toUpperCase();
@@ -265,7 +268,7 @@
       }
     }, 500);
   })();
-  
+
 </script>
 
 </html>
