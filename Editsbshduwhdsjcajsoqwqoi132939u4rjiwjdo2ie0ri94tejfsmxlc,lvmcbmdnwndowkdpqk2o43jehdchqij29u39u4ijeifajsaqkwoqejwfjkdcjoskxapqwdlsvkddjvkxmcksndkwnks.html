@@ -2,707 +2,318 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <title>Leela Bazar</title>
-  <meta name="description" content="Leela Bazar – Play Smart & Track Your Game Stats Easily." />
-  <meta name="keywords" content="Leela Bazar, games, tracking, stats, online game" />
-  <meta name="author" content="Leela Bazar Team" />
-  <meta property="og:title" content="Leela Bazar" />
-  <meta property="og:description" content="Play Smart. Track Smarter. Leela Bazar PWA." />
-  <meta property="og:image" content="Logo.jpg" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="/" />
-  <link rel="icon" type="image/png" sizes="192x192" href="Logo.jpg" />
-  <link rel="apple-touch-icon" href="Logo.jpg">
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#FED7AA" />
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Leela Bazar">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <script type="module"
-    src="firebaseicsjiwhiudnjscniqueh8e28e28d82hd82h82h22h8dwdhsujvskaie3nejf9wu2ewidj9wi02e3u48u5tugr9uw9d3hrujfe.js"></script>
-  <script>
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker
-          .register("service-worker.js")
-          .then(() => console.log("Service Worker Registered"));
-      });
-    }
-  </script>
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Leela Bazar</title>
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Meta -->
+    <meta name="description" content="Leela Bazar – Result & Chart Management" />
+    <!-- Icons -->
+    <link rel="icon" href="Logo.jpg" />
+    <meta name="theme-color" content="#FED7AA" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 
 <body class="bg-gray-100">
-  <h1 id="loggedUserFName" class="hidden"></h1>
+    <h1 id="loggedUserFName" class="hidden"></h1>
 
-  <script>setTimeout(() => {
+    <script>setTimeout(() => {
+            const name = document.getElementById('loggedUserFName').innerText;
+            const mail = document.getElementById('loggedUserEmail').innerText;
+            if (name == "" || mail == "") {
+                window.location.href = "india.html";
+            }
+        }, 4000);
 
-      const name = document.getElementById('loggedUserFName').innerText;
-      const mail = document.getElementById('loggedUserEmail').innerText;
-      if (name == "" || mail == "") {
-        window.location.href = "india.html";
-      }
-
-    }, 4000);
-
-
-  </script>
-  <div id="page-loader"
-    class="fixed top-0 left-0 w-full h-full inset-1 bg-black bg-opacity-50 flex items-center justify-center z-50  transition-opacity duration-500 hidden">
-    <div id="spin" class="w-16 h-16 border-8 border-white border-t-transparent rounded-full animate-spin"></div>
-    <div id="successAlert" class=" inset-0 bg-black/40 flex items-center justify-center hidden">
-      <div class="bg-white px-6 py-5 rounded-xl shadow text-center">
-        <h2 class="text-green-600 text-lg font-bold">Success!</h2>
-        <p class="text-gray-600 text-sm mt-1">Updated successfully</p>
-      </div>
-    </div>
-  </div>
-  <!-- HEADER -->
-  <div class="bg-orange-200 left-0 w-full shadow-md rounded-b-3xl">
-    <div class="pt-5 pb-2">
-      <div class="flex px-5 justify-between items-center">
-        <div onclick="window.location.href='index.html'" id="openSidebar"
-          class="flex items-center gap-3 cursor-pointer">
-          <img src="Logo.jpg" alt="Leela Bazar" class="w-11 h-11 rounded-full shadow-md" />
-          <p id="loggedUserEmail" class="font-extrabold text-black text-1xl">Leela Bazar</p>
-        </div>
-        <div class="flex items-center gap-5 text-gray-900 text-2xl">
-          <i onclick="window.location.href='New_working.html'" class="fa-solid fa-add hover:text-blue-600 transition"></i>
+    </script>
+    <!-- HEADER -->
+    <header class="fixed w-full top-0 left-0 bg-orange-200 p-4 shadow rounded-b-3xl">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="Logo.jpg" class="w-10 h-10 rounded-full" />
+                <h1 class="font-bold text-xl">Leela Bazar</h1>
+            </div>
+            <button onclick="openForm()" class="text-xl"><i class="fa fa-plus"></i></button>
         </div>
 
-        <div class="flex items-center gap-5 text-gray-900 text-2xl">
-          <i onclick="showBox()" class="fa-solid fa-add hover:text-blue-600 transition"></i>
-        </div>
-      </div>
-      <div class="mx-2 mt-2 px-2 flex gap-2 items-center">
-        <!-- NAME FILTER -->
-        <select title="select name type" id="nameFilter" onchange="filterByName()" class="w-1/3 bg-orange-50 text-gray-800 px-3 py-2 rounded-xl font-semibold text-sm
-           focus:outline-none appearance-none shadow-sm">
-          <option value="">All Types</option>
-          <option value="LEELA BAZAR">LEELA BAZAR</option>
-          <option value="Golden">Golden</option>
-          <option value="Final">Final</option>
-          <option value="MORNING SYNDICATE">SYNDICATE</option>
-          <option value="KALYAN">KALYAN</option>
-          <option value="SYNDICATE NIGHT">SYNDICATE NIGHT</option>
-          <option value="RAJDHANI NIGHT">RAJDHANI NIGHT</option>
-          <option value="SHAKTIMAAN">SHAKTIMAAN</option>
-        </select>
-        <!-- DAY SELECT -->
-        <select id="dayFilter" title="Day" onchange="filterByDay()"
-          class="w-1/3 bg-orange-50 text-gray-800 px-3 py-2 rounded-xl  focus:outline-none  font-semibold text-sm">
-          <option value="">All Days</option>
-          <option value="MONDAY">Monday</option>
-          <option value="TUESDAY">Tuesday</option>
-          <option value="WEDNESDAY">Wednesday</option>
-          <option value="THURSDAY">Thursday</option>
-          <option value="FRIDAY">Friday</option>
-          <option value="SATURDAY">Saturday</option>
-          <option value="SUNDAY">Sunday</option>
-        </select>
-
-        <!-- DATE FILTER -->
-        <input title="date" type="date" id="searchInput" placeholder="Select Date" oninput="filterRecords()" class="w-1/3 bg-orange-50 text-gray-800 px-3 py-2 rounded-xl font-semibold text-sm
-           focus:outline-none shadow-sm" />
-      </div>
-    </div>
-  </div>
-
-  <!-- TABLE -->
-  <div class="mx-2">
-    <div class="bg-white py-2 rounded-lg shadow">
-      <div id="recordsBody" class="mt-2">
-        <div class="p-3 bg-orange-100 shadow rounded-lg border mb-3 flex justify-between animate-pulse">
-          <div class="space-y-2">
-            <div class="h-6 w-16 bg-gray-300 rounded"></div>
-            <div class="h-5 w-24 bg-pink-300 rounded"></div>
-          </div>
-          <div class="h-8 w-20 bg-blue-900 rounded opacity-50"></div>
-        </div>
-        <div class="p-3 bg-orange-100 shadow rounded-lg border mb-3 flex justify-between animate-pulse">
-          <div class="space-y-2">
-            <div class="h-6 w-16 bg-gray-300 rounded"></div>
-            <div class="h-5 w-24 bg-pink-300 rounded"></div>
-          </div>
-          <div class="h-8 w-20 bg-blue-900 rounded opacity-50"></div>
-        </div>
-        <div class="p-3 bg-orange-100 shadow rounded-lg border mb-3 flex justify-between animate-pulse">
-          <div class="space-y-2">
-            <div class="h-6 w-16 bg-gray-300 rounded"></div>
-            <div class="h-5 w-24 bg-pink-300 rounded"></div>
-          </div>
-          <div class="h-8 w-20 bg-blue-900 rounded opacity-50"></div>
-        </div>
-        <div class="p-3 bg-orange-100 shadow rounded-lg border mb-3 flex justify-between animate-pulse">
-          <div class="space-y-2">
-            <div class="h-6 w-16 bg-gray-300 rounded"></div>
-            <div class="h-5 w-24 bg-pink-300 rounded"></div>
-          </div>
-          <div class="h-8 w-20 bg-blue-900 rounded opacity-50"></div>
-        </div>
-        <div class="p-3 bg-orange-100 shadow rounded-lg border mb-3 flex justify-between animate-pulse">
-          <div class="space-y-2">
-            <div class="h-6 w-16 bg-gray-300 rounded"></div>
-            <div class="h-5 w-24 bg-pink-300 rounded"></div>
-          </div>
-          <div class="h-8 w-20 bg-blue-900 rounded opacity-50"></div>
-        </div>
-
-        <div class="p-3 bg-orange-100 shadow rounded-lg border mb-3 flex justify-between animate-pulse">
-          <div class="space-y-2">
-            <div class="h-6 w-16 bg-gray-300 rounded"></div>
-            <div class="h-5 w-24 bg-pink-300 rounded"></div>
-          </div>
-          <div class="h-8 w-20 bg-blue-900 rounded opacity-50"></div>
-        </div>
-        <div class="p-3 bg-orange-100 shadow rounded-lg border mb-3 flex justify-between animate-pulse">
-          <div class="space-y-2">
-            <div class="h-6 w-16 bg-gray-300 rounded"></div>
-            <div class="h-5 w-24 bg-pink-300 rounded"></div>
-          </div>
-          <div class="h-8 w-20 bg-blue-900 rounded opacity-50"></div>
-        </div>
-        <div class="p-3 bg-orange-100 shadow rounded-lg border mb-3 flex justify-between animate-pulse">
-          <div class="space-y-2">
-            <div class="h-6 w-16 bg-gray-300 rounded"></div>
-            <div class="h-5 w-24 bg-pink-300 rounded"></div>
-          </div>
-          <div class="h-8 w-20 bg-blue-900 rounded opacity-50"></div>
-        </div>
-        <div class="p-3 bg-orange-100 shadow rounded-lg border mb-3 flex justify-between animate-pulse">
-          <div class="space-y-2">
-            <div class="h-6 w-16 bg-gray-300 rounded"></div>
-            <div class="h-5 w-24 bg-pink-300 rounded"></div>
-          </div>
-          <div class="h-8 w-20 bg-blue-900 rounded opacity-50"></div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-  </div>
-
-
-  <div id="calendar"
-    class="max-h-[100vh] overflow-y-hidden grid w-full grid-cols-3 md:grid-cols-7 justify-center md:gap-1"></div>
-
-  <!-- UPDATE BOX -->
-  <div id="updatebox" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-40">
-    <div class="fixed bottom-0 left-0 w-full bg-white rounded-t-3xl px-3 py-8 shadow-lg ">
-
-      <div class="flex justify-between text-center">
-        <div class="text-left">
-          <h2 class="text-2xl font-bold">Update Data</h2>
-          <p class="text-gray-600 mt-1">Chart Sheet</p>
-        </div>
-        <!-- Angle down -->
-        <div onclick="showUpdateBox()"
-          class="w-12 h-12 bg-gray-200 rounded-full border border-black flex items-center justify-center cursor-pointer hover:bg-gray-300 transition">
-          <i class="fa-solid fa-angle-down text-black text-lg"></i>
-        </div>
-      </div>
-
-      <form id="crudForm" class="grid grid-cols-1 mt-4 md:grid-cols-2 gap-4">
-
-        <div class="space-y-2">
-          <input type="text" title="Categiry" name="Id" id="Id" required
-            class="border hidden border-black p-4 w-full font-bold text-black focus:outline-none focus:ring-0 rounded0" />
-
-          <select name="Name" id="Name" title="Select Tittle" required
-            class="border border-black p-4 w-full font-bold text-black focus:outline-none focus:ring-0 rounded">
-            <option value="LEELA BAZAR">LEELA BAZAR</option>
-            <option value="Golden">Golden</option>
-            <option value="Final">Final</option>
-            <option value="MORNING SYNDICATE">SYNDICATE</option>
-            <option value="KALYAN">KALYAN</option>
-            <option value="SYNDICATE NIGHT">SYNDICATE NIGHT</option>
-            <option value="RAJDHANI NIGHT">RAJDHANI NIGHT</option>
-            <option value="SHAKTIMAAN">SHAKTIMAAN</option>
-          </select>
-
-          <select type="color" title="Mcolor" name="Mcolor" data-empty required
-            class="w-full mt-2 h-14 border px-3 border-black text-black font-bold rounded cursor-pointer"
-            onchange="this.style.backgroundColor=this.value; this.style.color='#000000'">
-            <option value="#fff1e1" style="background:#fff1e1;color:black;">Peach</option>
-            <option value="#f7eebb" style="background:#f7eebb;color:black;">Gold</option>
-            <option value="#d2f8e0" style="background:#d2f8e0;color:black;">Green</option>
-            <option value="#d6e0f5" style="background:#d6e0f5;color:black;">Blue</option>
-            <option value="#ccbaeb" style="background:#ccbaeb;color:black;">Purple</option>
-            <option value="#f5d1d1" style="background:#f5d1d1;color:black;">Red</option>
-            <option value="#ccdafa" style="background:#ccdafa;color:black;">Dark Navy</option>
-            <option value="#ebdbc1" style="background:#ebdbc1;color:black;">Amber</option>
-          </select>
-          <br>
-
-          <input type="text" title="Categiry" name="Category" value="single" required
-            class="border hidden p-2 font-bold rounded focus:outline-none focus:ring-0" />
-
-          <select name="Day" id="days" title="Select Day" required
-            class="border border-black p-4 w-full font-bold text-black focus:outline-none focus:ring-0 rounded">
-            <option value="MONDAY">Monday</option>
-            <option value="TUESDAY">Tuesday</option>
-            <option value="WEDNESDAY">Wednesday</option>
-            <option value="THURSDAY">Thursday</option>
-            <option value="FRIDAY">Friday</option>
-            <option value="SATURDAY">Saturday</option>
-            <option value="SUNDAY">Sunday</option>
-          </select>
-        </div>
-        <div class="flex gap-2">
-          <input type="date" name="Date" id="dateInput" placeholder="Date" required
-            class="border border-black p-4 w-full font-bold text-black focus:outline-none focus:ring-0 rounded" />
-        </div>
-        <div class="flex gap-2">
-          <input type="time" name="Time" placeholder="Time Start" required
-            class="border p-3 rounded w-1/2 border-black  font-bold focus:outline-none focus:ring-0" />
-          <input type="time" name="End" placeholder="Time End" required
-            class="border p-3 rounded w-1/2 border-black  font-bold focus:outline-none focus:ring-0" />
-        </div>
-
-        <div class="flex gap-3">
-          <div class="w-1/3 space-y-2">
-            <select name="Acolor" title="Acolor" data-empty
-              class="w-full h-14 border border-black rounded font-bold px-3" onchange="this.style.backgroundColor=this.value;
-            this.style.color=['#FDBA74','#FFD700','#F59E0B'].includes(this.value)?'#000':'#fff';">
-              <option value="#000000" style="background:#000000;color:white;">Black</option>
-              <option value="#FDBA74" style="background:#FDBA74;color:black;">Peach</option>
-              <option value="#FFD700" style="background:#FFD700;color:black;">Gold</option>
-              <option value="#16A34A" style="background:#16A34A;color:white;">Green</option>
-              <option value="#2563EB" style="background:#2563EB;color:white;">Blue</option>
-              <option value="#7C3AED" style="background:#7C3AED;color:white;">Purple</option>
-              <option value="#DC2626" style="background:#DC2626;color:white;">Red</option>
-              <option value="#0F172A" style="background:#0F172A;color:white;">Dark Navy</option>
-              <option value="#F59E0B" style="background:#F59E0B;color:black;">Amber</option>
+        <!-- Filters -->
+        <div class="grid grid-cols-3 gap-2 mt-3">
+            <select id="filterName" class="p-2 rounded bg-white" onchange="applyFilters()">
+                <option value="">All Types</option>
+                <option value="LEELA BAZAR">LEELA BAZAR</option>
+                <option value="Golden">Golden</option>
+                <option value="Final">Final</option>
+                <option value="MORNING SYNDICATE">SYNDICATE</option>
+                <option value="KALYAN">KALYAN</option>
+                <option value="SYNDICATE NIGHT">SYNDICATE NIGHT</option>
+                <option value="RAJDHANI NIGHT">RAJDHANI NIGHT</option>
+                <option value="SHAKTIMAAN">SHAKTIMAAN</option>
             </select>
 
-            <input type="number" name="Jodi" placeholder="Jodi"
-              class="w-full p-4 border border-black rounded font-bold">
-          </div>
-
-          <div class="w-1/3 space-y-2">
-            <select name="Bcolor" title="Bcolor" data-empty
-              class="w-full h-14 border border-black rounded font-bold px-3" onchange="this.style.backgroundColor=this.value;
-            this.style.color=['#FDBA74','#FFD700','#F59E0B'].includes(this.value)?'#000':'#fff';">
-              <option value="#000000" style="background:#000000;color:white;">Black</option>
-              <option value="#FDBA74" style="background:#FDBA74;color:black;">Peach</option>
-              <option value="#FFD700" style="background:#FFD700;color:black;">Gold</option>
-              <option value="#16A34A" style="background:#16A34A;color:white;">Green</option>
-              <option value="#2563EB" style="background:#2563EB;color:white;">Blue</option>
-              <option value="#7C3AED" style="background:#7C3AED;color:white;">Purple</option>
-              <option value="#DC2626" style="background:#DC2626;color:white;">Red</option>
-              <option value="#0F172A" style="background:#0F172A;color:white;">Dark Navy</option>
-              <option value="#F59E0B" style="background:#F59E0B;color:black;">Amber</option>
+            <select id="filterDay" class="p-2 rounded bg-white" onchange="applyFilters()">
+                <option value="">All Days</option>
+                <option>MONDAY</option>
+                <option>TUESDAY</option>
+                <option>WEDNESDAY</option>
+                <option>THURSDAY</option>
+                <option>FRIDAY</option>
+                <option>SATURDAY</option>
+                <option>SUNDAY</option>
             </select>
 
-            <input type="number" name="Marks" placeholder="Marks"
-              class="w-full p-4 border border-black rounded font-bold">
-          </div>
+            <input type="date" id="filterDate" class="py-2 rounded  " oninput="applyFilters()" />
+        </div>
+    </header>
 
-          <div class="w-1/3 space-y-2">
-            <select name="Ccolor" title="Ccolor" data-empty
-              class="w-full h-14 border border-black rounded font-bold px-3" onchange="this.style.backgroundColor=this.value;
+    <!-- DATA GRID -->
+    <main class="p-2 mt-[33%] md:mt-[10%]">
+        <div id="grid" class="grid grid-cols-2 md:grid-cols-5 gap-2"></div>
+    </main>
+
+    <!-- MODAL -->
+    <div id="modal" class="hidden fixed inset-0 bg-black/50 flex items-end">
+        <div class="bg-white w-full rounded-t-3xl p-4">
+            <div class="flex justify-between mb-2">
+                <h2 class="font-bold text-lg">Update Record</h2>
+                <button onclick="closeForm()">✕</button>
+            </div>
+
+            <form id="form" class="justify-center w-full">
+                <input type="hidden" name="Id" id="Id" />
+                <div class="flex justify-between gap-2">
+                    <select type="color" title="Mcolor" name="Mcolor" data-empty required
+                        class="w-full mt-2 h-14 border px-3 border-black text-black font-bold rounded cursor-pointer"
+                        onchange="this.style.backgroundColor=this.value; this.style.color='#000000'">
+                        <option value="#fff1e1" style="background:#fff1e1;color:black;">Peach</option>
+                        <option value="#f7eebb" style="background:#f7eebb;color:black;">Gold</option>
+                        <option value="#d2f8e0" style="background:#d2f8e0;color:black;">Green</option>
+                        <option value="#d6e0f5" style="background:#d6e0f5;color:black;">Blue</option>
+                        <option value="#f5d1d1" style="background:#f5d1d1;color:black;">Red</option>
+                        <option value="#ebdbc1" style="background:#ebdbc1;color:black;">Amber</option>
+                    </select>
+                    <select name="Name" required
+                        class="w-full mt-2 h-14 border px-3 border-black text-black font-bold rounded cursor-pointer">
+                        <option value="LEELA BAZAR">LEELA BAZAR</option>
+                        <option value="MORNING SYNDICATE">SYNDICATE</option>
+                        <option value="KALYAN">KALYAN</option>
+                        <option value="SYNDICATE NIGHT">SYNDICATE NIGHT</option>
+                        <option value="RAJDHANI NIGHT">RAJDHANI NIGHT</option>
+                        <option value="SHAKTIMAAN">SHAKTIMAAN</option>
+                        <option value="Golden">Golden</option>
+                        <option value="Final">Final</option>
+                    </select>
+                </div>
+                <div class="flex justify-between gap-2">
+                    <input type="date" name="Date" required
+                        class="w-full mt-2 h-14  focus:outline-none focus:ring-0 ring-0 focus:ring-offset-0 border px-3 border-black text-black font-bold rounded cursor-pointer" />
+
+                    <select name="Day" required
+                        class="w-full mt-2 h-14 border px-3  border-black text-black font-bold rounded cursor-pointer">
+                        <option value="MONDAY">Monday</option>
+                        <option value="TUESDAY">Tuesday</option>
+                        <option value="WEDNESDAY">Wednesday</option>
+                        <option value="THURSDAY">Thursday</option>
+                        <option value="FRIDAY">Friday</option>
+                        <option value="SATURDAY">Saturday</option>
+                        <option value="SUNDAY">Sunday</option>
+                    </select>
+
+                </div>
+                <div class="flex justify-between gap-2">
+                    <input type="time" name="Time" required
+                        class="w-full mt-2 h-14 border  focus:outline-none focus:ring-0 ring-0 focus:ring-offset-0 px-3 border-black text-black font-bold rounded cursor-pointer gap-2" />
+                    <input type="time" name="End" required
+                        class="w-full mt-2 h-14 border  focus:outline-none focus:ring-0 ring-0 focus:ring-offset-0 px-3 border-black text-black font-bold rounded cursor-pointer gap-2" />
+                </div>
+                <select name="Bcolor" title="Bcolor" data-empty
+                    class="w-full h-14 mt-2 border border-black rounded font-bold px-3" onchange="this.style.backgroundColor=this.value;
             this.style.color=['#FDBA74','#FFD700','#F59E0B'].includes(this.value)?'#000':'#fff';">
-              <option value="#000000" style="background:#000000;color:white;">Black</option>
-              <option value="#FDBA74" style="background:#FDBA74;color:black;">Peach</option>
-              <option value="#FFD700" style="background:#FFD700;color:black;">Gold</option>
-              <option value="#16A34A" style="background:#16A34A;color:white;">Green</option>
-              <option value="#2563EB" style="background:#2563EB;color:white;">Blue</option>
-              <option value="#DC2626" style="background:#DC2626;color:white;">Red</option>
-              <option value="#396cb9" style="background:#ffffff;color:white;">Navy</option>
-              <option value="#F59E0B" style="background:#F59E0B;color:black;">Amber</option>
-            </select>
+                    <option value="#000000" style="background:#000000;color:white;">Black</option>
+                    <option value="#DC2626" style="background:#DC2626;color:white;">Red</option>
+                </select>
 
-            <input type="number" name="Pennel" placeholder="Pennel"
-              class="w-full p-4 border border-black rounded font-bold">
-          </div>
+                <div class="flex justify-between gap-2">
+                    <input type="number" name="Jodi" placeholder="Jodi"
+                        class="w-full mt-2 h-14 border  focus:outline-none focus:ring-0 ring-0 focus:ring-offset-0 px-3 border-black text-black font-bold rounded cursor-pointer gap-2" />
+                    <input type="number" name="Marks" placeholder="Marks"
+                        class="w-full mt-2 h-14 border px-3  focus:outline-none focus:ring-0 ring-0 focus:ring-offset-0 border-black text-black font-bold rounded cursor-pointer gap-2" />
+                    <input type="number" name="Pennel" placeholder="Panel"
+                        class="w-full mt-2 h-14 border px-3  focus:outline-none focus:ring-0 ring-0 focus:ring-offset-0 border-black text-black font-bold rounded cursor-pointer gap-2" />
+                </div>
+
+                <button type="submit"
+                    class="w-full mt-2 h-14 border px-3 border-black text-black font-bold rounded cursor-pointer bg-blue-600 text-white ">SAVE</button>
+            </form>
         </div>
-
-        <div class="flex justify-between w-full gap-2">
-          <button type="button" id="updateBtn" onclick="showLoader();"
-            class="bg-blue-900 w-full md:w-[48.4vw] text-white py-4 rounded-md text-lg font-bold mt-8 shadow-md hover:bg-blue-700 transition">
-            UPDATE
-          </button> <button type="button" id="createBtn" onclick="showLoader();"
-            class="bg-blue-900 w-full md:w-[48.4vw] text-white py-4 rounded-md text-lg font-bold mt-8 shadow-md hover:bg-blue-700 transition">
-            CREATE
-          </button>
+    </div>
+    <div id="success" class="fixed inset-0 hidden z-50 bg-black/40 flex items-center justify-center">
+        <div class="bg-white px-8 py-6 rounded-xl font-bold text-green-600 shadow-lg">
+            ✅ Submitted Successfully
         </div>
-      </form>
     </div>
-  </div>
-  <script>
-    function showUpdateBox() {
-      const box = document.getElementById('updatebox');
-      document.getElementById("createBtn").classList.remove("hidden");
-      document.getElementById("updateBtn").classList.add("hidden");
-      box.classList.add('hidden');
-    }
-    function showSuccess() {
-      const spin = document.getElementById("spin");
-      const successAlert = document.getElementById("successAlert");
-      spin.classList.add("hidden");
-      successAlert.classList.remove("hidden");
-    }
-    function showBox() {
-      document.getElementById("updatebox").classList.remove("hidden");
-      document.getElementById("createBtn").classList.remove("hidden");
-      document.getElementById("updateBtn").classList.add("hidden");
-    }
-    function crtBox() {
-      document.getElementById("createBtn").classList.add("hidden");
-      document.getElementById("updateBtn").classList.remove("hidden");
-    }
-
-    function showLoader() {
-      const loader = document.getElementById('page-loader');
-      loader.classList.remove('hidden', 'opacity-0');
-      loader.classList.add('flex');
-    }
-
-    function hideLoader() {
-      const loader = document.getElementById('page-loader');
-      loader.classList.add('hidden', 'opacity-0');
-
-    }
-
-    function generate6DigitCode() {
-      document.getElementById("Id").value =
-        Math.floor(100000 + Math.random() * 900000);
-    }
-
-    const scriptURL = "https://script.google.com/macros/s/AKfycbwyn0hnIPesioTndkrXdHdH8XIouffYuWbPq_Sa1V7PzgpICK2ZXE5Xjm4ShXOMQf8J/exec";
-
-    function getCurrentDateTime() {
-      const now = new Date();
-      return {
-        date: now.toISOString().split("T")[0],
-        time: now.toTimeString().slice(0, 5)
-      };
-    }
-    function setTodayDate() {
-      const input = document.getElementById("dateInput");
-      const today = new Date();
-      const yyyy = today.getFullYear();
-      const mm = String(today.getMonth() + 1).padStart(2, "0");
-      const dd = String(today.getDate()).padStart(2, "0");
-      input.value = `${mm}/${dd}/${yyyy}`;
-    }
-
-    // Run on page load
-    window.addEventListener("load", setTodayDate);
-    // LOAD RECORDS
-    async function fetchRecords() {
-
-      try {
-        const res = await fetch(`${scriptURL}?action=read`);
-        const data = await res.json();
-        const body = document.getElementById("recordsBody");
-        body.innerHTML = "";
-
-        // Keep track of already rendered Ids
-
-        const calendar = document.getElementById("calendar");
-        const renderedIds = new Set();
-
-        data.records.reverse().forEach((r, index) => {
-          if (!renderedIds.has(r.Id)) {
-            renderedIds.add(r.Id);
-
-            const cell = document.createElement("div");
-            cell.className = " bg-orange-100 shadow rounded-lg border flex flex-col justify-between";
-            cell.innerHTML = `
-     <div class="p-1 bg-white shadow-md rounded-lg border border-gray-200 flex flex-col justify-between text-[10px] md:text-[14px]">
-  <!-- Header: Date & Day -->
-  <div class="flex justify-between items-center mb-1">
-    <span class="font-semibold text-gray-700">${r.Date}</span>
-    <span class="font-semibold text-gray-500">${r.Day}</span>
-  </div>
-
-  <!-- Name & Details -->
-  <div class="mb-2">
-    <h2 class="font-bold text-gray-800 truncate">${r.Name}</h2>
-    <div class="text-pink-600 flex font-bold truncate justify-between">
-      <p>  ${r.Jodi || ""}</p>  
-         <p> ${r.Marks || ""} </p>  
-            <p>${r.Pennel || ""}</p>
-    </div>
-  </div>
-
-  <!-- Actions -->
-  <div class="flex gap-1 justify-end text-[10px]">
-    <button onclick="fillForm('${r.Id}')" 
-            class="bg-blue-600 text-white px-2 py-1 rounded hover:bg-blue-500 text-xs">
-      Update
-    </button>
-    <button onclick="deleteEntry('${r.Id}')" 
-            class="hidden bg-red-600 text-white px-2 py-1 rounded hover:bg-red-500 text-xs">
-      Delete
-    </button>
-  </div>
-</div>
 
 
+    <script>
+        const API = "https://script.google.com/macros/s/AKfycbwyn0hnIPesioTndkrXdHdH8XIouffYuWbPq_Sa1V7PzgpICK2ZXE5Xjm4ShXOMQf8J/exec";
+        let records = [];
+
+        // Fetch
+        async function loadData() {
+            const res = await fetch(API + "?action=read");
+            const data = await res.json();
+            records = data.records.reverse();
+            render(records);
+        }
+
+        // Render
+        function render(list) {
+            const grid = document.getElementById("grid");
+            grid.innerHTML = "";
+
+            list.forEach(r => {
+                const card = document.createElement("div");
+                card.className = "bg-white p-2 rounded shadow text-sm";
+                card.innerHTML = `
+                <div onclick='edit(${JSON.stringify(r)})'>
+      <div class="flex justify-between">
+        <b>${r.Date}</b><span>${r.Day}</span>
+      </div>
+      <div class="font-bold justify-center mx-auto">${r.Name}</div>
+      <div class="text-pink-600 font-bold flex justify-between">
+        <span>${r.Jodi || ""}</span>
+        <span>${r.Marks || ""}</span>
+        <span>${r.Pennel || ""}</span>
+      </div>  </div>
     `;
-            calendar.appendChild(cell);
-          }
+                grid.appendChild(card);
+            });
+        }
+
+        // Filters
+        function applyFilters() {
+            const n = filterName.value;
+            const d = filterDay.value;
+            const dt = filterDate.value;
+
+            render(records.filter(r =>
+                (!n || r.Name === n) &&
+                (!d || r.Day === d) &&
+                (!dt || r.Date === dt)
+            ));
+        }
+
+        // Modal
+        function openForm() { modal.classList.remove("hidden"); }
+        function closeForm() { modal.classList.add("hidden"); form.reset(); }
+
+        function edit(r) {
+            openForm();
+            Object.keys(r).forEach(k => form[k] && (form[k].value = r[k]));
+        }
+
+        function showSuccess() {
+            const s = document.getElementById("success");
+            s.classList.remove("hidden");
+            setTimeout(() => {
+                s.classList.add("hidden");
+                closeForm();
+            }, 2000);
+        }
+
+        // Submit
+        form.addEventListener("submit", async e => {
+            e.preventDefault();
+            showSuccess();
+            const fd = new FormData(form);
+            const params = new URLSearchParams(fd);
+            const action = fd.get("Id") ? "update" : "create";
+            await fetch(API + `?action=${action}`, { method: "POST", body: params });
+            closeForm();
+            loadData();
         });
 
-      } catch (err) {
-        console.error("Error fetching records:", err);
-      }
-    }
-
-    // FILL FORM (open update box)
-    async function fillForm(Id) {
-      showLoader();
-      try {
-        const res = await fetch(`${scriptURL}?action=read`);
-        const data = await res.json();
-        const record = data.records.find(r => r.Id == Id);
-        if (record) {
-          const form = document.getElementById("crudForm");
-          Object.keys(record).forEach(key => {
-            if (form[key]) form[key].value = record[key];
-          });
-          crtBox();
-          document.getElementById("updatebox").classList.remove("hidden");
-          hideLoader();
-        }
-      } catch (err) {
-        console.error("Error filling form:", err);
-      }
-    }
-
-    async function deleteEntry(Id) {
-      if (!confirm("Are you sure?")) return;
-      try {
-        const res = await fetch(`${scriptURL}?action=delete&Id=${Id}`, { method: "POST" });
-        const result = await res.json();
-        if (result.status === "success") {
-          alert("Are You Sure");
-        }
-      } catch (e) {
-        console.error(e);
-        alert("Error occurred");
-      } finally {
-        showSuccess();
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
-      }
-    }
-
-
-    // SUBMIT UPDATE
-    document.getElementById("updateBtn").addEventListener("click", async (e) => {
-      e.preventDefault();
-
-      const form = document.getElementById("crudForm");
-      const fd = Object.fromEntries(new FormData(form));
-      const id = fd.Id?.trim();
-      const name = fd.Name?.trim();
-      const date = fd.date?.trim();
-      const Day = fd.Day?.trim();
-      const Time = fd.Time?.trim();
-      const End = fd.End?.trim();
-
-      if (!id && !name && !Day && !Time && !date && !End) return alert("Fields Are Required");
-
-      showLoader();
-
-      try {
-        const params = new URLSearchParams({
-          action: "update",
-          ...fd          // ✅ SEND ALL FORM DATA
-        });
-
-        const res = await fetch(scriptURL, {
-          method: "POST",
-          body: params
-        });
-
-        const result = await res.json();
-
-        if (result.status === "success") {
-          document.getElementById("updatebox").classList.add("hidden");
-          showSuccess();
-        }
-      } catch (err) {
-        console.error(err);
-        alert("Update error");
-      } finally {
-        showSuccess();
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
-
-      }
-    });
-
-    // ADD / CREATE RECORD
-    document.getElementById("createBtn").addEventListener("click", async (e) => {
-      e.preventDefault();
-      generate6DigitCode();
-      crtBox();
-      const form = document.getElementById("crudForm");
-      const fd = Object.fromEntries(new FormData(form));
-      const id = fd.Id;
-      const name = fd.Name?.trim();
-      const Day = fd.Day?.trim();
-      const Time = fd.Time?.trim();
-      const End = fd.End?.trim();
-      const date = fd.Date || document.getElementById("dateInput").value;
-      if (!id && !date && !name && !Day && !Time && !End) {
-        alert("ALl Fields Are Required");
-        return;
-      }
-      showLoader();
-      setTodayDate();
-      try {
-        const res = await fetch(`${scriptURL}?action=create&${new URLSearchParams(fd).toString()}`);
-        const result = await res.json();
-        if (result.status == "success") {
-          showSuccess();
-          form.reset();
-          fetchRecords();
-          setTimeout(() => {
-            window.location.reload();
-          }, 300); // small delay so UI updates properly
-        }
-      } catch (err) {
-        console.error("Error creating record:", err);
-      } finally {
-        showSuccess();
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
-
-      }
-    });
-    // INITIAL LOAD
-    fetchRecords();
-
-    // APPLY ALL FILTERS TOGETHER (Name + Day + Search)
-    function applyFilters() {
-      const selectedName = document.getElementById("nameFilter")?.value.toLowerCase() || "";
-      const selectedDay = document.getElementById("dayFilter")?.value.toUpperCase() || "";
-      const searchValue = document.getElementById("searchInput")?.value.toLowerCase() || "";
-
-      const boxes = document.querySelectorAll("#calendar > div");
-
-      boxes.forEach(box => {
-        // NAME
-        const nameEl = box.querySelector("h2");
-        const boxName = nameEl ? nameEl.innerText.toLowerCase() : "";
-
-        // DAY
-        const boxTextUpper = box.innerText.toUpperCase();
-
-        const matchName = !selectedName || boxName === selectedName;
-        const matchDay = !selectedDay || boxTextUpper.includes(selectedDay);
-        const matchSearch = !searchValue || box.innerText.toLowerCase().includes(searchValue);
-
-        box.style.display = matchName && matchDay && matchSearch ? "" : "none";
-      });
-    }
-
-    // HOOK ALL FILTERS
-    function filterByName() {
-      applyFilters();
-    }
-
-    function filterByDay() {
-      applyFilters();
-    }
-
-    function filterRecords() {
-      applyFilters();
-    }
-
-  </script>
+        loadData();
+    </script>
 
 </body>
-
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-  import {
-    getAuth,
-    onAuthStateChanged,
-    signOut
-  } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
-  import {
-    getFirestore,
-    getDoc,
-    doc
-  } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+    import {
+        getAuth,
+        onAuthStateChanged,
+        signOut
+    } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+    import {
+        getFirestore,
+        getDoc,
+        doc
+    } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
 
-  // ✅ Your Firebase config (USE YOUR OWN VALUES HERE)
-  const firebaseConfig = {
-    apiKey: "AIzaSyAKN5GR18VTFrKNgVG7FenD4aSTX3Q2PbA",
-    authDomain: "gift-zone-project.firebaseapp.com",
-    projectId: "gift-zone-project",
-    storageBucket: "gift-zone-project.appspot.com",
-    messagingSenderId: "806465456032",
-    appId: "1:806465456032:web:becf8988a6dfabe43646c5",
-    measurementId: "G-1ZLMWBP61Y",
-  };
+    // ✅ Your Firebase config (USE YOUR OWN VALUES HERE)
+    const firebaseConfig = {
+        apiKey: "AIzaSyAKN5GR18VTFrKNgVG7FenD4aSTX3Q2PbA",
+        authDomain: "gift-zone-project.firebaseapp.com",
+        projectId: "gift-zone-project",
+        storageBucket: "gift-zone-project.appspot.com",
+        messagingSenderId: "806465456032",
+        appId: "1:806465456032:web:becf8988a6dfabe43646c5",
+        measurementId: "G-1ZLMWBP61Y",
+    };
 
-  // ✅ Initialize Firebase services
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
+    // ✅ Initialize Firebase services
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
 
-  // ✅ On Auth Change: fetch and show user data
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      const loggedInUserId = localStorage.getItem("loggedInUserId");
-      if (!loggedInUserId) {
-        console.log("User ID not found in local storage.");
-        return;
-      }
-
-      const docRef = doc(db, "users", loggedInUserId);
-      getDoc(docRef)
-        .then((docSnap) => {
-          if (docSnap.exists()) {
-            const userData = docSnap.data();
-            let filt = document.getElementById("loggedUserFName").innerText = userData.firstName || "N/A";
-            document.getElementById("loggedUserEmail").innerText = userData.email || "N/A";
-            const lNameElement = document.getElementById("loggedUserLName");
-            if (userData.lastName) {
-              lNameElement.innerText = userData.lastName;
-            } else {
-              lNameElement.innerText = "-";
+    // ✅ On Auth Change: fetch and show user data
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            const loggedInUserId = localStorage.getItem("loggedInUserId");
+            if (!loggedInUserId) {
+                console.log("User ID not found in local storage.");
+                return;
             }
-          } else {
-            console.log("No user document found in Firestore.");
-          }
-        })
-        .catch((error) => {
-          console.error("Error fetching user data:", error);
-        });
-    } else {
-      console.log("User not signed in.");
-      window.location.href = "index.html"; // Redirect to login
-    }
-  });
 
-  // ✅ Logout
-  const logoutButton = document.getElementById("logout");
-  logoutButton.addEventListener("click", () => {
-    localStorage.removeItem("loggedInUserId");
-    signOut(auth)
-      .then(() => {
-        window.location.href = "index.html";
-      })
-      .catch((error) => {
-        console.error("Error signing out:", error);
-      });
-  });
+            const docRef = doc(db, "users", loggedInUserId);
+            getDoc(docRef)
+                .then((docSnap) => {
+                    if (docSnap.exists()) {
+                        const userData = docSnap.data();
+                        let filt = document.getElementById("loggedUserFName").innerText = userData.firstName || "N/A";
+                        document.getElementById("loggedUserEmail").innerText = userData.email || "N/A";
+                        const lNameElement = document.getElementById("loggedUserLName");
+                        if (userData.lastName) {
+                            lNameElement.innerText = userData.lastName;
+                        } else {
+                            lNameElement.innerText = "-";
+                        }
+                    } else {
+                        console.log("No user document found in Firestore.");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error fetching user data:", error);
+                });
+        } else {
+            console.log("User not signed in.");
+            window.location.href = "index.html"; // Redirect to login
+        }
+    });
+
+    // ✅ Logout
+    const logoutButton = document.getElementById("logout");
+    logoutButton.addEventListener("click", () => {
+        localStorage.removeItem("loggedInUserId");
+        signOut(auth)
+            .then(() => {
+                window.location.href = "index.html";
+            })
+            .catch((error) => {
+                console.error("Error signing out:", error);
+            });
+    });
 
 </script>
 

@@ -130,7 +130,7 @@ function loadData() {
         renderedIds.add(r.Name);
 
         singleBox.innerHTML += `
-<div class="flex justify-between items-center my-4 bg-[${
+<div class="flex justify-between items-center my-6 bg-[${
           r.Mcolor || "#fffaf0"
         }] px-2 py-2 border-t border-orange-300">
   <button onclick="window.location.href='${r.Name}.html?id=${r.Name}'"
@@ -139,14 +139,14 @@ function loadData() {
   </button>
 
   <div class="text-center flex-1">
-    <h2 class="font-bold text-lg">${r.Name}</h2>
-    <p class="text-[12px] text-gray-700">
+    <h2 class="font-bold text-[22px]">${r.Name}</h2>
+    <p class="text-[16px] text-gray-700">
       ${formatTime(r.Time)} && ${formatTime(r.End)}
     </p>
        <p class="text-base text-pink-400 font-extrabold">
-        ${ "Open"}${"----"}${"----" + "Close"}
+        ${ "Open"}${"-----"}${"-----" + "Close"}
     </p>
-    <p class="text-xl text-pink-700 font-extrabold">
+    <p class="text-[22px] text-pink-700 font-extrabold">
       ${r.Jodi + " " || ""}${"- " + r.Marks + " " || ""}${"- " + r.Pennel || ""}
     </p>
   </div>
