@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Leela Bazar</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Meta -->
+    <meta name="description" content="Leela Bazar – Result & Chart Management" />
+
+    <!-- Icons -->
+    <link rel="icon" href="Logo.jpg" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- HEADER -->
+    <header class="bg-orange-200 p-4 shadow rounded-b-3xl">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="Logo.jpg" class="w-10 h-10 rounded-full" />
+                <h1 class="font-bold text-xl">Leela Bazar</h1>
+            </div>
+            <button onclick="openForm()" class="text-xl"><i class="fa fa-plus"></i></button>
+        </div>
+
+        <!-- Filters -->
+        <div class="grid grid-cols-3 gap-2 mt-3">
+            <select id="filterName" class="p-2 rounded" onchange="applyFilters()">
+                <option value="">All Types</option>
+                <option>LEELA BAZAR</option>
+                <option>Golden</option>
+                <option>Final</option>
+                <option>KALYAN</option>
+            </select>
+
+            <select id="filterDay" class="p-2 rounded" onchange="applyFilters()">
+                <option value="">All Days</option>
+                <option>MONDAY</option>
+                <option>TUESDAY</option>
+                <option>WEDNESDAY</option>
+                <option>THURSDAY</option>
+                <option>FRIDAY</option>
+                <option>SATURDAY</option>
+                <option>SUNDAY</option>
+            </select>
+
+            <input type="date" id="filterDate" class="p-2 rounded" oninput="applyFilters()" />
+        </div>
+    </header>
+
+    <!-- DATA GRID -->
+    <main class="p-3">
+        <div id="grid" class="grid grid-cols-2 md:grid-cols-5 gap-2"></div>
+    </main>
+
+    <!-- MODAL -->
+    <div id="modal" class="hidden fixed inset-0 bg-black/50 flex items-end">
+        <div class="bg-white w-full rounded-t-3xl p-4">
+            <div class="flex justify-between mb-2">
+                <h2 class="font-bold text-lg">Update Record</h2>
+                <button onclick="closeForm()">✕</button>
+            </div>
+
+            <form id="form" class="grid grid-cols-2 gap-2">
+                <input type="hidden" name="Id" id="Id" />
+                <select name="Name" required class="p-2 border">
+                    <option>LEELA BAZAR</option>
+                    <option>Golden</option>
+                    <option>Final</option>
+                    <option>KALYAN</option>
+                </select>
+                <select name="Day" required class="p-2 border">
+                    <option>MONDAY</option>
+                    <option>TUESDAY</option>
+                    <option>WEDNESDAY</option>
+                    <option>THURSDAY</option>
+                    <option>FRIDAY</option>
+                    <option>SATURDAY</option>
+                    <option>SUNDAY</option>
+                </select>
+                <input type="date" name="Date" required class="p-2 border" />
+                <input type="time" name="Time" required class="p-2 border" />
+                <input type="time" name="End" required class="p-2 border" />
+                <input type="number" name="Jodi" placeholder="Jodi" class="p-2 border" />
+                <input type="number" name="Marks" placeholder="Marks" class="p-2 border" />
+                <input type="number" name="Pennel" placeholder="Panel" class="p-2 border" />
+
+                <button type="submit" class="col-span-2 bg-blue-600 text-white p-3 rounded">SAVE</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const API = "https://script.google.com/macros/s/AKfycbwyn0hnIPesioTndkrXdHdH8XIouffYuWbPq_Sa1V7PzgpICK2ZXE5Xjm4ShXOMQf8J/exec";
+        let records = [];
+
+        // Fetch
+        async function loadData() {
+            const res = await fetch(API + "?action=read");
+            const data = await res.json();
+            records = data.records.reverse();
+            render(records);
+        }
+
+        // Render
+        function render(list) {
+            const grid = document.getElementById("grid");
+            grid.innerHTML = "";
+
+            list.forEach(r => {
+                const card = document.createElement("div");
+                card.className = "bg-white p-2 rounded shadow text-sm";
+                card.innerHTML = `
+      <div class="flex justify-between">
+        <b>${r.Date}</b><span>${r.Day}</span>
+      </div>
+      <div class="font-bold">${r.Name}</div>
+      <div class="text-pink-600 font-bold flex justify-between">
+        <span>${r.Jodi || ""}</span>
+        <span>${r.Marks || ""}</span>
+        <span>${r.Pennel || ""}</span>
+      </div>
+      <button class="mt-2 text-xs bg-blue-500 text-white px-2 py-1 rounded" onclick='edit(${JSON.stringify(r)})'>Edit</button>
+    `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Filters
+        function applyFilters() {
+            const n = filterName.value;
+            const d = filterDay.value;
+            const dt = filterDate.value;
+
+            render(records.filter(r =>
+                (!n || r.Name === n) &&
+                (!d || r.Day === d) &&
+                (!dt || r.Date === dt)
+            ));
+        }
+
+        // Modal
+        function openForm() { modal.classList.remove("hidden"); }
+        function closeForm() { modal.classList.add("hidden"); form.reset(); }
+
+        function edit(r) {
+            openForm();
+            Object.keys(r).forEach(k => form[k] && (form[k].value = r[k]));
+        }
+
+        // Submit
+        form.addEventListener("submit", async e => {
+            e.preventDefault();
+            const fd = new FormData(form);
+            const params = new URLSearchParams(fd);
+            const action = fd.get("Id") ? "update" : "create";
+            await fetch(API + `?action=${action}`, { method: "POST", body: params });
+            closeForm();
+            loadData();
+        });
+
+        loadData();
+    </script>
+
+</body>
+
+</html>
