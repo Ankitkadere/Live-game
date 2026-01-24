@@ -156,7 +156,7 @@
             class="w-full mt-2 h-14 border px-3  focus:outline-none focus:ring-0 ring-0 focus:ring-offset-0 border-black text-black font-bold rounded cursor-pointer gap-2" />
         </div>
 
-        <button type="submit"
+        <button type="submit" id="Save"
           class="w-full mt-2 h-14 border px-3 border-black text-black font-bold rounded cursor-pointer bg-blue-600 text-white ">SAVE</button>
       </form>
     </div>
@@ -218,11 +218,14 @@
     }
 
     // Modal
-    function openForm() { modal.classList.remove("hidden"); }
+    function openForm() {
+      modal.classList.remove("hidden");
+      document.getElementById("Save").textContent = "Create";
+    }
     function closeForm() { modal.classList.add("hidden"); form.reset(); }
-
     function edit(r) {
       openForm();
+      document.getElementById("Save").textContent = "Update";
       Object.keys(r).forEach(k => form[k] && (form[k].value = r[k]));
     }
 
