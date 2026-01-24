@@ -186,7 +186,7 @@
       Object.keys(weeks).sort().forEach(start => {
         const end = new Date(start); end.setDate(end.getDate() + 5);
         body.innerHTML += `
-<div class="flex border border-black bg-white shadow text-center text-[11px] font-black ">
+<div class="flex border-b border-1 border-black bg-white shadow text-center text-[11px] font-black ">
 
   <div class="min-w-[65px] leading-[1]  font-extrabold font-black flex flex-col text-[10px] justify-center p-[2px] ">
     ${start}<br>TO<br>${end.toISOString().slice(0, 10)}
