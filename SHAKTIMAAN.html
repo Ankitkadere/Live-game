@@ -188,11 +188,11 @@
         body.innerHTML += `
 <div class="flex border border-black bg-white shadow text-center text-[11px] font-black ">
 
-  <div class="min-w-[65px] leading-[1]  font-extrabold font-black flex flex-col text-[10px] justify-center p-[2px] ">
+  <div class="min-w-[60px] leading-[1]  font-extrabold font-black flex flex-col text-[10px] justify-center p-[1px] ">
     ${start}<br>TO<br>${end.toISOString().slice(0, 10)}
   </div>
 
-  <div class="grid grid-cols-7 w-full py-[2px]">
+  <div class="grid grid-cols-7 w-full py-[2px] mr-1">
     ${renderWeekRow(weeks[start])}
   </div>
 

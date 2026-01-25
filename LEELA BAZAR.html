@@ -108,11 +108,11 @@
 
   <div class="flex w-full rounded-md  md:text-[40px]  mt-2 font-bold text-[13px] text-center">
     <!-- DATE COLUMN -->
-    <div class="flex items-center justify-center px-[4.5%] bg-yellow-300 border-b border-black min-w-[60px]">
+    <div class="flex items-center justify-center px-[4%] bg-yellow-300 border-b border-black min-w-[60px]">
       DATE
     </div>
     <!-- DAYS GRID -->
-    <div class="grid grid-cols-7 flex-1 pr-4 bg-yellow-300 border-b border-black py-[2px]">
+    <div class="grid grid-cols-7 flex-1 pr-3 bg-yellow-300 border-b border-black py-[2px]">
       <div class="border-l border-black">MON</div>
       <div class="border-l border-black">TUE</div>
       <div class="border-l border-black">WED</div>
@@ -125,7 +125,7 @@
 
   <!-- DATA -->
   <div class="p-[5px] bg-black mb-[60%]">
-    <div id="recordsBody" class="border-[#a229f4] border-4 ">
+    <div id="recordsBody" class=" ">
       <div class="pt-6 flex items-center bg-white h-[70vh] justify-center gap-2">
         <div class="h-4 w-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
         <span class="font-bold">Loading<span class="animate-pulse">...</span></span>
@@ -192,7 +192,7 @@
     ${start}<br>TO<br>${end.toISOString().slice(0, 10)}
   </div>
 
-  <div class="grid grid-cols-7 w-full p-[2px]">
+  <div class="grid grid-cols-7 w-full p-[2px] mr-1">
     ${renderWeekRow(weeks[start])}
   </div>
 
