@@ -342,7 +342,7 @@
         });
     } else {
       console.log("User not signed in.");
-      window.location.href = "index.html"; // Redirect to login
+      window.location.href = "https://leela-bazar.vercel.app"; // Redirect to login
     }
   });
 
@@ -352,7 +352,7 @@
     localStorage.removeItem("loggedInUserId");
     signOut(auth)
       .then(() => {
-        window.location.href = "index.html";
+        window.location.href = "https://leela-bazar.vercel.app/";
       })
       .catch((error) => {
         console.error("Error signing out:", error);
@@ -386,7 +386,7 @@
       const name = document.getElementById('loggedUserFName').innerText;
       const mail = document.getElementById('loggedUserEmail').innerText;
       if (name == "" || mail == "") {
-        window.location.href = "india.html";
+        window.location.href = "https://leela-bazar.vercel.app/";
       }
     }, 4000);
 
@@ -747,7 +747,7 @@
     localStorage.removeItem("loggedInUserId");
     signOut(auth)
       .then(() => {
-        window.location.href = "index.html";
+        window.location.href = "https://leela-bazar.vercel.app";
       })
       .catch((error) => {
         console.error("Error signing out:", error);
