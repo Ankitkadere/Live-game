@@ -17,22 +17,10 @@
 </head>
 
 <body class="bg-gray-100">
-  <!-- <h1 id="loggedUserFName" class="hidden"></h1>
-
-  <script>setTimeout(() => {
-      const name = document.getElementById('loggedUserFName').innerText;
-      const mail = document.getElementById('loggedUserEmail').innerText;
-      if (name == "" || mail == "") {
-        window.location.href = "india.html";
-      }
-    }, 4000); -->
-
-  </script>
   <!-- HEADER -->
   <header class="fixed w-full top-0 left-0 bg-orange-200 p-4 shadow rounded-b-3xl">
     <div class="flex justify-between items-center">
       <div class="flex items-center gap-3">
-        <img alt="logo" src="Logo.jpg" class="w-10 h-10 rounded-full" />
         <h1 class="font-bold text-xl">Leela Bazar</h1>
       </div>
       <button title="add data" onclick="openForm()" class="text-xl"><i class="fa fa-plus"></i></button>
@@ -82,11 +70,12 @@
     </div>
   </main>
 
-  <div id="loader" class="hidden fixed inset-0 flex items-center justify-center bg-black/40 z-10">
+  <div id="loader" class="hidden fixed inset-0 flex items-center justify-center bg-black/40 z-50">
     <div class="w-10 h-10 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
   </div>
+  
   <!-- MODAL -->
-  <div id="modal" class="hidden fixed inset-0 bg-black/50 flex items-end">
+  <div id="modal" class="hidden fixed inset-0 bg-black/50 flex items-end z-40">
     <div class="bg-white w-full rounded-t-3xl p-4">
       <div class="flex justify-between mb-2">
         <h2 class="font-bold text-lg">Update Record</h2>
@@ -96,6 +85,7 @@
       <form id="form" class="justify-center w-full">
         <input type="hidden" name="Id" id="Id" />
         <input type="hidden" name="Category" value="single" />
+        
         <div class="flex justify-between gap-2">
           <select type="color" title="Mcolor" name="Mcolor" data-empty required
             class="w-full mt-2 h-14 border px-3 border-black text-black font-bold rounded cursor-pointer"
@@ -119,6 +109,7 @@
             <option value="Final">Final</option>
           </select>
         </div>
+        
         <div class="flex justify-between gap-2">
           <input title="Date" type="date" name="Date" required
             class="w-full mt-2 h-14  focus:outline-none focus:ring-0 ring-0 focus:ring-offset-0 border px-3 border-black text-black font-bold rounded cursor-pointer" />
@@ -133,14 +124,15 @@
             <option value="SATURDAY">Saturday</option>
             <option value="SUNDAY">Sunday</option>
           </select>
-
         </div>
+        
         <div class="flex justify-between gap-2">
           <input title="Start TIme" type="time" name="Time" required
             class="w-full mt-2 h-14 border  focus:outline-none focus:ring-0 ring-0 focus:ring-offset-0 px-3 border-black text-black font-bold rounded cursor-pointer gap-2" />
           <input title="ENd TIme" type="time" name="End" required
             class="w-full mt-2 h-14 border  focus:outline-none focus:ring-0 ring-0 focus:ring-offset-0 px-3 border-black text-black font-bold rounded cursor-pointer gap-2" />
         </div>
+        
         <select name="Bcolor" title="Bcolor" data-empty
           class="w-full h-14 mt-2 border border-black rounded font-bold px-3" onchange="this.style.backgroundColor=this.value;
             this.style.color=['#FDBA74','#FFD700','#F59E0B'].includes(this.value)?'#000':'#fff';">
@@ -149,11 +141,14 @@
         </select>
 
         <div class="flex justify-between gap-2">
-          <input type="text" name="Jodi" placeholder="Jodi"
+          <!-- FIX: Changed type="number" to type="text" with numeric input modes -->
+          <input type="text" inputmode="numeric" pattern="[0-9]*" name="Jodi" placeholder="Jodi"
             class="w-full mt-2 h-14 border  focus:outline-none focus:ring-0 ring-0 focus:ring-offset-0 px-3 border-black text-black font-bold rounded cursor-pointer gap-2" />
-          <input type="text" name="Marks" placeholder="Marks"
+            
+          <input type="number" inputmode="numeric" pattern="[0-9]*" name="Marks" placeholder="Marks"
             class="w-full mt-2 h-14 border px-3  focus:outline-none focus:ring-0 ring-0 focus:ring-offset-0 border-black text-black font-bold rounded cursor-pointer gap-2" />
-          <input type="text" name="Pennel" placeholder="Panel"
+            
+          <input type="text" inputmode="numeric" pattern="[0-9]*" name="Pennel" placeholder="Panel"
             class="w-full mt-2 h-14 border px-3  focus:outline-none focus:ring-0 ring-0 focus:ring-offset-0 border-black text-black font-bold rounded cursor-pointer gap-2" />
         </div>
 
@@ -162,14 +157,55 @@
       </form>
     </div>
   </div>
+  
   <div id="success" class="fixed inset-0 hidden z-50 bg-black/40 flex items-center justify-center">
     <div class="bg-white px-8 py-6 rounded-xl font-bold text-green-600 shadow-lg">
       ✅ Submitted Successfully
     </div>
   </div>
+ <!-- Alert Popup -->
+  <div
+    id="alertPopup"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+  >
+    <div class="relative w-full max-w-sm rounded-2xl border border-green-100
+                bg-white p-6 text-center shadow-2xl">
+      <!-- Icon -->
+      <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center
+                  rounded-full bg-green-100 text-3xl text-green-700">
+        ✔
+      </div>
+
+      <!-- Heading -->
+      <h2 class="mb-2 text-xl font-extrabold text-green-800">
+        महत्वपूर्ण सूचना !
+      </h2>
+
+      <!-- Hindi Message -->
+      <p class="mb-6 text-base leading-7 text-gray-900">
+        आप 0 का इस्तेमाल कर सकते हैं।
+      </p>
+
+      <!-- Close Button -->
+      <button
+        onclick="closePopup()"
+        class="w-full rounded-xl bg-green-600 px-5 py-3 font-semibold
+               text-white shadow-md transition hover:bg-green-700
+               active:scale-95"
+      >
+        ठीक है, समझ गया
+      </button>
+
+    </div>
+  </div>
+
+  <script>
+    function closePopup() {
+      document.getElementById("alertPopup").classList.add("hidden");
+    }
+  </script>
 
 <script>
-    // Replaced with your actual working Google Apps Script URL
     const API = "https://script.google.com/macros/s/AKfycbwKmjk8_4zk_uCa6vN9S05o-7axymyH1sRY6lImxL3PZYhpMUDrTI4ePlx3Zn_gMpzyJQ/exec";
     
     let records = [];
@@ -177,19 +213,22 @@
     // Fetch Data
     async function loadData() {
       try {
-        // Added redirect: "follow" to prevent Google routing errors
         const res = await fetch(API, { redirect: "follow" });
         const text = await res.text();
         const data = JSON.parse(text);
         
-        // Depending on your Google Script, it might return an array directly, or an object { records: [...] }
         const rawRecords = data.records ? data.records : data;
-        
-        records = rawRecords.reverse();
+        records = rawRecords.reverse().slice(0, 14);
         render(records);
       } catch (err) {
-        console.error("Failed to fetch data (Make sure your Google Apps Script is deployed as 'Anyone'):", err);
+        console.error("Failed to fetch data", err);
       }
+    }
+
+    // Helper function to remove the hidden quote if Google sends it back
+    function cleanValue(val, fallback) {
+      if (val === undefined || val === null || val === "") return fallback;
+      return String(val).replace(/^'/, ""); // Removes leading apostrophe
     }
 
     // Render Data to Grid
@@ -200,6 +239,12 @@
       list.forEach(r => {
         const card = document.createElement("div");
         card.className = "bg-white p-2 rounded shadow text-sm cursor-pointer hover:bg-orange-50 transition";
+        
+        // Safely extract numbers and remove the Google Sheets text-forcing quote
+        const safeJodi = cleanValue(r.Jodi, "**");
+        const safeMarks = cleanValue(r.Marks, "***");
+        const safePennel = cleanValue(r.Pennel, "***");
+
         card.innerHTML = `
           <div onclick='edit(${JSON.stringify(r)})'>
             <div class="flex justify-between border-b pb-1 mb-1 border-gray-200">
@@ -208,11 +253,11 @@
             </div>
             <div class="font-bold text-center mx-auto text-lg uppercase my-2">${r.Name || "Unnamed"}</div>
             <div class="text-pink-600 font-extrabold flex justify-center gap-2 text-lg">
-              <span style="color:${r.Bcolor || '#db2777'}">${r.Jodi || "**"}</span>
+              <span style="color:${r.Bcolor || '#db2777'}">${safeJodi}</span>
               <span class="text-gray-400">-</span>
-              <span style="color:${r.Ccolor || '#db2777'}">${r.Marks || "***"}</span>
+              <span style="color:${r.Ccolor || '#db2777'}">${safeMarks}</span>
               <span class="text-gray-400">-</span>
-              <span style="color:${r.Acolor || '#db2777'}">${r.Pennel || "***"}</span>
+              <span style="color:${r.Acolor || '#db2777'}">${safePennel}</span>
             </div>
           </div>
         `;
@@ -250,7 +295,13 @@
     function edit(r) {
       openForm();
       document.getElementById("Save").textContent = "Update";
-      Object.keys(r).forEach(k => form[k] && (form[k].value = r[k]));
+      
+      // Clean quotes out of the edit form inputs too
+      Object.keys(r).forEach(k => {
+        if (form[k]) {
+          form[k].value = String(r[k]).replace(/^'/, ""); 
+        }
+      });
     }
 
     function showSuccess() {
@@ -272,22 +323,23 @@
       showLoader();
       
       const fd = new FormData(form);
-      
-      // Convert FormData into a standard JSON object
       let payload = Object.fromEntries(fd.entries());
       
+      // CRITICAL FIX: Prepend a single quote (') to force Google Sheets to treat it as TEXT
+      if (payload.Jodi != null && payload.Jodi !== "") payload.Jodi = "'" + String(payload.Jodi).trim();
+      if (payload.Marks != null && payload.Marks !== "") payload.Marks = "'" + String(payload.Marks).trim();
+      if (payload.Pennel != null && payload.Pennel !== "") payload.Pennel = "'" + String(payload.Pennel).trim();
+
       let id = payload.Id;
       if (id && id.trim() !== "") {
         payload.action = "update";
       } else {
-        // Generate 6-digit ID as a string
         id = Math.floor(100000 + Math.random() * 900000).toString();
         payload.Id = id;
         payload.action = "create";
       }
 
       try {
-        // Post data as JSON string disguised as text/plain to bypass CORS
         await fetch(API, {
           method: "POST",
           redirect: "follow",
@@ -295,7 +347,6 @@
           body: JSON.stringify(payload)
         });
         
-        // Allow Google Sheets 1 second to write the data before fetching the fresh list
         setTimeout(() => {
           loadData();
           hideLoader();
@@ -310,142 +361,7 @@
       }
     });
 
-    // Initial load
     loadData();
   </script>
 </body>
-<!-- <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-  import {
-    getAuth,
-    onAuthStateChanged,
-    signOut
-  } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
-  import {
-    getFirestore,
-    getDoc,
-    doc
-  } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
-
-  // ✅ Your Firebase config (USE YOUR OWN VALUES HERE)
-  const firebaseConfig = {
-    apiKey: "AIzaSyAKN5GR18VTFrKNgVG7FenD4aSTX3Q2PbA",
-    authDomain: "gift-zone-project.firebaseapp.com",
-    projectId: "gift-zone-project",
-    storageBucket: "gift-zone-project.appspot.com",
-    messagingSenderId: "806465456032",
-    appId: "1:806465456032:web:becf8988a6dfabe43646c5",
-    measurementId: "G-1ZLMWBP61Y",
-  };
-
-  // ✅ Initialize Firebase services
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-
-  // ✅ On Auth Change: fetch and show user data
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      const loggedInUserId = localStorage.getItem("loggedInUserId");
-      if (!loggedInUserId) {
-        console.log("User ID not found in local storage.");
-        return;
-      }
-
-      const docRef = doc(db, "users", loggedInUserId);
-      getDoc(docRef)
-        .then((docSnap) => {
-          if (docSnap.exists()) {
-            const userData = docSnap.data();
-            let filt = document.getElementById("loggedUserFName").innerText = userData.firstName || "N/A";
-            document.getElementById("loggedUserEmail").innerText = userData.email || "N/A";
-            const lNameElement = document.getElementById("loggedUserLName");
-            if (userData.lastName) {
-              lNameElement.innerText = userData.lastName;
-            } else {
-              lNameElement.innerText = "-";
-            }
-          } else {
-            console.log("No user document found in Firestore.");
-          }
-        })
-        .catch((error) => {
-          console.error("Error fetching user data:", error);
-        });
-    } else {
-      console.log("User not signed in.");
-      window.location.href = "index.html"; // Redirect to login
-    }
-  });
-
-  // ✅ Logout
-  const logoutButton = document.getElementById("logout");
-  logoutButton.addEventListener("click", () => {
-    localStorage.removeItem("loggedInUserId");
-    signOut(auth)
-      .then(() => {
-        window.location.href = "index.html";
-      })
-      .catch((error) => {
-        console.error("Error signing out:", error);
-      });
-  });
-
-</script> -->
- 
-
-
-
-
-
-<div class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 p-4">
-  <div
-    id="valuePopup"
-    class="relative w-full max-w-md rounded-2xl border border-green-200 bg-white p-6 text-center shadow-2xl"
-  >
-
-
-    <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-3xl">
-      🌱
-    </div>
-
-    <h2 class="mb-3 text-xl font-bold text-green-900">
-      अब आप जीरो वैल्यू ऐड कर सकते हैं
-    </h2>
-
-    <p class="text-center text-sm leading-7 text-gray-600">
-      अब आप अपनी सुविधा के अनुसार वैल्यू में शून्य (0) भी जोड़ सकते हैं।
-    </p>
-
-    <button
-      type="button"
-      onclick="document.getElementById('valuePopup').parentElement.classList.add('hidden')"
-      class="mt-6 w-full rounded-xl bg-green-700 px-5 py-3 font-semibold text-white transition hover:bg-green-800"
-    >
-      ठीक है
-    </button>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-  
 </html>
