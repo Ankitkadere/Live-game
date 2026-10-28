@@ -142,13 +142,13 @@
 
         <div class="flex justify-between gap-2">
           <!-- FIX: Changed type="number" to type="text" with numeric input modes -->
-          <input type="text" inputmode="numeric" pattern="[0-9]*" name="Jodi" placeholder="Jodi"
+          <input type="number" inputmode="numeric" pattern="[0-9]*" name="Jodi" placeholder="Jodi"
             class="w-full mt-2 h-14 border  focus:outline-none focus:ring-0 ring-0 focus:ring-offset-0 px-3 border-black text-black font-bold rounded cursor-pointer gap-2" />
             
           <input type="number" inputmode="numeric" pattern="[0-9]*" name="Marks" placeholder="Marks"
             class="w-full mt-2 h-14 border px-3  focus:outline-none focus:ring-0 ring-0 focus:ring-offset-0 border-black text-black font-bold rounded cursor-pointer gap-2" />
             
-          <input type="text" inputmode="numeric" pattern="[0-9]*" name="Pennel" placeholder="Panel"
+          <input type="number" inputmode="numeric" pattern="[0-9]*" name="Pennel" placeholder="Panel"
             class="w-full mt-2 h-14 border px-3  focus:outline-none focus:ring-0 ring-0 focus:ring-offset-0 border-black text-black font-bold rounded cursor-pointer gap-2" />
         </div>
 
@@ -238,7 +238,7 @@
 
       list.forEach(r => {
         const card = document.createElement("div");
-        card.className = "bg-white p-2 rounded shadow text-sm cursor-pointer hover:bg-orange-50 transition";
+        card.className = "bg-white p-1 rounded shadow text-sm cursor-pointer hover:bg-orange-50 transition";
         
         // Safely extract numbers and remove the Google Sheets text-forcing quote
         const safeJodi = cleanValue(r.Jodi, "**");
@@ -252,7 +252,7 @@
               <span class="text-gray-500 font-semibold">${r.Day || ""}</span>
             </div>
             <div class="font-bold text-center mx-auto text-lg uppercase my-2">${r.Name || "Unnamed"}</div>
-            <div class="text-pink-600 font-extrabold flex justify-center gap-2 text-lg">
+            <div class="text-pink-600 font-extrabold flex justify-center gap-2 text-base md:text-lg">
               <span style="color:${r.Bcolor || '#db2777'}">${safeJodi}</span>
               <span class="text-gray-400">-</span>
               <span style="color:${r.Ccolor || '#db2777'}">${safeMarks}</span>
