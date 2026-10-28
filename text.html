@@ -218,7 +218,7 @@
         const data = JSON.parse(text);
         
         const rawRecords = data.records ? data.records : data;
-        records = rawRecords.reverse().slice(0, 14);
+        records = rawRecords.reverse();
         render(records);
       } catch (err) {
         console.error("Failed to fetch data", err);
