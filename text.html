@@ -240,7 +240,7 @@
         const card = document.createElement("div");
         card.className = "bg-white p-1 rounded shadow text-sm cursor-pointer hover:bg-orange-50 transition";
         
-        // Safely extract numbers and remove the Google Sheets text-forcing quote
+        // Safely extract numbers and remove the backend text-forcing quote
         const safeJodi = cleanValue(r.Jodi, "**");
         const safeMarks = cleanValue(r.Marks, "***");
         const safePennel = cleanValue(r.Pennel, "***");
@@ -251,7 +251,7 @@
               <b class="text-blue-900">${r.Date || "N/A"}</b>
               <span class="text-gray-500 font-semibold">${r.Day || ""}</span>
             </div>
-            <div class="font-bold text-center mx-auto text-lg uppercase my-2">${r.Name || "Unnamed"}</div>
+            <div class="font-bold text-center mx-auto text-base md:text-lg uppercase my-2">${r.Name || "Unnamed"}</div>
             <div class="text-pink-600 font-extrabold flex justify-center gap-2 text-base md:text-lg">
               <span style="color:${r.Bcolor || '#db2777'}">${safeJodi}</span>
               <span class="text-gray-400">-</span>
